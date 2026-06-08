@@ -1,0 +1,47 @@
+@use 'variables'
+@use 'reset'
+@use 'header'
+@use 'overview'
+@use 'portfolio'
+@use 'footer'
+
+html
+	font-size: 16px
+
+body
+	font-family: variables.$font-primary
+
+.container
+	width: 1280px
+	margin: 0 auto
+	@media (max-width: variables.$breakpoint-xl)
+		width: 85%
+
+.scroll-inactive
+	overflow: hidden
+
+.logo
+	display: flex
+	column-gap: 10px
+	align-items: center
+	img
+		width: 58px
+
+.logo__texts
+	display: flex
+	flex-direction: column
+	row-gap: 3px
+
+.logo__name
+	font-weight: 600
+	font-size: 1.062rem
+	line-height: 1.062rem
+	text-transform: uppercase
+	color: variables.$color-primary
+
+.logo__role
+	font-weight: 600
+	font-size: 0.875rem
+	line-height: 0.875rem
+	text-transform: uppercase
+	color: variables.$color-black
