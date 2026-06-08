@@ -1,17 +1,13 @@
-# Ressonar
-Este projeto faz parte do meu portfólio profissional e foi desenvolvido com o objetivo de demonstrar minhas habilidades em desenvolvimento front-end, organização de código e estruturação de projetos web. Além de apresentar o resultado final, este repositório permite que recrutadores, clientes e outros desenvolvedores avaliem a qualidade do meu código, minha forma de trabalhar e minhas práticas de desenvolvimento.
+# PORTFOLIO
+This portfolio website showcases a selection of web design and web development projects, reflecting my experience in creating modern, responsive and user-centred digital experiences. 
 
-## Visualização
-🔗 https://markusvdc.github.io/ressonar/
+The projects featured range from custom WordPress websites and landing pages to front-end development solutions, with a strong focus on usability, performance, accessibility and clean visual design. Each project has been carefully selected to demonstrate both technical expertise and a practical understanding of business objectives, user needs and effective online communication.
 
-## Avaliações
-- Estrutura HTML
-- Organização e estilização com SASS
-- Responsividade
-- Funcionalidades em JavaScript
-- Organização de arquivos e pastas
-- Boas práticas de desenvolvimento
+## 🚀 Website
+https://markusvdc.github.io/portfolio/
 
-## Desenvolvedor
-**Markus Vinicius Domenegheti Cruz**  
-Web Designer / Desenvolvedor Front-end WordPress
+## ✨ Features
+- Services
+- Websites
+- Resume
+- Contact
