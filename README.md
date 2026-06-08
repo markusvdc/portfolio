@@ -4,6 +4,7 @@ This portfolio website showcases a selection of web design and web development p
 ## HAVE A'GANDER
 https://markusvdc.github.io/portfolio/ - Services, Websites, Resume and Contact.
 
-## GLAD'YOU DROPPED 
-**Markus Vinicius Domenegheti Cruz**
-Developed VS Code / Designed Figma / Web Designer / Front-end WordPress
+## TY'FOR DROPPED
+**Markus Vinicius Domenegheti Cruz**  
+Developed in Visual Studio Code and designed with Figma.  
+WordPress Web Designer and Front-end Developer.
