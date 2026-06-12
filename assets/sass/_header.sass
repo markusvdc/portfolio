@@ -7,30 +7,14 @@
 .header__container
 	display: flex
 	align-items: center
-	justify-content: space-between
+	justify-content: space-between 
 	height: 100%
 
-.header__menu
-	ul
-		display: flex
-		align-items: center
-		column-gap: 40px
-	a
-		font-size: 0.93rem
-		line-height: 0.93rem
-		font-weight: 600
-		text-transform: uppercase
-		color: variables.$color-primary
-		position: relative
-		letter-spacing: 0.3px
-		&::after
-			content: ''
-			position: absolute
-			left: 0
-			bottom: -4px
-			width: 0
-			height: 2px
-			background-color: variables.$color-primary
-			transition: width .3s ease
-		&:hover::after
-			width: 100%
+.header__description
+	display: flex
+	flex-direction: column
+	row-gap: 10px
+	p
+		font-size: 0.9375rem
+		line-height: 0.9375rem
+		color: variables.$color-black
