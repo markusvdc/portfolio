@@ -1,15 +1,42 @@
 @use 'variables'
 
 .footer
-	height: 160px
 	background-color: variables.$color-white
 
 .footer__container
+	padding: 50px 0 80px
+	display: flex
+	flex-direction: column
+	border-top: 1px solid #DDD
+
+.footer__social
 	display: flex
 	align-items: center
 	justify-content: space-between
-	height: 100%
-	border-top: 1px solid #DDD
+	column-gap: 40px
+	a
+		width: 100%
+		max-width: 290px
+		height: 40px
+		border: 1px solid variables.$color-primary
+		color: variables.$color-primary
+		font-size: 0.875rem
+		line-height: 0.875rem
+		font-weight: 500
+		border-radius: 5px
+		display: flex
+		justify-content: center
+		align-items: center
+		text-transform: uppercase
+		transition: transform .2s ease
+		&:hover
+			transform: translateY(-2px)
+
+.footer__info
+	padding-top: 50px
+	display: flex
+	align-items: center
+	justify-content: space-between
 
 .footer__description
 	display: flex
