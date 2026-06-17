@@ -1,0 +1,70 @@
+@use '../abstracts/variables'
+
+.portfolio
+	padding: 50px 0
+
+.portfolio__item
+	display: flex
+	justify-content: space-between
+	column-gap: 50px
+	padding: 40px 0
+	border-top: 1px solid #DDD
+	&:first-child
+		padding-top: 0
+		border-top: none
+
+.portfolio__cover
+	border-radius: 8px
+	border: 1px solid #EEE
+	overflow: hidden
+	width: min(780px, 64%)
+	img
+		width: 100%
+		height: 100%
+		object-fit: cover
+
+.portfolio__description
+	width: 350px
+	display: flex
+	flex-direction: column
+	row-gap: 10px
+	h2
+		color: variables.$color-black
+		font-size: 1.6rem
+		line-height: 2rem
+	p
+		font-size: 1rem
+		line-height: 1.625rem
+		color: variables.$color-black
+		text-align: justify
+	a
+		height: 40px
+		border: 1px solid variables.$color-primary
+		color: variables.$color-primary
+		font-size: 0.875rem
+		line-height: 0.875rem
+		font-weight: 500
+		border-radius: 5px
+		display: flex
+		justify-content: center
+		align-items: center
+		text-transform: uppercase
+		transition: transform .2s ease
+		&:hover
+			transform: translateY(-2px)
+
+@media (max-width: variables.$breakpoint-lg)
+	.portfolio__item
+		flex-direction: column
+		row-gap: 24px
+
+	.portfolio__cover,
+	.portfolio__description
+		width: 100%
+
+@media (max-width: variables.$breakpoint-md)
+	.portfolio
+		padding: 40px 0
+
+	.portfolio__item
+		padding: 32px 0
