@@ -6,7 +6,7 @@ export const resumeItems = [
 		'Seeking remote opportunities as a Web Designer / WordPress Front-end Developer, including full-time employment and professional partnerships.'
 	],
 	[
-		'Company: PC4Y IT',
+		'Company: PC4Y Computing',
 		'Position: IT Technician',
 		'Period: May 2006 - April 2008',
 		'Responsibilities: Diagnosed and repaired computers with hardware and software issues, including operating system installation, configuration, formatting, data backup and recovery. Prepared quotations, provided customer support and coordinated technical team activities.'
@@ -36,8 +36,8 @@ export const resumeItems = [
 		'Responsibilities: Development and maintenance of websites and landing pages for clients across various industries. Worked on WordPress projects both with and without Elementor, implementing custom JavaScript functionality, third-party integrations, performance optimisation and troubleshooting. Responsible for creating, updating and improving websites while applying SEO best practices, responsive design principles and user-focused solutions, with an emphasis on usability, technical quality and overall performance.'
 	],
 	[
-		'Development: HTML5, CSS3, JavaScript, SASS and Git Version Control.',
-		'WordPress: Elementor, Advanced Custom Fields (ACF) and API Integration.',
+		'Development: JavaScript, React (Learning), SASS and Git Version Control.',
+		'WordPress: Elementor, Advanced Custom Fields (ACF) and REST API Integration.',
 		'Artificial Intelligence: OpenAI Codex and Topaz Photo AI.',
 		'Optimization: Responsive Design, PageSpeed Insights and SEO.',
 		'Design: Figma, Photoshop, Illustrator and Magnific.',
