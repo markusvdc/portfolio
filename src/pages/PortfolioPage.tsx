@@ -4,6 +4,7 @@ import { portfolio } from '../data/portfolio'
 function PortfolioPage() {
 	return (
 		<main>
+			<h1 className="sr-only">Portfolio</h1>
 			<Overview />
 			<section className="portfolio">
 				<div className="portfolio__container container">

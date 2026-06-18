@@ -1,1 +1,1 @@
-export type Page = 'portfolio' | 'resume'
+export type Page = 'portfolio' | 'resume' | 'writing'

@@ -1,0 +1,65 @@
+@use '../abstracts/variables'
+
+.article
+	padding: 50px 0 30px
+
+.article__header
+	padding-bottom: 22px
+	border-bottom: 1px solid #DDD
+	display: flex
+	flex-direction: column
+	row-gap: 5px
+	h1
+		color: variables.$color-black
+		font-size: 1rem
+		line-height: 1.45rem
+		font-weight: 500
+
+.article__meta
+	display: flex
+	flex-wrap: wrap
+	align-items: center
+	gap: 8px
+	color: variables.$color-black
+	font-size: 1rem
+	line-height: 1.5rem
+	span
+		display: flex
+		align-items: center
+		gap: 8px
+		&::before
+			content: '·'
+
+.article__content
+	max-width: 930px
+	padding: 30px 0 0
+	display: flex
+	flex-direction: column
+	row-gap: 24px
+	p
+		color: variables.$color-black
+		font-size: 1rem
+		line-height: 1.625rem
+		text-align: justify
+
+.article__back
+	color: variables.$color-black
+	font-size: 1rem
+	line-height: 1.5rem
+	display: flex
+	width: fit-content
+	transition: all .2s ease
+	border-bottom: 1px solid variables.$color-black
+
+@media (max-width: variables.$breakpoint-md)
+	.article
+		padding: 45px 0
+
+	.article__header
+		padding-bottom: 20px
+
+	.article__content
+		padding: 20px 0 38px
+		p
+			font-size: 1rem
+			line-height: 1.625rem

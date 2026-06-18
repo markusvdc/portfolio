@@ -4,13 +4,19 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
 
 export const routes = {
 	portfolio: basePath,
-	resume: `${basePath}resume/`
+	resume: `${basePath}resume/`,
+	writing: `${basePath}writing/`
 }
 
 export function getRouteFromPath(pathname: string) {
 	const normalizedBase = basePath === '/' ? '/' : basePath.replace(/\/$/, '')
 	const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`
 	const resumePath = `${normalizedBase === '/' ? '' : normalizedBase}/resume/`
+	const writingPath = `${normalizedBase === '/' ? '' : normalizedBase}/writing/`
 
-	return normalizedPath === resumePath ? 'resume' : 'portfolio'
+	if (normalizedPath === resumePath) {
+		return 'resume'
+	}
+
+	return normalizedPath.startsWith(writingPath) ? 'writing' : 'portfolio'
 }

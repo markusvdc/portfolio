@@ -1,0 +1,87 @@
+@use '../abstracts/variables'
+
+.writing
+	padding: 55px 0
+
+.writing__container
+	display: block
+
+.writing__list
+	display: flex
+	flex-direction: column
+
+.article-card
+	padding: 40px 0
+	border-top: 1px solid #DDD
+	display: flex
+	flex-direction: column
+	align-items: flex-start
+	row-gap: 6px
+	&:first-child
+		padding-top: 0
+		border-top: none
+	&:last-child
+		padding-bottom: 0
+	h2
+		color: variables.$color-black
+		font-size: 1.1rem
+		line-height: 1.65rem
+		font-weight: 500
+		transition: all .2s ease
+		border-bottom: 1px solid variables.$color-white
+		&:hover
+			border-bottom-color: variables.$color-black
+	p
+		max-width: 900px
+		color: variables.$color-black
+		font-size: 1rem
+		line-height: 1.6rem
+		text-align: justify
+
+.article-card__meta
+	display: flex
+	flex-wrap: wrap
+	align-items: center
+	gap: 8px
+	color: variables.$color-black
+	font-size: 1rem
+	line-height: 1.5rem
+	span
+		display: flex
+		align-items: center
+		gap: 8px
+		&::before
+			content: '·'
+
+.article-card__link
+	margin-top: 8px
+	min-height: 40px
+	width: max-content
+	border: 1px solid variables.$color-black
+	border-radius: 5px
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	padding: 0 30px
+	color: variables.$color-black
+	font-size: .875rem
+	line-height: .875rem
+	font-weight: 500
+	text-transform: uppercase
+	transition: transform .2s ease
+	&:hover
+		transform: translateY(-2px)
+
+@media (max-width: variables.$breakpoint-md)
+	.writing
+		padding: 45px 0
+
+	.article-card
+		padding-top: 32px
+		&:first-child
+			padding-top: 0
+		& + &
+			padding-top: 32px
+		h2
+			font-size: 1rem
+			line-height: 1.45rem
