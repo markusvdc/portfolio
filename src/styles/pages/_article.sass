@@ -1,19 +1,19 @@
 @use '../abstracts/variables'
 
 .article
-	padding: 50px 0 30px
+	padding: 50px 0
 
 .article__header
-	padding-bottom: 22px
+	padding-bottom: 30px
 	border-bottom: 1px solid #DDD
 	display: flex
 	flex-direction: column
 	row-gap: 5px
 	h1
 		color: variables.$color-black
-		font-size: 1rem
-		line-height: 1.45rem
-		font-weight: 500
+		font-size: 1.1rem
+		line-height: 1.625rem
+		font-weight: 700
 
 .article__meta
 	display: flex
@@ -21,8 +21,8 @@
 	align-items: center
 	gap: 8px
 	color: variables.$color-black
-	font-size: 1rem
-	line-height: 1.5rem
+	font-size: variables.$font-size-md
+	line-height: variables.$font-height-md
 	span
 		display: flex
 		align-items: center
@@ -38,16 +38,17 @@
 	row-gap: 24px
 	p
 		color: variables.$color-black
-		font-size: 1rem
-		line-height: 1.625rem
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
 		text-align: justify
 
 .article__back
 	color: variables.$color-black
-	font-size: 1rem
-	line-height: 1.5rem
+	font-size: variables.$font-size-md
+	line-height: 1rem
 	display: flex
 	width: fit-content
+	padding-bottom: 2px
 	transition: all .2s ease
 	border-bottom: 1px solid variables.$color-black
 
@@ -61,5 +62,5 @@
 	.article__content
 		padding: 20px 0 38px
 		p
-			font-size: 1rem
-			line-height: 1.625rem
+			font-size: variables.$font-size-md
+			line-height: variables.$font-height-md

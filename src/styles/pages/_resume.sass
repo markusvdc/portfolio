@@ -1,149 +1,29 @@
 @use '../abstracts/variables'
 
-.resume__hero
-	padding: 40px 0 55px
-	background-color: variables.$color-primary
-	color: variables.$color-secondary
-	h1
-		font-size: clamp(3.5rem, 9vw, 8rem)
-		line-height: .95
-		font-weight: 700
-		color: variables.$color-secondary
-	p
-		max-width: 760px
-		margin-top: 20px
-		font-size: 1.125rem
-		line-height: 1.875rem
-
-.resume__eyebrow
-	margin-bottom: 18px
-	font-size: .875rem !important
-	line-height: .875rem !important
-	font-weight: 700
-	text-transform: uppercase
-
-.resume__content
-	padding: 55px 0
-
-.resume__container
-	display: grid
-	grid-template-columns: 340px minmax(0, 1fr)
-	gap: 70px
-	align-items: start
-
-.resume__sidebar
-	position: sticky
-	top: 24px
-	display: flex
-	flex-direction: column
-	row-gap: 40px
-
-.resume__block
-	display: flex
-	flex-direction: column
-	row-gap: 14px
-	h2
-		color: variables.$color-primary
-		font-size: 1rem
-		line-height: 1rem
-		text-transform: uppercase
-	a
-		width: 100%
-		min-height: 40px
-		border: 1px solid variables.$color-primary
-		border-radius: 5px
-		display: flex
-		align-items: center
-		padding: 0 16px
-		color: variables.$color-primary
-		font-size: .875rem
-		font-weight: 600
-		text-transform: uppercase
-		transition: transform .2s ease
-		&:hover
-			transform: translateY(-2px)
-
-.resume__skills
-	display: flex
-	flex-wrap: wrap
-	gap: 10px
-	li
-		border: 1px solid #DDD
-		border-radius: 5px
-		padding: 10px 12px
-		color: variables.$color-black
-		font-size: .875rem
-		line-height: .875rem
-		font-weight: 600
-
-.resume__main
-	display: flex
-	flex-direction: column
-	row-gap: 55px
-
-.resume__section
-	display: flex
-	flex-direction: column
-	h2
-		padding-bottom: 18px
-		border-bottom: 1px solid #DDD
-		color: variables.$color-primary
-		font-size: 1rem
-		line-height: 1rem
-		text-transform: uppercase
+.resume
+	padding: 50px 0
 
 .resume__item
-	padding: 28px 0
-	border-bottom: 1px solid #DDD
+	display: flex
+	flex-direction: column
+	row-gap: 7px
+	padding: 40px 0
+	border-top: 1px solid #DDD
+	&:first-child
+		padding-top: 0
+		border-top: none
 	&:last-child
-		border-bottom: none
 		padding-bottom: 0
-	span
-		display: block
-		margin-bottom: 12px
-		color: variables.$color-gray
-		font-size: .875rem
-		line-height: .875rem
-		font-weight: 600
-		text-transform: uppercase
+	h2
+		color: variables.$color-black
+		font-size: 1.6rem
+		line-height: 2rem
 	h3
-		margin-bottom: 10px
-		color: variables.$color-black
-		font-size: 1.45rem
-		line-height: 1.8rem
-	strong
-		display: block
-		margin-bottom: 12px
 		color: variables.$color-primary
-		font-size: .95rem
-		line-height: .95rem
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
 	p
-		max-width: 760px
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
 		color: variables.$color-black
-		font-size: 1rem
-		line-height: 1.625rem
 		text-align: justify
-
-@media (max-width: variables.$breakpoint-lg)
-	.resume__container
-		grid-template-columns: 1fr
-		gap: 45px
-
-	.resume__sidebar
-		position: static
-
-@media (max-width: variables.$breakpoint-md)
-	.resume__hero
-		padding: 35px 0 45px
-		h1
-			font-size: 3.5rem
-		p
-			font-size: 1rem
-			line-height: 1.625rem
-
-	.resume__content
-		padding: 45px 0
-
-	.resume__item h3
-		font-size: 1.25rem
-		line-height: 1.6rem

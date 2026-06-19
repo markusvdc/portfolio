@@ -9,10 +9,28 @@ export type Article = {
 
 export const articles: Article[] = [
 	{
-		title: 'Learning React, Vite and TypeScript with the help of Codex',
-		slug: 'learning-react-vite-typescript-with-codex',
+		title: 'Learning ImageMagick for image conversion and optimization',
+		slug: 'learning-imagemagick-images-conversion-optimization',
 		date: '2026-06-18',
 		readingTime: '3 min read',
+		summary: 'A simple introduction to ImageMagick, a free and open source tool for converting and optimizing images from the command line. Learn how to install it, convert PNG to WEBP, reduce file size and process multiple images at once with just a few simple commands every day.',
+		content: [
+			"I've been using ImageMagick to convert and optimize images directly from the command line, and one of the things I like most about it is how simple it is. ImageMagick is a free and open source tool capable of editing, converting and processing images in hundreds of formats. It has been around for many years, is extremely mature and works on Windows, Linux and macOS.",
+			"I first started using it for a very common task: converting PNG files to WEBP. Instead of opening an editor, exporting the image, choosing options and repeating the process for every file, I can do everything with a single command.",
+			'The installation is straightforward. Just access the official website: https://imagemagick.org/ go to the download section and download the recommended installer. The file name is usually something like: ImageMagick-7.x.x-Q16-HDRI-x64-dll.exe. During installation, there\'s one option worth paying attention to: "Add application directory to your system PATH".',
+			"This option allows you to use the magick command from any terminal window. It's a small detail, but it makes the experience much better. After installation, open the Command Prompt or any terminal you prefer and run: “magick -version” If you see something like: “Version: ImageMagick 7.1.2” everything is working correctly. From there, the interesting part begins.",
+			'Imagine you have an image called: “foto.png” to convert it to WEBP “magick foto.png foto.webp”, that\'s it. No extra parameters are required and the conversion happens almost instantly. If your goal is to reduce the file size, you can adjust the quality level: “magick foto.png -quality 80 foto.webp”, the -quality parameter controls compression. In general, lower values produce smaller files, while higher values preserve more image quality.',
+			'For many cases, values between 70 and 85 offer a good balance between size and visual quality. What surprised me the most is how practical this becomes when dealing with multiple images. Suppose you have an entire folder full of PNG files and want to convert them all to WEBP while applying compression. You can do: “magick mogrify -format webp -quality 80 *.png”, the command processes every PNG file in the current folder automatically. This is where ImageMagick starts to shine.',
+			'Tasks that would normally take several minutes — or even hours if there are many files — become something you execute once and forget about.',
+			"And image conversion is only a small part of what it can do. ImageMagick also supports resizing, cropping, rotating, adding borders, adjusting colors, creating thumbnails, applying effects and automating complete image workflows through scripts. Because everything happens through the terminal, it's easy to integrate it with build processes, deploy scripts or any other automation you already use.",
+			"There are many modern tools for image optimization today, but I like how ImageMagick follows a different philosophy: simple commands, lots of flexibility and the ability to process thousands of files without needing a graphical interface. For anyone who works with websites, blogs or any project that deals with images regularly, it's one of those tools worth keeping installed."
+		]
+	},
+	{
+		title: 'Learning React, Vite and TypeScript with the help of Codex',
+		slug: 'learning-react-vite-help-codex',
+		date: '2026-06-18',
+		readingTime: '4 min read',
 		summary: 'My experience learning React, Vite and TypeScript has been much more productive than I expected. With the help of Codex, I can build real projects, understand each step of the process and spend more time improving the code instead of getting stuck searching for bugs.',
 		content: [
 			"I'm learning React, Vite and TypeScript while rebuilding my own website. Instead of following the traditional path — studying the documentation first, taking courses and only then trying to build something — I decided to learn by creating.",
@@ -28,8 +46,8 @@ export const articles: Article[] = [
 		]
 	},
 	{
-		title: 'How Topaz Photo AI surprised me as a Windows app',
-		slug: 'how-topaz-photo-ai-surprised-me-as-a-windows-app',
+		title: 'How Topaz Photo AI surprised me with image enhancement',
+		slug: 'topaz-photo-surprised-image-enhancement',
 		date: '2026-06-18',
 		readingTime: '3 min read',
 		summary: 'I never expected to find a Windows application capable of manipulating images with AI in such an impressive way. What started as a simple upscale tool quickly became one of the most interesting AI applications I have used recently, changing the way I think about image editing.',

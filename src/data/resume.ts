@@ -1,9 +1,9 @@
 export const resumeItems = [
 	[
+		'Markus Vinicius Domenegheti Cruz',
 		'36 years old | Ribeirao Preto, SP - Brazil',
 		'Bachelor\'s Degree in Information Systems - UNAERP',
-		'+55 (16) 99180-2172 | markusvdc@gmail.com',
-		'Seeking remote opportunities as a Web Designer / WordPress Front-end Developer, including full-time employment and professional partnerships.'
+		'+55 (16) 99180-2172 | markusvdc@gmail.com'
 	],
 	[
 		'Company: PC4Y Computing',

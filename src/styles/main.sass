@@ -5,7 +5,6 @@
 @use './layout/footer'
 
 @use './pages/overview'
-@use './pages/jobs'
 @use './pages/portfolio'
 @use './pages/resume'
 @use './pages/writing'
@@ -24,79 +23,6 @@ body
 	margin: 0 auto
 	@media (max-width: variables.$breakpoint-xl)
 		width: 85%
-
-.hero
-	padding: 20px 0 60px
-	background-color: variables.$color-white
-
-.hero__container
-	display: grid
-	grid-template-columns: minmax(0, 1fr) 520px
-	align-items: center
-	gap: 60px
-
-.hero__content
-	display: flex
-	flex-direction: column
-	align-items: flex-start
-	row-gap: 24px
-	h1
-		max-width: 760px
-		color: variables.$color-black
-		font-size: clamp(3rem, 7vw, 6.8rem)
-		line-height: .95
-		font-weight: 700
-	p
-		max-width: 620px
-		font-size: 1.125rem
-		line-height: 1.875rem
-		color: variables.$color-black
-
-.hero__eyebrow
-	color: variables.$color-primary !important
-	font-size: .875rem !important
-	line-height: .875rem !important
-	font-weight: 700
-	text-transform: uppercase
-
-.hero__actions
-	display: flex
-	flex-wrap: wrap
-	gap: 14px
-	a
-		min-width: 150px
-		height: 44px
-		padding: 0 24px
-		border: 1px solid variables.$color-primary
-		color: variables.$color-primary
-		font-size: .875rem
-		line-height: .875rem
-		font-weight: 600
-		border-radius: 5px
-		display: inline-flex
-		justify-content: center
-		align-items: center
-		text-transform: uppercase
-		transition: transform .2s ease, background-color .2s ease, color .2s ease
-		&:first-child
-			background-color: variables.$color-primary
-			color: variables.$color-white
-		&:hover
-			transform: translateY(-2px)
-
-.hero__image
-	border: 1px solid #EEE
-	border-radius: 8px
-	overflow: hidden
-	aspect-ratio: 1 / 1
-	background-color: #f7f7f7
-	img
-		width: 100%
-		height: 100%
-		object-fit: cover
-
-.scroll-inactive
-	overflow: hidden
 
 .sr-only
 	position: absolute
@@ -122,41 +48,22 @@ body
 	row-gap: 3px
 
 .logo__name
-	font-weight: 600
-	font-size: 1.062rem
-	line-height: 1.062rem
+	font-size: 1rem
+	line-height: 1rem
 	text-transform: uppercase
 	color: variables.$color-primary
+	font-weight: 700
 
 .logo__role
-	font-weight: 600
 	font-size: 0.875rem
 	line-height: 0.875rem
 	text-transform: uppercase
+	font-weight: 700
 	color: variables.$color-black
-
-@media (max-width: variables.$breakpoint-lg)
-	.hero__container
-		grid-template-columns: 1fr
-		gap: 35px
-
-	.hero__image
-		max-width: 560px
 
 @media (max-width: variables.$breakpoint-md)
 	.container
 		width: 90%
-
-	.hero
-		padding: 0 0 45px
-
-	.hero__content
-		row-gap: 18px
-		h1
-			font-size: 3.2rem
-		p
-			font-size: 1rem
-			line-height: 1.625rem
 
 	.logo img
 		width: 48px
