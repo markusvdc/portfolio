@@ -5,9 +5,7 @@ import { formatArticleDate } from '../utils/formatArticleDate'
 function ArticleCard({ article }: { article: Article }) {
 	return (
 		<article className="article-card">
-			<h2>
-				<Link to={`/writing/${article.slug}`}>{article.title}</Link>
-			</h2>
+			<h2>{article.title}</h2>
 			<div className="article-card__meta">
 				<time dateTime={article.date}>{formatArticleDate(article.date)}</time>
 				<span>{article.readingTime}</span>

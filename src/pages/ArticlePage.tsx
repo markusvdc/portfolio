@@ -25,12 +25,12 @@ function ArticlePage() {
 					</header>
 					<div className="article__content">
 						{article.content.map((paragraph) => (
-							<p key={paragraph}>{paragraph}</p>
+							<p key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
 						))}
-						<Link className="article__back" to="/writing">
-							Back to writing
-						</Link>
 					</div>
+					<Link className="article__back" to="/writing">
+						Back to writing
+					</Link>
 				</div>
 			</article>
 		</main>
