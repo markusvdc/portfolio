@@ -12,12 +12,11 @@
 .header__menu 
 	ul
 		display: flex
-		align-items: center
 		column-gap: 25px
 	a
 		font-size: 0.925rem
 		line-height: 0.925rem
-		font-weight: 700
+		font-weight: variables.$font-weight-bd
 		text-transform: uppercase
 		color: variables.$color-black
 		position: relative
@@ -41,13 +40,12 @@
 @media (max-width: variables.$breakpoint-md)
 	.header__container
 		align-items: flex-start
-		padding: 28px 0
-		gap: 24px
+		padding: 25px 0
+		gap: 25px
 		flex-direction: column
 
 	.header__menu
-		width: 100%
+		display: flex
 		ul
-			width: 100%
-			column-gap: 18px
-			justify-content: flex-start
+			flex-direction: column
+			row-gap: 5px

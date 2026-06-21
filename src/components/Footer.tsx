@@ -12,7 +12,7 @@ function Footer() {
 					<a className="button button--primary" href="https://pinterest.com/markusvdc/" target="_blank" rel="noopener noreferrer">Pinterest</a>
 				</div>
 				<div className="footer__info">
-					<a className="logo" href={routes.portfolio}>
+					<a className="logo" href={routes.home}>
 						<img src={logo} alt="Logotipo de Markus Domenegheti" />
 						<div className="logo__texts">
 							<span className="logo__name">Markus Domenegheti</span>

@@ -13,6 +13,10 @@ export default defineConfig({
 			async closeBundle() {
 				const staticRoutes = [
 					{
+						path: 'portfolio',
+						title: 'PORTFÓLIO - MARKUS DOMENEGHETI'
+					},
+					{
 						path: 'curriculo',
 						title: 'CURRÍCULO - MARKUS DOMENEGHETI'
 					},

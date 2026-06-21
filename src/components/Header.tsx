@@ -17,10 +17,19 @@ function Header({ page }: { page: Page }) {
 					<ul>
 						<li>
 							<NavLink
-								aria-current={page === 'portfolio' ? 'page' : undefined}
+								aria-current={page === 'home' ? 'page' : undefined}
 								className={({ isActive }) => isActive ? 'is-active' : ''}
 								to="/"
 								end
+							>
+								Home
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								aria-current={page === 'portfolio' ? 'page' : undefined}
+								className={({ isActive }) => isActive ? 'is-active' : ''}
+								to="/portfolio"
 							>
 								Portfólio
 							</NavLink>
