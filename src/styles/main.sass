@@ -45,7 +45,7 @@ body
 .logo__texts
 	display: flex
 	flex-direction: column
-	row-gap: 3px
+	row-gap: 5px
 
 .logo__name
 	font-size: 1rem
@@ -60,6 +60,28 @@ body
 	text-transform: uppercase
 	font-weight: 700
 	color: variables.$color-black
+
+.button
+	height: 40px
+	border: 1px solid transparent
+	font-size: 0.875rem
+	line-height: 0.875rem
+	border-radius: 5px
+	display: flex
+	justify-content: center
+	align-items: center
+	text-transform: uppercase
+	transition: transform 0.2s ease
+	font-weight: 700
+	letter-spacing: .2px
+	&:hover
+		transform: translateY(-2px)
+	&.button--primary
+		color: variables.$color-primary
+		border-color: variables.$color-primary
+	&.button--secondary
+		color: variables.$color-black
+		border-color: variables.$color-black
 
 @media (max-width: variables.$breakpoint-md)
 	.container

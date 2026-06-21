@@ -7,7 +7,7 @@ function Header({ page }: { page: Page }) {
 		<header id="header" className="header">
 			<div className="header__container container">
 				<NavLink className="logo" to="/">
-					<img src={logo} alt="Markus Domenegheti logo" />
+					<img src={logo} alt="Logotipo de Markus Domenegheti" />
 					<div className="logo__texts">
 						<p className="logo__name">Markus Domenegheti</p>
 						<p className="logo__role">Web Designer</p>
@@ -22,25 +22,25 @@ function Header({ page }: { page: Page }) {
 								to="/"
 								end
 							>
-								Portfolio
+								Portfólio
 							</NavLink>
 						</li>
 						<li>
 							<NavLink
 								aria-current={page === 'resume' ? 'page' : undefined}
 								className={({ isActive }) => isActive ? 'is-active' : ''}
-								to="/resume"
+								to="/curriculo"
 							>
-								Resume
+								Currículo
 							</NavLink>
 						</li>
 						<li>
 							<NavLink
 								aria-current={page === 'writing' ? 'page' : undefined}
 								className={({ isActive }) => isActive ? 'is-active' : ''}
-								to="/writing"
+								to="/artigos"
 							>
-								Writing
+								Artigos
 							</NavLink>
 						</li>
 					</ul>

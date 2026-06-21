@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { copyFile, mkdir } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 // https://vite.dev/config/
@@ -11,10 +11,28 @@ export default defineConfig({
 			name: 'copy-index-to-static-routes',
 			apply: 'build',
 			async closeBundle() {
-				const resumeDir = resolve('dist/resume')
+				const staticRoutes = [
+					{
+						path: 'curriculo',
+						title: 'CURRÍCULO - MARKUS DOMENEGHETI'
+					},
+					{
+						path: 'artigos',
+						title: 'ARTIGOS - MARKUS DOMENEGHETI'
+					}
+				]
+				const indexHtml = await readFile(resolve('dist/index.html'), 'utf-8')
 
-				await mkdir(resumeDir, { recursive: true })
-				await copyFile(resolve('dist/index.html'), resolve(resumeDir, 'index.html'))
+				await Promise.all(staticRoutes.map(async (route) => {
+					const routeDir = resolve('dist', route.path)
+					const routeHtml = indexHtml.replace(
+						/<title>.*<\/title>/,
+						`<title>${route.title}</title>`
+					)
+
+					await mkdir(routeDir, { recursive: true })
+					await writeFile(resolve(routeDir, 'index.html'), routeHtml)
+				}))
 			},
 		},
 	],

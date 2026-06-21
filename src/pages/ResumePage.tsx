@@ -4,7 +4,7 @@ import { resumeItems } from '../data/resume'
 function ResumePage() {
 	return (
 		<main>
-			<h1 className="sr-only">Resume</h1>
+			<h1 className="sr-only">Currículo</h1>
 			<Overview />
 			<div className="resume">
 				<div className="resume__container container">

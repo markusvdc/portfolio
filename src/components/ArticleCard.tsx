@@ -4,15 +4,15 @@ import { formatArticleDate } from '../utils/formatArticleDate'
 
 function ArticleCard({ article }: { article: Article }) {
 	return (
-		<article className="article-card">
+		<article className="writing__card">
 			<h2>{article.title}</h2>
-			<div className="article-card__meta">
+			<div className="writing__meta">
 				<time dateTime={article.date}>{formatArticleDate(article.date)}</time>
 				<span>{article.readingTime}</span>
 			</div>
 			<p>{article.summary}</p>
-			<Link className="article-card__link" to={`/writing/${article.slug}`}>
-				Read Article
+			<Link className="writing__link button button--secondary" to={`/artigos/${article.slug}`}>
+				Ler Artigo
 			</Link>
 		</article>
 	)

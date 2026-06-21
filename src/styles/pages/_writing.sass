@@ -10,7 +10,7 @@
 	display: flex
 	flex-direction: column
 
-.article-card
+.writing__card
 	padding: 40px 0
 	border-top: 1px solid #DDD
 	display: flex
@@ -24,7 +24,7 @@
 		padding-bottom: 0
 	h2
 		color: variables.$color-black
-		font-size: 1.1rem
+		font-size: 1rem
 		line-height: 1.625rem
 		font-weight: 700
 	p
@@ -34,7 +34,7 @@
 		line-height: variables.$font-height-md
 		text-align: justify
 
-.article-card__meta
+.writing__meta
 	display: flex
 	flex-wrap: wrap
 	align-items: center
@@ -49,31 +49,16 @@
 		&::before
 			content: '·'
 
-.article-card__link
+.writing__link
 	margin-top: 8px
-	min-height: 40px
 	width: max-content
-	border: 1px solid variables.$color-black
-	border-radius: 5px
-	display: inline-flex
-	align-items: center
-	justify-content: center
 	padding: 0 30px
-	color: variables.$color-black
-	font-size: .925rem
-	line-height: .925rem
-	text-transform: uppercase
-	transition: transform .2s ease
-	letter-spacing: 0.4px
-	font-weight: 700
-	&:hover
-		transform: translateY(-2px)
 
 @media (max-width: variables.$breakpoint-md)
 	.writing
 		padding: 45px 0
 
-	.article-card
+	.writing__card
 		padding-top: 32px
 		&:first-child
 			padding-top: 0

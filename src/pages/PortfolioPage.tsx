@@ -4,7 +4,7 @@ import { portfolio } from '../data/portfolio'
 function PortfolioPage() {
 	return (
 		<main>
-			<h1 className="sr-only">Portfolio</h1>
+			<h1 className="sr-only">Portfólio</h1>
 			<Overview />
 			<section className="portfolio">
 				<div className="portfolio__container container">
@@ -16,7 +16,7 @@ function PortfolioPage() {
 							<div className="portfolio__description">
 								<p>{project.description}</p>
 								{project.link && (
-									<a href={project.link} target="_blank" rel="noopener noreferrer">Open Live Site</a>
+									<a className="button button--primary" href={project.link} target="_blank" rel="noopener noreferrer">Visitar Site</a>
 								)}
 							</div>
 						</div>

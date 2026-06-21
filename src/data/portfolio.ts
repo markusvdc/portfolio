@@ -9,43 +9,43 @@ import ressonar from '../assets/images/portfolio/ressonar.webp'
 export const portfolio = [
 	{
 		image: lactivit,
-		alt: 'Lactvit website preview showing dairy products and cows in a field',
-		description: 'Front-end development in WordPress using a custom theme, built without Elementor and focused on performance and scalability. The project includes a product showcase, recipes, and a blog with dynamic loading through the WordPress API, along with integrations with Swiper, Contact Form 7, and Advanced Custom Fields (ACF).',
+		alt: 'Prévia do site Lactvit exibindo produtos lácteos e vacas em um campo',
+		description: 'Desenvolvimento front-end em WordPress utilizando tema personalizado, criado sem Elementor e com foco em desempenho e escalabilidade. O projeto inclui vitrine de produtos, receitas e blog com carregamento dinâmico por meio da API do WordPress, além de integrações com Swiper, Contact Form 7 e Advanced Custom Fields (ACF).',
 		link: 'https://lactvit.com.br/'
 	},
 	{
 		image: altfaz,
-		alt: 'Altfaz Facilities website preview with a cleaning professional in the hero section',
-		description: 'Front-end development in WordPress using Elementor to streamline both the build process and ongoing maintenance. With a minimal design, the solution integrates JetEngine for dynamic content and JetFormBuilder for advanced forms, delivering flexibility and a smooth browsing experience.',
+		alt: 'Prévia do site Altfaz Facilities com uma profissional de limpeza na seção principal',
+		description: 'Desenvolvimento front-end em WordPress utilizando Elementor para otimizar tanto o processo de criação quanto a manutenção contínua. Com design minimalista, a solução integra JetEngine para conteúdo dinâmico e JetFormBuilder para formulários avançados, oferecendo flexibilidade e uma experiência de navegação fluida.',
 		link: 'https://altfaz.com/'
 	},
 	{
 		image: quizz,
-		alt: 'Rural worker safety certification quiz interface preview',
-		description: 'WordPress application development with Elementor, focused on interaction and conversion. The project includes a custom quiz with dynamic answer validation, JavaScript-based business rules, lead capture, and automatic PDF certificate generation at the end of the experience.'
+		alt: 'Prévia da interface de quiz para certificação em segurança do trabalhador rural',
+		description: 'Desenvolvimento de aplicação em WordPress com Elementor, focada em interação e conversão. O projeto inclui quiz personalizado com validação dinâmica de respostas, regras de negócio em JavaScript, captação de leads e geração automática de certificado em PDF ao final da experiência.'
 	},
 	{
 		image: citizensrx,
-		alt: 'Citizens Rx website preview with a city background and service sections',
-		description: 'Layout design and front-end development in React for a modern application with smooth navigation and no page reloads. The project includes AWS environment integrations and CAPTCHA protection, ensuring performance, security, and an optimized user experience.',
+		alt: 'Prévia do site Citizens Rx com fundo urbano e seções de serviços',
+		description: 'Criação de layout e desenvolvimento front-end em React para uma aplicação moderna, com navegação fluida e sem recarregamento de páginas. O projeto inclui integrações com ambiente AWS e proteção por CAPTCHA, garantindo desempenho, segurança e uma experiência de usuário otimizada.',
 		link: 'https://citizensrx.com/'
 	},
 	{
 		image: bluestorm,
-		alt: 'Bluestorm Software website preview with a blue business hero section',
-		description: 'Layout design and front-end development for a corporate website built without a CMS, prioritizing lightweight code, performance, and full control over the structure. The project features a minimal design focused on a clear, modern browsing experience aligned with the brand identity.',
+		alt: 'Prévia do site Bluestorm Software com seção principal corporativa em tons de azul',
+		description: 'Criação de layout e desenvolvimento front-end para um site corporativo desenvolvido sem CMS, priorizando código leve, desempenho e controle total sobre a estrutura. O projeto apresenta design minimalista focado em uma navegação clara, moderna e alinhada à identidade da marca.',
 		link: 'https://bluestorm.com.br/'
 	},
 	{
 		image: fiats,
-		alt: 'FIATS law firm website preview with a handshake hero image',
-		description: 'Layout design, visual icon system definition, and front-end development in WordPress with Elementor. The project integrates the WordPress API, Swiper for carousels, and Advanced Custom Fields (ACF) for custom content management, combining flexibility and performance.',
+		alt: 'Prévia do site do escritório de advocacia FIATS com imagem de aperto de mãos na seção principal',
+		description: 'Criação de layout, definição do sistema visual de ícones e desenvolvimento front-end em WordPress com Elementor. O projeto integra a API do WordPress, Swiper para carrosséis e Advanced Custom Fields (ACF) para gerenciamento personalizado de conteúdo, combinando flexibilidade e desempenho.',
 		link: 'https://fiats.adv.br/'
 	},
 	{
 		image: ressonar,
-		alt: 'Ressonar agency website preview with a team meeting hero image',
-		description: 'Layout design and front-end development for a corporate website with public source code, built without a CMS. The project follows a minimal approach and includes Swiper integration for dynamic content presentation, creating a modern and efficient experience across different devices.',
+		alt: 'Prévia do site da agência Ressonar com imagem de reunião de equipe na seção principal',
+		description: 'Criação de layout e desenvolvimento front-end para um site corporativo com código-fonte público, desenvolvido sem CMS. O projeto segue uma abordagem minimalista e inclui integração com Swiper para apresentação dinâmica de conteúdo, proporcionando uma experiência moderna e eficiente em diferentes dispositivos.',
 		link: 'https://markusvdc.github.io/ressonar/'
 	}
 ]

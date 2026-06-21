@@ -8,7 +8,7 @@ function ArticlePage() {
 	const article = articles.find((item) => item.slug === slug)
 
 	if (!article) {
-		return <Navigate to="/writing" replace />
+		return <Navigate to="/artigos" replace />
 	}
 
 	return (
@@ -28,8 +28,8 @@ function ArticlePage() {
 							<p key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
 						))}
 					</div>
-					<Link className="article__back" to="/writing">
-						Back to writing
+					<Link className="article__back" to="/artigos">
+						Voltar Para Artigos
 					</Link>
 				</div>
 			</article>

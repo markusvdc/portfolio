@@ -9,76 +9,76 @@ export type Article = {
 
 export const articles: Article[] = [
 	{
-		title: 'How to remove italic text in VS Code for Front-end projects',
-		slug: 'remove-italic-vscode-front-end',
+		title: 'Como remover texto em itálico no VSCODE para projetos Front-end',
+		slug: 'remover-italico-vscode-projetos-frontend',
 		date: '2026-06-19',
-		readingTime: '2 min read',
-		summary: 'If italic text in VS Code makes your code harder to read, this guide is for you. Learn how to disable italics for common Front-end tokens using a ready-to-use configuration tested with HTML, CSS, SCSS, SASS, JavaScript, TypeScript, React, PHP and WordPress.',
+		readingTime: '6 min de leitura',
+		summary: 'Se o texto em itálico no VSCODE dificulta a leitura do seu código, este guia é para você. Aprenda a desativar itálicos para os principais elementos do Front-end usando uma configuração pronta para uso, testada com HTML, CSS, SCSS, SASS, JavaScript, TypeScript, React, PHP e WordPress.',
 		content: [
-			"If you use a stylish VS Code theme, you've probably noticed comments, parameters, classes, or types showing up in italics. I know a lot of developers like this look, but after years of coding I realized I prefer everything without italics. In my opinion, the code becomes cleaner and, more importantly, easier to read, especially in larger projects.",
-			"It's a small change, but it noticeably improved my day-to-day experience. The tricky part is that there isn't a single setting that disables italics everywhere. Some elements are styled using TextMate Tokens, others use Semantic Tokens, and themes can apply their own rules on top of that.",
-			"After some testing, I ended up with the configuration below. It's focused on Front-end development and removes most italic styles I encounter on a daily basis. It has been tested with: HTML, CSS, SCSS, SASS, JavaScript, TypeScript, React, PHP and WordPress.",
-			"How to Add It, open the Command Palette “Ctrl + Shift + P”, search for “Preferences: Open Settings (JSON)” this will open your settings.json file. Now simply add the following configuration:",
+			'Se você usa um tema estilizado no VSCODE, provavelmente já percebeu comentários, parâmetros, classes ou tipos aparecendo em itálico. Sei que muitos desenvolvedores gostam desse visual, mas depois de anos programando percebi que prefiro tudo sem itálico. Na minha opinião, o código fica mais limpo e, principalmente, mais fácil de ler, especialmente em projetos maiores.',
+			'É uma pequena mudança, mas que melhorou bastante minha experiência no dia a dia. A parte complicada é que não existe uma única configuração que desative itálico em todos os lugares. Alguns elementos são estilizados usando <strong>TextMate Tokens</strong>, outros utilizam <strong>Semantic Tokens</strong>, e os temas ainda podem aplicar regras próprias por cima disso.',
+			'Depois de alguns testes, cheguei à configuração abaixo. Ela é focada em desenvolvimento Front-end e remove a maior parte dos estilos em itálico que encontro diariamente. Foi testada com: <strong>HTML, CSS, SCSS, SASS, JavaScript, TypeScript, React, PHP e WordPress</strong>.',
+			'Como adicionar: abra a paleta de comandos com <strong>ctrl + shift + p</strong>, pesquise por <strong>Preferences: Open Settings (JSON)</strong> para abrir o arquivo <strong>settings.json</strong>. Depois, basta adicionar a seguinte configuração:',
 			'<a href="https://gist.github.com/markusvdc/c5647e5b480922a7d36672f6902e709a" target="_blank" rel="noopener noreferrer">https://gist.github.com/markusvdc/c5647e5b480922a7d36672f6902e709a</a>',
-			"That's it. If you mainly work with Front-end technologies, this configuration should remove most italic styles from your editor. And if you're like me and think code is easier to read when it doesn't look like it's written on a wedding invitation, you'll probably like the result."
+			'Pronto. Se você trabalha principalmente com tecnologias Front-end, essa configuração deve remover a maior parte dos estilos em itálico do seu editor. E, se você é como eu e acha que código fica mais fácil de ler quando não parece ter sido escrito em um convite de casamento, provavelmente vai gostar do resultado.'
 		]
 	},
 	{
-		title: 'Learning ImageMagick for image conversion and optimization',
-		slug: 'learning-imagemagick-images-conversion-optimization',
+		title: 'Aprendendo ImageMagick para conversão e otimização de imagens',
+		slug: 'aprendendo-imagemagick-conversao-otimizacao-imagens',
 		date: '2026-06-18',
-		readingTime: '3 min read',
-		summary: 'A simple introduction to ImageMagick, a free and open source tool for converting and optimizing images from the command line. Learn how to install it, convert PNG to WEBP, reduce file size and process multiple images at once with just a few simple commands every day.',
+		readingTime: '6 min de leitura',
+		summary: 'Uma introdução simples ao ImageMagick, uma ferramenta gratuita e de código aberto para converter e otimizar imagens pela linha de comando. Aprenda a instalar, converter PNG para WEBP, reduzir o tamanho dos arquivos e processar várias imagens ao mesmo tempo com alguns comandos simples.',
 		content: [
-			"I've been using ImageMagick to convert and optimize images directly from the command line, and one of the things I like most about it is how simple it is. ImageMagick is a free and open source tool capable of editing, converting and processing images in hundreds of formats. It has been around for many years, is extremely mature and works on Windows, Linux and macOS.",
-			"I first started using it for a very common task: converting PNG files to WEBP. Instead of opening an editor, exporting the image, choosing options and repeating the process for every file, I can do everything with a single command.",
-			'The installation is straightforward. Just access the official website: <a href="https://imagemagick.org/" target="_blank" rel="noopener noreferrer">https://imagemagick.org/</a> go to the download section and download the recommended installer. The file name is usually something like: ImageMagick-7.x.x-Q16-HDRI-x64-dll.exe. During installation, there\'s one option worth paying attention to: "Add application directory to your system PATH".',
-			"This option allows you to use the magick command from any terminal window. It's a small detail, but it makes the experience much better. After installation, open the Command Prompt or any terminal you prefer and run: “magick -version” If you see something like: “Version: ImageMagick 7.1.2” everything is working correctly. From there, the interesting part begins.",
-			'Imagine you have an image called: “foto.png” to convert it to WEBP “magick foto.png foto.webp”, that\'s it. No extra parameters are required and the conversion happens almost instantly. If your goal is to reduce the file size, you can adjust the quality level: “magick foto.png -quality 80 foto.webp”, the -quality parameter controls compression. In general, lower values produce smaller files, while higher values preserve more image quality.',
-			'For many cases, values between 70 and 85 offer a good balance between size and visual quality. What surprised me the most is how practical this becomes when dealing with multiple images. Suppose you have an entire folder full of PNG files and want to convert them all to WEBP while applying compression. You can do: “magick mogrify -format webp -quality 80 *.png”, the command processes every PNG file in the current folder automatically. This is where ImageMagick starts to shine.',
-			'Tasks that would normally take several minutes — or even hours if there are many files — become something you execute once and forget about.',
-			"And image conversion is only a small part of what it can do. ImageMagick also supports resizing, cropping, rotating, adding borders, adjusting colors, creating thumbnails, applying effects and automating complete image workflows through scripts. Because everything happens through the terminal, it's easy to integrate it with build processes, deploy scripts or any other automation you already use.",
-			"There are many modern tools for image optimization today, but I like how ImageMagick follows a different philosophy: simple commands, lots of flexibility and the ability to process thousands of files without needing a graphical interface. For anyone who works with websites, blogs or any project that deals with images regularly, it's one of those tools worth keeping installed."
+			'Tenho usado o ImageMagick para converter e otimizar imagens diretamente pela linha de comando e uma das coisas que mais gosto nele é a simplicidade. O ImageMagick é uma ferramenta gratuita e de código aberto capaz de editar, converter e processar imagens em centenas de formatos. Existe há muitos anos, é extremamente maduro e funciona no Windows, Linux e macOS.',
+			'Comecei a utilizá-lo para uma tarefa muito comum - converter arquivos PNG para WEBP. Em vez de abrir um editor, exportar a imagem, escolher opções e repetir o processo para cada arquivo, consigo fazer tudo com um único comando.',
+			'A instalação é simples. Basta acessar o site oficial <a href="https://imagemagick.org/" target="_blank" rel="noopener noreferrer">https://imagemagick.org/</a>, ir até a seção de downloads e baixar o instalador recomendado. O nome do arquivo geralmente é algo como <strong>ImageMagick-7.x.x-Q16-HDRI-x64-dll.exe</strong>. Durante a instalação, existe uma opção que merece atenção <strong>Add application directory to your system PATH<strong>.',
+			'Essa opção permite utilizar o comando <strong>magick</strong> em qualquer janela do terminal. É um detalhe pequeno, mas que melhora bastante a experiência. Após a instalação, abra o Prompt de Comando ou o terminal de sua preferência e execute <strong>magick -version</strong>. Se aparecer algo como <strong>Version: ImageMagick 7.1.2</strong>, significa que tudo está funcionando corretamente. A partir daí começa a parte interessante.',
+			'Imagine que você tenha uma imagem chamada <strong>foto.png</strong> e queira convertê-la para WEBP. Basta executar <strong>magick foto.png foto.webp</strong>. Pronto. Nenhum parâmetro adicional é necessário e a conversão acontece quase instantaneamente. Se o objetivo for reduzir o tamanho do arquivo, você pode ajustar o nível de qualidade <strong>magick foto.png -quality 80 foto.webp</strong>. O parâmetro <strong>-quality</strong> controla a compressão. Em geral, valores menores produzem arquivos menores, enquanto valores maiores preservam mais qualidade.',
+			'Na maioria dos casos, valores entre 70 e 85 oferecem um bom equilíbrio entre tamanho e qualidade visual. O que mais me surpreendeu foi a praticidade quando se trabalha com várias imagens. Imagine uma pasta cheia de arquivos PNG e a necessidade de convertê-los todos para WEBP aplicando compressão. Você pode usar <strong>magick mogrify -format webp -quality 80 *.png</strong>. O comando processa automaticamente todos os arquivos PNG da pasta atual. É nesse momento que o ImageMagick realmente se destaca.',
+			'Tarefas que normalmente levariam vários minutos — ou até horas, dependendo da quantidade de arquivos — passam a ser executadas uma única vez e esquecidas.',
+			'E a conversão de imagens é apenas uma pequena parte do que ele pode fazer. O ImageMagick também permite redimensionar, cortar, rotacionar, adicionar bordas, ajustar cores, criar miniaturas, aplicar efeitos e automatizar fluxos completos de processamento de imagens por meio de scripts. Como tudo acontece pelo terminal, é fácil integrá-lo a processos de build, scripts de deploy ou qualquer outra automação que você já utilize.',
+			'Hoje existem muitas ferramentas modernas para otimização de imagens, mas gosto da filosofia do ImageMagick - comandos simples, muita flexibilidade e a capacidade de processar milhares de arquivos sem precisar de uma interface gráfica. Para quem trabalha com sites, blogs ou qualquer projeto que lide com imagens com frequência, é uma daquelas ferramentas que vale a pena manter instalada.'
 		]
 	},
 	{
-		title: 'Learning React, Vite and TypeScript with the help of Codex',
-		slug: 'learning-react-vite-help-codex',
+		title: 'Aprendendo React, Vite e TypeScript com a ajuda do Codex',
+		slug: 'aprendendo-react-vite-ajuda-codex',
 		date: '2026-06-18',
-		readingTime: '4 min read',
-		summary: 'My experience learning React, Vite and TypeScript has been much more productive than I expected. With the help of Codex, I can build real projects, understand each step of the process and spend more time improving the code instead of getting stuck searching for bugs.',
+		readingTime: '8 min de leitura',
+		summary: 'Minha experiência aprendendo React, Vite e TypeScript tem sido muito mais produtiva do que eu imaginava. Com a ajuda do Codex, consigo criar projetos reais, entender cada etapa do processo e dedicar mais tempo a melhorar o código em vez de ficar preso procurando bugs.',
 		content: [
-			"I'm learning React, Vite and TypeScript while rebuilding my own website. Instead of following the traditional path — studying the documentation first, taking courses and only then trying to build something — I decided to learn by creating.",
-			"And so far, this has been one of the most productive learning experiences I've ever had.",
-			"A big part of that is thanks to Codex. I can describe what I want to build, ask for an initial structure and follow step by step how each part of the project is put together. Routes, components, types, file organization and styles stop being isolated concepts and start making sense inside a real project.",
-			"The most interesting part is that I still have control over the decisions. Codex can suggest an implementation, but I'm the one who decides whether the structure makes sense, whether a component name is appropriate or whether the solution matches the idea I have for the project. My experience with other technologies helps a lot in this process. Many times I can identify possible improvements, suggest changes and receive immediate feedback to understand why one approach is better than another.",
-			"One of the things that surprised me the most is that I run into fewer errors than I expected.",
-			"In traditional learning methods, especially when learning a new technology, it's common to spend a lot of time solving configuration issues, fixing imports or dealing with small syntax mistakes. That's part of the learning process, but it can also be exhausting. Sometimes you spend so much time searching for the source of an error that there's little energy left to think about the project itself.",
-			"With Codex, I've experienced fewer of these obstacles. Since the initial structure is usually ready or very close to ideal, I can spend more time understanding how things work and improving the project.",
-			"That doesn't mean learning less. I still need to understand the code, question decisions and test alternatives. The difference is that I spend less time searching for bugs and more time thinking about architecture, semantics, user experience and the small details that make a difference.",
-			"Maybe making mistakes is important at times. Some mistakes teach valuable lessons and are part of the process. But for me, learning this way has been much more productive. I have the feeling that I'm building something real from day one, and that makes the learning experience more interesting and motivating.",
-			"I'm still far from mastering React, Vite or TypeScript. But for the first time in a long time, I feel like I'm learning at the same pace that I'm creating."
+			'Estou aprendendo <strong>React, Vite e TypeScript</strong> enquanto reconstruo meu próprio site. Em vez de seguir o caminho tradicional — estudar a documentação primeiro, fazer cursos e só depois tentar criar algo — decidi aprender construindo.',
+			'E, até agora, esta tem sido <strong>uma das experiências de aprendizado mais produtivas que já tive</strong>.',
+			'<strong>Grande parte disso se deve ao Codex</strong>. Posso descrever o que quero construir, pedir uma estrutura inicial e acompanhar passo a passo como cada parte do projeto é montada. Rotas, componentes, tipos, organização de arquivos e estilos deixam de ser conceitos isolados e passam a fazer sentido dentro de um projeto real.',
+			'O mais interessante é que continuo tendo <strong>controle sobre as decisões</strong>. O Codex pode sugerir uma implementação, mas sou eu quem decide se a estrutura faz sentido, se o nome de um componente é adequado ou se a solução combina com a ideia que tenho para o projeto. Minha experiência com outras tecnologias ajuda bastante nesse processo. Muitas vezes consigo identificar possíveis melhorias, sugerir mudanças e receber um retorno imediato para entender por que uma abordagem é melhor do que outra.',
+			'Uma das coisas que mais me surpreendeu é que <strong>encontro menos erros do que imaginava</strong>.',
+			'Nos métodos tradicionais de aprendizado, especialmente ao aprender uma tecnologia nova, é comum gastar muito tempo resolvendo problemas de configuração, corrigindo imports ou lidando com pequenos erros de sintaxe. Isso faz parte do processo, mas também pode ser cansativo. Às vezes você passa tanto tempo procurando a origem de um erro que sobra pouca energia para pensar no projeto em si.',
+			'Com o Codex, tenho encontrado menos desses obstáculos. Como a estrutura inicial geralmente já está pronta ou muito próxima do ideal, consigo dedicar <strong>mais tempo a entender como as coisas funcionam e a melhorar o projeto</strong>.',
+			'Isso não significa aprender menos. Ainda preciso compreender o código, questionar decisões e testar alternativas. A diferença é que gasto menos tempo procurando bugs e mais tempo pensando em <strong>arquitetura, semântica, experiência do usuário</strong> e nos pequenos detalhes que fazem diferença.',
+			'Talvez cometer erros seja importante em alguns momentos. Alguns erros ensinam lições valiosas e fazem parte do processo. Mas, para mim, aprender dessa forma tem sido muito mais produtivo. Tenho a sensação de estar <strong>construindo algo real desde o primeiro dia</strong>, e isso torna a experiência de aprendizado mais interessante e motivadora.',
+			'Ainda estou longe de dominar React, Vite ou TypeScript. Mas, pela primeira vez em muito tempo, sinto que estou <strong>aprendendo no mesmo ritmo em que estou criando</strong>.'
 		]
 	},
 	{
-		title: 'How Topaz Photo AI surprised me with image enhancement',
-		slug: 'topaz-photo-surprised-image-enhancement',
+		title: 'Como o Topaz Photo AI me surpreendeu com aprimoramento de imagens',
+		slug: 'como-topazphoto-surpreendeu-aprimoramento-imagens',
 		date: '2026-06-18',
-		readingTime: '3 min read',
-		summary: 'I never expected to find a Windows application capable of manipulating images with AI in such an impressive way. What started as a simple upscale tool quickly became one of the most interesting AI applications I have used recently, changing the way I think about image editing.',
+		readingTime: '6 min de leitura',
+		summary: 'Nunca imaginei encontrar um aplicativo para Windows capaz de manipular imagens com IA de forma tão impressionante. O que começou como uma simples ferramenta de upscale rapidamente se tornou uma das aplicações de IA mais interessantes que usei recentemente, mudando a forma como penso sobre edição de imagens.',
 		content: [
-			"I've been experimenting with AI tools for quite some time now, but most of my experiences have been limited to web platforms. Image generators, chatbots and online editors have become part of my daily routine, so I naturally assumed that the most advanced AI image tools would continue to live inside the browser.",
-			"That's why Topaz Photo AI surprised me so much.",
-			"Finding a dedicated Windows application focused entirely on image enhancement felt different. Most AI tools I use are websites, so opening a native desktop application and seeing what it could do gave me the impression that AI is slowly becoming part of the operating system itself, not just another tab in my browser.",
-			"The feature I use the most is definitely Upscale. At first, I thought it would simply increase the image resolution. And technically, that's exactly what it does. But the result often feels like much more than that.",
-			"Many times the image doesn't just become larger; it becomes better. Details look cleaner, edges feel sharper and, somehow, the artwork itself seems improved. I know the AI isn't magically recovering information that never existed, but that's honestly how it feels. It's as if the image had always looked this good and I was only now seeing its best version.",
-			"As usual, AI ends up giving me more than I expected.",
-			"Another feature I use a lot is Remove. The concept is simple: you select an object or a specific part of the image, and the AI reconstructs the missing area as if that element had never existed in the first place. I still find this fascinating.",
-			"A few years ago, removing objects from an image could take a long time and require a fair amount of skill. Today, I simply point to something and say: 'Remove this.' And most of the time, the result is surprisingly good.",
-			"Of course, not every image is perfect and sometimes the reconstruction isn't exactly what I imagined. But even then, I'm impressed by how natural the process feels.",
-			"What's funny is that I still feel like I've barely explored the software. Topaz Photo AI offers several other features that seem much more specialized, and I'm very curious to discover when each one is most useful. Every now and then I open the program, try something new and end up surprised once again.",
-			"Maybe that's what I enjoy the most about AI. I rarely start using a tool expecting it to change the way I work. Usually, I think it will save me a few minutes here and there.",
-			"Then I discover something like Topaz Photo AI and realize that the technology isn't just making tasks faster. It's changing what I believe is possible."
+			'Tenho experimentado ferramentas de IA há bastante tempo, mas a maior parte das minhas experiências sempre esteve limitada a plataformas web. Geradores de imagens, chatbots e editores online se tornaram parte da minha rotina, então naturalmente imaginei que as ferramentas de imagem mais avançadas continuariam vivendo dentro do navegador.',
+			'Foi por isso que o <strong>Topaz Photo AI me surpreendeu tanto</strong>.',
+			'Encontrar um aplicativo dedicado para Windows, totalmente focado em aprimoramento de imagens, foi uma experiência diferente. A maioria das ferramentas de IA que uso são sites, então abrir um aplicativo nativo e ver do que ele era capaz me deu a sensação de que a IA está, aos poucos, <strong>se tornando parte do próprio sistema operacional</strong> e não apenas mais uma aba do navegador.',
+			'<strong>A funcionalidade que mais utilizo é, sem dúvida, o Upscale</strong>. No começo, achei que ele simplesmente aumentaria a resolução da imagem. E, tecnicamente, é exatamente isso que acontece. Mas o resultado muitas vezes parece ir muito além disso.',
+			'Em muitos casos, a imagem não apenas fica maior, <strong>ela fica melhor</strong>. Os detalhes parecem mais limpos, as bordas ficam mais definidas e, de alguma forma, a própria arte parece aprimorada. Sei que a IA não está recuperando magicamente informações que nunca existiram, mas sinceramente é essa a sensação. É como se a imagem sempre tivesse sido assim e eu estivesse vendo sua melhor versão pela primeira vez.',
+			'Como costuma acontecer, a IA acabou me entregando <strong>mais do que eu esperava</strong>.',
+			'Outro recurso que uso bastante é o Remove. O conceito é simples: você seleciona um objeto ou uma parte específica da imagem e a IA reconstrói a área ausente como se aquele elemento nunca tivesse existido. Ainda acho isso fascinante.',
+			'Alguns anos atrás, remover objetos de uma imagem poderia levar bastante tempo e exigir uma boa dose de habilidade. <strong>Hoje, simplesmente aponto para algo e digo Remova isso</strong>. E, na maioria das vezes, o resultado é surpreendentemente bom.',
+			'É claro que nem toda imagem fica perfeita e, às vezes, a reconstrução não é exatamente como imaginei. Mas, ainda assim, fico impressionado com <strong>a naturalidade do processo</strong>.',
+			'O curioso é que sinto que ainda explorei muito pouco do software. O Topaz Photo AI oferece diversos outros recursos que parecem bem mais especializados, e tenho bastante curiosidade para descobrir em quais situações cada um deles é mais útil. De vez em quando abro o programa, testo alguma novidade e acabo me surpreendendo mais uma vez.',
+			'Talvez seja isso que mais gosto na IA. Raramente começo a usar uma ferramenta esperando que ela mude minha forma de trabalhar. Normalmente imagino que ela vai me economizar alguns minutos aqui e ali.',
+			'Então descubro algo como o Topaz Photo AI e percebo que a tecnologia não está apenas tornando as tarefas mais rápidas. <strong>Ela está mudando aquilo que acredito ser possível</strong>.'
 		]
 	}
 ]

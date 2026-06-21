@@ -1,47 +1,47 @@
 export const resumeItems = [
 	[
 		'Markus Vinicius Domenegheti Cruz',
-		'36 years old | Ribeirao Preto, SP - Brazil',
-		'Bachelor\'s Degree in Information Systems - UNAERP',
+		'36 anos | Ribeirão Preto, SP - Brasil',
+		'Bacharel em Sistemas de Informação - UNAERP',
 		'+55 (16) 99180-2172 | markusvdc@gmail.com'
 	],
 	[
-		'Company: PC4Y Computing',
-		'Position: IT Technician',
-		'Period: May 2006 - April 2008',
-		'Responsibilities: Diagnosed and repaired computers with hardware and software issues, including operating system installation, configuration, formatting, data backup and recovery. Prepared quotations, provided customer support and coordinated technical team activities.'
+		'Empresa: PC4Y Informática',
+		'Cargo: Técnico em Informática',
+		'Período: Maio 2006 - Abril 2008',
+		'Atribuições: Diagnóstico e manutenção de computadores com problemas em componentes físicos e programas, realizando formatação, instalação e configuração de sistemas operacionais, cópias de segurança e recuperação de dados. Elaboração de orçamentos, atendimento a clientes e coordenação das atividades da equipe técnica.'
 	],
 	[
-		'Company: JET E-commerce',
-		'Position: Front-end Developer',
-		'Period: November 2012 - April 2015',
-		"Responsibilities: Developed front-end interfaces for e-commerce websites across desktop and mobile platforms, integrated with the company's back-end system. Implemented new features and resolved issues in live e-commerce projects, providing maintenance, improvements and client support."
+		'Empresa: JET E-commerce',
+		'Cargo: Desenvolvedor Front-end',
+		'Período: Novembro 2012 - Abril 2015',
+		"Atribuições: Desenvolvimento do front-end de e-commerces para computadores e dispositivos móveis, integrado ao sistema de back-end da empresa. Implementação de funcionalidades e correção de problemas em e-commerces já publicados, atendendo demandas de manutenção, melhorias e suporte aos clientes."
 	],
 	[
-		'Company: Labcom Advertising',
-		'Position: Front-end Developer',
-		'Period: March 2016 - April 2018',
-		'Responsibilities: Developed and maintained front-end solutions for corporate and promotional websites in collaboration with the back-end team. Created and managed email marketing campaigns using Mailchimp and developed custom interactive interfaces for events and advertising campaigns.'
+		'Empresa: Labcom Advertising',
+		'Cargo: Desenvolvedor Front-end',
+		'Período: Março 2016 - Abril 2018',
+		'Atribuições: Desenvolvimento e manutenção do front-end de sites institucionais e promocionais, em colaboração com a equipe de back-end. Criação e disparo de campanhas de e-mail utilizando Mailchimp, além do desenvolvimento de interfaces interativas personalizadas para eventos e ações publicitárias.'
 	],
 	[
-		'Company: Bluestorm Software',
-		'Position: Front-end Developer',
-		'Period: May 2018 - July 2021',
-		'Responsibilities: Developed and maintained systems used by clients and pharmacies across the United States to manage and apply prescription discount programmes. Implemented features using React, integrated back-end APIs and resolved issues in production environments.'
+		'Empresa: Bluestorm Software',
+		'Cargo: Desenvolvedor Front-end',
+		'Período: Maio 2018 - Julho 2021',
+		'Atribuições: Desenvolvimento e manutenção de sistemas utilizados por clientes e farmácias dos Estados Unidos para gerenciamento e aplicação de descontos em medicamentos. Implementação de funcionalidades em React, integração com APIs de back-end e correção de problemas em sistemas já publicados.'
 	],
 	[
-		'Company: Freelance Experience',
-		'Position: Web Designer / WordPress Front-end Developer',
-		'Period: July 2021 - Present',
-		'Responsibilities: Development and maintenance of websites and landing pages for clients across various industries. Worked on WordPress projects both with and without Elementor, implementing custom JavaScript functionality, third-party integrations, performance optimisation and troubleshooting. Responsible for creating, updating and improving websites while applying SEO best practices, responsive design principles and user-focused solutions, with an emphasis on usability, technical quality and overall performance.'
+		'Empresa: Experiência Freelance',
+		'Cargo: Web Designer / Front-end WordPress',
+		'Período: Julho 2021 - Presente',
+		'Atribuições: Desenvolvimento e manutenção de sites e páginas de captura em WordPress para clientes de diversos segmentos. Desenvolvimento de projetos utilizando WordPress com e sem Elementor, implementação de funcionalidades com JavaScript, integração com serviços externos, otimização de desempenho e correção de problemas. Atuação em projetos de criação, atualização e evolução de sites, aplicando boas práticas de SEO e responsividade, com foco em usabilidade, experiência do usuário, qualidade técnica e desempenho geral dos projetos.'
 	],
 	[
-		'Development: JavaScript, React (Learning), SASS and Git Version Control.',
-		'WordPress: Elementor, Advanced Custom Fields (ACF) and REST API Integration.',
-		'Artificial Intelligence: OpenAI Codex and Topaz Photo AI.',
-		'Optimization: Responsive Design, PageSpeed Insights and SEO.',
-		'Design: Figma, Photoshop, Illustrator and Magnific.',
-		'Infrastructure: Mailchimp, cPanel, Hostinger and Locaweb.',
-		'Productivity: Notion, Trello and Google Drive.'
+		'Desenvolvimento: JavaScript, React (Aprendendo), SASS e Versionamento Git.',
+		'WordPress: Elementor, Advanced Custom Fields (ACF) e Integração com REST API.',
+		'Inteligência Artificial: OpenAI Codex e Topaz Photo AI.',
+		'Otimização: Design Responsivo, PageSpeed Insights e SEO.',
+		'Design: Figma, Photoshop, Illustrator e Magnific.',
+		'Infraestrutura: Mailchimp, cPanel, Hostinger e Locaweb.',
+		'Produtividade: Notion, Trello e Google Drive.'
 	]
 ]

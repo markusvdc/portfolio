@@ -5,7 +5,7 @@ import { articles } from '../data/articles'
 function WritingPage() {
 	return (
 		<main>
-			<h1 className="sr-only">Writing</h1>
+			<h1 className="sr-only">Artigos</h1>
 			<Overview />
 			<section className="writing">
 				<div className="writing__container container">
