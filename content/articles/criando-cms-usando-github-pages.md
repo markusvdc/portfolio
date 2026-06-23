@@ -1,7 +1,7 @@
 ---
 title: "Como criar um CMS sem backend usando GitHub Pages"
 slug: "criando-cms-usando-github-pages"
-date: "2026-06-23"
+date: "2026-06-11T14:50"
 readingTime: "7 min de leitura"
 summary: "Descubra como transformar um portfólio estático em um CMS sem backend usando React, Markdown, GitHub API e GitHub Pages. Veja como criar artigos, versionar conteúdo automaticamente e publicar tudo sem banco de dados, servidor ou infraestrutura complexa."
 ---
