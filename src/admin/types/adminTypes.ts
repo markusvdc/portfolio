@@ -47,7 +47,7 @@ export type ArticleFormState = {
 	title: string
 	slug: string
 	date: string
-	readingTime: string
+	readingTime: number
 	summary: string
 }
 

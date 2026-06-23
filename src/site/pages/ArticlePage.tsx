@@ -224,7 +224,7 @@ function ArticlePage() {
 						<h1>{article.title}</h1>
 						<div className="article__meta">
 							<time dateTime={article.date}>{formatArticleDate(article.date)}</time>
-							<span>{article.readingTime}</span>
+							<span>{article.readingTime} min de leitura</span>
 						</div>
 					</header>
 					<div

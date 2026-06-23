@@ -18,7 +18,7 @@ const emptyArticleForm = (): ArticleFormState => ({
 	title: '',
 	slug: '',
 	date: new Date().toISOString().slice(0, 16),
-	readingTime: '5 min de leitura',
+	readingTime: 1,
 	summary: '',
 })
 
@@ -318,7 +318,7 @@ export function useAdminPageController() {
 			return
 		}
 
-		if (!articleForm.title.trim() || !articleForm.slug.trim() || !articleForm.date.trim() || !articleForm.readingTime.trim() || !articleForm.summary.trim()) {
+		if (!articleForm.title.trim() || !articleForm.slug.trim() || !articleForm.date.trim() || !articleForm.readingTime || !articleForm.summary.trim()) {
 			setArticleCreateResult({
 				status: 'error',
 				message: 'Preencha titulo, slug, data, tempo de leitura e resumo.',

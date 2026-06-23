@@ -10,7 +10,7 @@ export function buildArticleMarkdown(form: ArticleFormState, markdownContent: st
 		`title: "${escapeFrontmatterValue(form.title.trim())}"`,
 		`slug: "${escapeFrontmatterValue(form.slug.trim())}"`,
 		`date: "${escapeFrontmatterValue(form.date.trim())}"`,
-		`readingTime: "${escapeFrontmatterValue(form.readingTime.trim())}"`,
+		`readingTime: ${form.readingTime}`,
 		`summary: "${escapeFrontmatterValue(form.summary.trim())}"`,
 		'---',
 		'',

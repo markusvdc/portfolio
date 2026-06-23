@@ -8,7 +8,7 @@ function ArticleCard({ article }: { article: Article }) {
 			<h2>{article.title}</h2>
 			<div className="writing__meta">
 				<time dateTime={article.date}>{formatArticleDate(article.date)}</time>
-				<span>{article.readingTime}</span>
+				<span>{article.readingTime} min de leitura</span>
 			</div>
 			<p>{article.summary}</p>
 			<Link className="writing__link button button--secondary" to={`/artigos/${article.slug}`}>

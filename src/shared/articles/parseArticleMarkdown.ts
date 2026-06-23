@@ -2,7 +2,7 @@ export type Article = {
 	title: string
 	slug: string
 	date: string
-	readingTime: string
+	readingTime: number
 	summary: string
 	content: string
 	filePath: string

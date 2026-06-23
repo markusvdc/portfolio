@@ -10,7 +10,7 @@ type AdminArticleEditorFormProps = {
 	isCreatingArticle: boolean
 	editor: Editor | null
 	linkDraft: LinkDraft | null
-	onFormChange: (field: keyof ArticleFormState, value: string) => void
+	onFormChange: (field: keyof ArticleFormState, value: ArticleFormState[keyof ArticleFormState]) => void
 	onSubmit: (event: FormEvent<HTMLFormElement>) => void
 	onCancelEdit: () => void
 	onOpenLinkPanel: () => void
@@ -74,10 +74,17 @@ function AdminArticleEditorForm({
 				<label htmlFor="article-reading-time">Tempo de leitura</label>
 				<input
 					id="article-reading-time"
-					type="text"
+					type="number"
+					min={1}
+					max={99}
 					value={form.readingTime}
-					onChange={(event) => onFormChange('readingTime', event.target.value)}
-					placeholder="5 min de leitura"
+					onChange={(event) => {
+						const value = Number(event.target.value)
+						onFormChange(
+							'readingTime',
+							Math.min(99, Math.max(1, value))
+						)
+					}}
 				/>
 
 				<label htmlFor="article-summary">Resumo</label>

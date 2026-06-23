@@ -29,7 +29,7 @@ function AdminArticleList({
 						<span>Slug: {article.slug}</span>
 						<span>Arquivo: {article.filePath}</span>
 						<span>Data: {article.date}</span>
-						<span>Tempo de leitura: {article.readingTime}</span>
+						<span>Tempo de leitura: {article.readingTime} min de leitura</span>
 						<button
 							type="button"
 							onClick={() => onEditArticle(article)}
