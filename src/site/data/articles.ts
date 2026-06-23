@@ -11,4 +11,8 @@ const articleFiles = import.meta.glob('../../../content/articles/*.md', {
 
 export const articles = Object.entries(articleFiles)
 	.map(([filePath, markdown]) => parseArticleMarkdown(filePath.replace('../../../', ''), markdown))
-	.sort((firstArticle, secondArticle) => secondArticle.date.localeCompare(firstArticle.date))
+	.sort(
+		(firstArticle, secondArticle) =>
+			new Date(secondArticle.date).getTime() -
+			new Date(firstArticle.date).getTime()
+	)
