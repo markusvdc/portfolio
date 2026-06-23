@@ -4,7 +4,7 @@ import { marked } from 'marked'
 import Overview from '../components/Overview'
 import { articles } from '../data/articles'
 import { formatArticleDate } from '../utils/formatArticleDate'
-import { normalizeMarkdownCodeBlocks } from '../utils/normalizeMarkdownCodeBlocks'
+import { normalizeMarkdownCodeBlocks } from '../../shared/articles/normalizeMarkdownCodeBlocks'
 
 const codeBlockTheme = 'github-dark'
 const supportedLanguages = [
@@ -83,7 +83,37 @@ function escapeHtml(value: string) {
 		.replace(/'/g, '&#039;')
 }
 
-function resolveCodeLanguage(language = '') {
+function inferCodeLanguage(code: string): SupportedCodeLanguage | null {
+	const trimmedCode = code.trim()
+
+	if (/^</.test(trimmedCode)) {
+		return 'html'
+	}
+
+	if (/^\{[\s\S]*\}$/.test(trimmedCode)) {
+		return 'json'
+	}
+
+	if (/\b(interface|type|enum|implements|readonly)\b/.test(trimmedCode)) {
+		return 'typescript'
+	}
+
+	if (/\b(const|let|function|import|export|return)\b/.test(trimmedCode)) {
+		return 'javascript'
+	}
+
+	if (/\b(npm|git|cd|mkdir|rm|cp|mv)\b/.test(trimmedCode)) {
+		return 'bash'
+	}
+
+	if (/[.#]?[a-z0-9_-]+\s*\{[\s\S]*\}/i.test(trimmedCode)) {
+		return 'css'
+	}
+
+	return null
+}
+
+function resolveCodeLanguage(language = '', code = '') {
 	const normalizedLanguage = language.trim().toLowerCase()
 	const aliases: Record<string, SupportedCodeLanguage> = {
 		ts: 'typescript',
@@ -95,7 +125,7 @@ function resolveCodeLanguage(language = '') {
 	return aliases[normalizedLanguage] ?? (
 		supportedLanguages.includes(normalizedLanguage as SupportedCodeLanguage)
 			? normalizedLanguage as SupportedCodeLanguage
-			: null
+			: inferCodeLanguage(code)
 	)
 }
 
@@ -134,7 +164,7 @@ async function renderArticleMarkdown(content: string) {
 	const highlighter = highlightedCodeBlocks.length > 0 ? await getHighlighter() : null
 	const highlightedHtml = highlightedCodeBlocks.map((serializedCodeBlock) => {
 		const { language, code } = JSON.parse(serializedCodeBlock) as { language: string, code: string }
-		const resolvedLanguage = resolveCodeLanguage(language)
+		const resolvedLanguage = resolveCodeLanguage(language, code)
 
 		if (!resolvedLanguage || !highlighter) {
 			return `<pre class="shiki article__code-block"><code>${escapeHtml(code)}</code></pre>`
@@ -201,7 +231,7 @@ function ArticlePage() {
 						className="article__content"
 						dangerouslySetInnerHTML={{ __html: articleHtml }}
 					/>
-					<Link className="article__back" to="/artigos">
+					<Link className="article__back button button--secondary" to="/artigos">
 						Voltar Para Artigos
 					</Link>
 				</div>

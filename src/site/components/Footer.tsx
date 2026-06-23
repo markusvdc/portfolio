@@ -1,4 +1,4 @@
-import logo from '../assets/vectors/logo.svg'
+import logo from '../../assets/vectors/logo.svg'
 import { routes } from '../utils/routes'
 
 function Footer() {

@@ -6,9 +6,9 @@
 	font-family: Verdana, Geneva, sans-serif
 
 .admin__panel
-	width: min(100%, 760px)
+	width: min(100%, 1000px)
 	margin: 0 auto
-	padding: 24px
+	padding: 50px
 	background: #fff
 	border: 1px solid #ddd
 	border-radius: 6px
@@ -21,7 +21,7 @@
 .admin__form
 	display: flex
 	flex-direction: column
-	gap: 10px
+	gap: 15px
 	label
 		font-weight: 700
 	input,
@@ -40,20 +40,18 @@
 .admin__actions
 	display: flex
 	gap: 10px
+	flex-wrap: wrap
 	button
-		padding: 10px 14px
+		padding: 10px 25px
 		border: 1px solid #333
 		border-radius: 4px
-		background: #222
-		color: #fff
+		background: #fff
+		color: #222
 		cursor: pointer
 		font: inherit
 		&:disabled
 			cursor: not-allowed
 			opacity: .5
-	button + button
-			background: #fff
-			color: #222
 
 .admin__message,
 .admin__status
@@ -80,8 +78,8 @@
 	background: #fff1f0
 
 .admin__article-editor
-	margin-top: 32px
-	padding-top: 24px
+	margin-top: 30px
+	padding-top: 30px
 	border-top: 1px solid #ddd
 	h2
 		margin-bottom: 16px
@@ -113,6 +111,38 @@
 		&:disabled
 			cursor: not-allowed
 			opacity: .5
+
+.admin__link-panel
+	display: flex
+	flex-direction: column
+	gap: 8px
+	padding: 12px
+	border-bottom: 1px solid #ddd
+	background: #fafafa
+	label
+		font-weight: 700
+	input
+		width: 100%
+		padding: 10px
+		border: 1px solid #aaa
+		border-radius: 4px
+		font: inherit
+
+.admin__link-actions
+	display: flex
+	flex-wrap: wrap
+	gap: 8px
+	button
+		padding: 8px 10px
+		border: 1px solid #333
+		border-radius: 4px
+		background: #222
+		color: #fff
+		cursor: pointer
+		font: inherit
+	button + button
+		background: #fff
+		color: #222
 
 .tiptap
 	min-height: 220px
@@ -159,9 +189,9 @@
 			background: transparent
 			color: inherit
 	pre + pre
-		margin-top: -12px
-		border-top-left-radius: 0
-		border-top-right-radius: 0
+			margin-top: -12px
+			border-top-left-radius: 0
+			border-top-right-radius: 0
 	img
 		max-width: 100%
 		height: auto
@@ -177,6 +207,7 @@
 			margin-bottom: 0
 	a
 		text-decoration: underline
+		pointer-events: none
 
 .admin__articles
 	margin-top: 24px
@@ -211,9 +242,9 @@
 			cursor: not-allowed
 			opacity: .5
 	button + button
-		background: #fff
-		color: #b42318
-		border-color: #b42318
+			background: #fff
+			color: #b42318
+			border-color: #b42318
 
 @media (max-width: 520px)
 	.admin__actions

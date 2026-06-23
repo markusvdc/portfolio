@@ -1,4 +1,4 @@
-import banner from '../assets/images/home/banner.webp'
+import banner from '../../assets/images/home/banner.webp'
 
 function HomePage() {
 	return (

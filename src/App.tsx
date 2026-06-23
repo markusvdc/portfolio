@@ -1,17 +1,17 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import ScrollToTop from './components/ScrollToTop'
-import HomePage from './pages/HomePage'
-import PortfolioPage from './pages/PortfolioPage'
-import ResumePage from './pages/ResumePage'
-import WritingPage from './pages/WritingPage'
+import Footer from './site/components/Footer'
+import Header from './site/components/Header'
+import ScrollToTop from './site/components/ScrollToTop'
+import HomePage from './site/pages/HomePage'
+import PortfolioPage from './site/pages/PortfolioPage'
+import ResumePage from './site/pages/ResumePage'
+import WritingPage from './site/pages/WritingPage'
 import type { Page } from './types/page'
-import { getRouteFromPath } from './utils/routes'
+import { getRouteFromPath } from './site/utils/routes'
 
-const AdminPage = lazy(() => import('./pages/AdminPage'))
-const ArticlePage = lazy(() => import('./pages/ArticlePage'))
+const AdminPage = lazy(() => import('./admin/pages/AdminPage'))
+const ArticlePage = lazy(() => import('./site/pages/ArticlePage'))
 
 function App() {
 	const location = useLocation()

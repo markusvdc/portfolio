@@ -1,10 +1,10 @@
-import altfaz from '../assets/images/portfolio/altfaz.webp'
-import bluestorm from '../assets/images/portfolio/bluestorm.webp'
-import citizensrx from '../assets/images/portfolio/citizensrx.webp'
-import fiats from '../assets/images/portfolio/fiats.webp'
-import lactivit from '../assets/images/portfolio/lactivit.webp'
-import quizz from '../assets/images/portfolio/quizz.webp'
-import ressonar from '../assets/images/portfolio/ressonar.webp'
+import altfaz from '../../assets/images/portfolio/altfaz.webp'
+import bluestorm from '../../assets/images/portfolio/bluestorm.webp'
+import citizensrx from '../../assets/images/portfolio/citizensrx.webp'
+import fiats from '../../assets/images/portfolio/fiats.webp'
+import lactivit from '../../assets/images/portfolio/lactivit.webp'
+import quizz from '../../assets/images/portfolio/quizz.webp'
+import ressonar from '../../assets/images/portfolio/ressonar.webp'
 
 export const portfolio = [
 	{
