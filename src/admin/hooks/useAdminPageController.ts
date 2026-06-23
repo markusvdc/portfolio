@@ -249,7 +249,7 @@ export function useAdminPageController() {
 			richTextEditor.setMarkdownContent(loadedArticle.article.content)
 			setArticleCreateResult({
 				status: 'success',
-				message: 'Artigo carregado para edicao.',
+				message: 'Artigo carregado para edicão.',
 			})
 		} catch (error) {
 			setArticleCreateResult({
@@ -349,7 +349,7 @@ export function useAdminPageController() {
 			].sort((firstArticle, secondArticle) => secondArticle.date.localeCompare(firstArticle.date)))
 			setArticleCreateResult({
 				status: 'success',
-				message: editingArticle ? 'Artigo Markdown atualizado com sucesso.' : 'Artigo Markdown criado com sucesso.',
+				message: editingArticle ? 'Artigo atualizado com sucesso.' : 'Artigo criado com sucesso.',
 				link: savedResult.link,
 			})
 			resetArticleForm()

@@ -21,7 +21,7 @@ function AdminArticleList({
 
 	return (
 		<section className="admin__articles" aria-labelledby="admin-articles-title">
-			<h2 id="admin-articles-title">Artigos Markdown</h2>
+			<h2 id="admin-articles-title">Artigos</h2>
 			<ul>
 				{articles.map((article) => (
 					<li key={article.filePath}>
@@ -29,7 +29,7 @@ function AdminArticleList({
 						<span>Slug: {article.slug}</span>
 						<span>Arquivo: {article.filePath}</span>
 						<span>Data: {article.date}</span>
-						<span>Tempo de leitura: {article.readingTime} min de leitura</span>
+						<span>Tempo de leitura: {article.readingTime} min</span>
 						<button
 							type="button"
 							onClick={() => onEditArticle(article)}

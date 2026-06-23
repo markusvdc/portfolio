@@ -91,7 +91,7 @@ export async function loadMarkdownArticle(token: string, article: AdminArticle) 
 	const data: GitHubReadFileResponse = await response.json()
 
 	if (!response.ok || !data.content) {
-		throw new Error(data.message ?? 'Erro ao carregar artigo para edicao.')
+		throw new Error(data.message ?? 'Erro ao carregar artigo para edicão.')
 	}
 
 	return {

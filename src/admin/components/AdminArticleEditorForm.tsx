@@ -42,7 +42,7 @@ function AdminArticleEditorForm({
 }: AdminArticleEditorFormProps) {
 	return (
 		<section className="admin__article-editor" aria-labelledby="admin-create-article-title">
-			<h2 id="admin-create-article-title">{editingArticle ? 'Editar artigo Markdown' : 'Criar artigo Markdown'}</h2>
+			<h2 id="admin-create-article-title">{editingArticle ? 'Editar artigo' : 'Criar artigo'}</h2>
 			<form className="admin__form" onSubmit={onSubmit}>
 				<label htmlFor="article-title">Titulo</label>
 				<input
@@ -52,6 +52,9 @@ function AdminArticleEditorForm({
 					onChange={(event) => onFormChange('title', event.target.value)}
 					placeholder="Titulo do artigo"
 				/>
+				<span className="admin__character">
+					{form.title.length}/75
+				</span>
 
 				<label htmlFor="article-slug">Slug</label>
 				<input
@@ -95,6 +98,9 @@ function AdminArticleEditorForm({
 					placeholder="Resumo do artigo"
 					rows={4}
 				/>
+				<span className="admin__character">
+					{form.summary.length}/270
+				</span>
 
 				<label htmlFor="article-summary">Conteúdo</label>
 				<ArticleRichTextEditor
@@ -113,7 +119,7 @@ function AdminArticleEditorForm({
 					<button type="submit" disabled={!hasSavedToken || isCreatingArticle}>
 						{isCreatingArticle
 							? editingArticle ? 'Atualizando artigo...' : 'Criando artigo...'
-							: editingArticle ? 'Atualizar artigo' : 'Criar artigo Markdown'}
+							: editingArticle ? 'Atualizar artigo' : 'Criar artigo'}
 					</button>
 					{editingArticle && (
 						<button type="button" onClick={onCancelEdit}>
