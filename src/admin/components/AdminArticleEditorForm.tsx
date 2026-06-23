@@ -66,7 +66,7 @@ function AdminArticleEditorForm({
 				<label htmlFor="article-date">Data</label>
 				<input
 					id="article-date"
-					type="date"
+					type="datetime-local"
 					value={form.date}
 					onChange={(event) => onFormChange('date', event.target.value)}
 				/>
@@ -78,7 +78,7 @@ function AdminArticleEditorForm({
 					value={form.readingTime}
 					onChange={(event) => onFormChange('readingTime', event.target.value)}
 					placeholder="5 min de leitura"
-					/>
+				/>
 
 				<label htmlFor="article-summary">Resumo</label>
 				<textarea
@@ -88,7 +88,7 @@ function AdminArticleEditorForm({
 					placeholder="Resumo do artigo"
 					rows={4}
 				/>
-				
+
 				<label htmlFor="article-summary">Conteúdo</label>
 				<ArticleRichTextEditor
 					editor={editor}

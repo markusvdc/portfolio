@@ -17,7 +17,7 @@ import { useArticleRichTextEditor } from './useArticleRichTextEditor'
 const emptyArticleForm = (): ArticleFormState => ({
 	title: '',
 	slug: '',
-	date: new Date().toISOString(),
+	date: new Date().toISOString().slice(0, 16),
 	readingTime: '5 min de leitura',
 	summary: '',
 })
