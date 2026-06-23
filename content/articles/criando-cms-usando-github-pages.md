@@ -6,9 +6,7 @@ readingTime: "7 min de leitura"
 summary: "Descubra como transformar um portfólio estático em um CMS sem backend usando React, Markdown, GitHub API e GitHub Pages. Veja como criar artigos, versionar conteúdo automaticamente e publicar tudo sem banco de dados, servidor ou infraestrutura complexa."
 ---
 
-Durante muito tempo eu pensei que, para ter um painel administrativo, era obrigatório criar um backend completo.
-
-Isso normalmente significava:
+Durante muito tempo eu pensei que, para ter um painel administrativo, era obrigatório criar um backend completo. Isso normalmente significava:
 
 -   Node.js;
     
@@ -46,9 +44,7 @@ Então veio o estalo:
 
 Em vez de armazenar dados em uma base tradicional, eu poderia salvar todo o conteúdo em arquivos **Markdown** dentro do repositório.
 
-Cada alteração se transformaria em um **commit**, criando automaticamente um histórico completo das mudanças.
-
-O que antes parecia uma gambiarra começou a parecer uma solução extremamente elegante.
+Cada alteração se transformaria em um **commit**, criando automaticamente um histórico completo das mudanças. O que antes parecia uma gambiarra começou a parecer uma solução extremamente elegante.
 
 ## O fluxo
 
