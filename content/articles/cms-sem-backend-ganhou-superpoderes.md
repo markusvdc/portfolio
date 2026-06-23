@@ -33,15 +33,15 @@ Hoje o projeto já possui:
 
 Agora o editor possui algumas ferramentas que fazem bastante diferença.
 
-### Links
+## Links
 
 Você pode criar links externos como: <a href="https://github.com" target="_blank" rel="noopener noreferrer">https://github.com</a> ou <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">https://vitejs.dev</a>
 
-### Código inline
+## Código inline
 
 Se você usa VSCODE, provavelmente conhece o arquivo `settings.json`. Também pode mencionar comandos como `npm install` ou `git pull`.
 
-### Bloco de código
+## Bloco de código
 
 ```
 interface Article {
