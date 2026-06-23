@@ -4,7 +4,7 @@ export type Article = {
 	date: string
 	readingTime: string
 	summary: string
-	content: string[]
+	content: string
 	filePath: string
 }
 
@@ -54,7 +54,7 @@ export function parseArticleMarkdown(filePath: string, markdown: string): Articl
 		date: frontmatter.date,
 		readingTime: frontmatter.readingTime,
 		summary: frontmatter.summary,
-		content: contentSource.trim().split(/\r?\n\r?\n/).filter(Boolean),
+		content: contentSource.trim(),
 		filePath,
 	}
 }

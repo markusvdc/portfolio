@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { marked } from 'marked'
 import Overview from '../components/Overview'
 import { articles } from '../data/articles'
 import { formatArticleDate } from '../utils/formatArticleDate'
@@ -23,11 +24,10 @@ function ArticlePage() {
 							<span>{article.readingTime}</span>
 						</div>
 					</header>
-					<div className="article__content">
-						{article.content.map((paragraph) => (
-							<p key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
-						))}
-					</div>
+					<div
+						className="article__content"
+						dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }}
+					/>
 					<Link className="article__back" to="/artigos">
 						Voltar Para Artigos
 					</Link>

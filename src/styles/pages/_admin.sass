@@ -3,10 +3,10 @@
 	padding: 40px 20px
 	background: #f5f5f5
 	color: #222
-	font-family: Arial, sans-serif
+	font-family: Verdana, Geneva, sans-serif
 
 .admin__panel
-	width: min(100%, 640px)
+	width: min(100%, 760px)
 	margin: 0 auto
 	padding: 24px
 	background: #fff
@@ -24,12 +24,17 @@
 	gap: 10px
 	label
 		font-weight: 700
+	input,
 	textarea
 		width: 100%
 		padding: 12px
 		border: 1px solid #aaa
 		border-radius: 4px
 		font: inherit
+		line-height: 1.445rem
+	input
+		height: 44px
+	textarea
 		resize: vertical
 
 .admin__actions
@@ -47,8 +52,8 @@
 			cursor: not-allowed
 			opacity: .5
 	button + button
-		background: #fff
-		color: #222
+			background: #fff
+			color: #222
 
 .admin__message,
 .admin__status
@@ -73,6 +78,66 @@
 .admin__connection--error
 	border-color: #b42318
 	background: #fff1f0
+
+.admin__article-editor
+	margin-top: 32px
+	padding-top: 24px
+	border-top: 1px solid #ddd
+	h2
+		margin-bottom: 16px
+		font-size: 1.35rem
+
+.admin__editor
+	border: 1px solid #aaa
+	border-radius: 4px
+	overflow: hidden
+
+.admin__editor-toolbar
+	display: flex
+	flex-wrap: wrap
+	gap: 6px
+	padding: 8px
+	border-bottom: 1px solid #ddd
+	background: #f7f7f7
+	button
+		padding: 7px 10px
+		border: 1px solid #bbb
+		border-radius: 4px
+		background: #fff
+		color: #222
+		cursor: pointer
+		font: inherit
+		&.is-active
+			background: #222
+			color: #fff
+		&:disabled
+			cursor: not-allowed
+			opacity: .5
+
+.tiptap
+	min-height: 220px
+	padding: 14px
+	outline: none
+	p,
+	ul,
+	ol,
+	blockquote
+		margin-bottom: 12px
+	h2
+		margin: 18px 0 10px
+		font-size: 1.4rem
+	ul,
+	ol
+		padding-left: 22px
+		list-style: disc
+	blockquote
+		padding-left: 12px
+		border-left: 3px solid #bbb
+	p
+		line-height: 1.445rem
+	li
+		p
+			margin-bottom: 0
 
 .admin__articles
 	margin-top: 24px

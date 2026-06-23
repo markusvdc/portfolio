@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import { EditorContent, useEditor } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import TurndownService from 'turndown'
 import { parseArticleMarkdown } from '../utils/parseArticleMarkdown'
 import type { Article } from '../utils/parseArticleMarkdown'
 
@@ -21,6 +24,12 @@ type WriteResult = {
 	link?: string
 }
 
+type ArticleCreateResult = {
+	status: 'success' | 'error'
+	message: string
+	link?: string
+}
+
 type ArticleListResult = {
 	status: 'success' | 'error'
 	message: string
@@ -33,6 +42,36 @@ type GitHubContentItem = {
 	url: string
 }
 
+const turndownService = new TurndownService({
+	headingStyle: 'atx',
+	bulletListMarker: '-',
+	codeBlockStyle: 'fenced',
+})
+
+function createSlug(value: string) {
+	return value
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '')
+}
+
+function escapeFrontmatterValue(value: string) {
+	return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+}
+
+function encodeBase64Content(content: string) {
+	const bytes = new TextEncoder().encode(content)
+	let binaryContent = ''
+
+	bytes.forEach((byte) => {
+		binaryContent += String.fromCharCode(byte)
+	})
+
+	return btoa(binaryContent)
+}
+
 function AdminPage() {
 	const [token, setToken] = useState(() => localStorage.getItem(githubTokenStorageKey) ?? '')
 	const [hasSavedToken, setHasSavedToken] = useState(() => Boolean(localStorage.getItem(githubTokenStorageKey)))
@@ -40,10 +79,24 @@ function AdminPage() {
 	const [connectionResult, setConnectionResult] = useState<ConnectionResult | null>(null)
 	const [writeResult, setWriteResult] = useState<WriteResult | null>(null)
 	const [articleListResult, setArticleListResult] = useState<ArticleListResult | null>(null)
+	const [articleCreateResult, setArticleCreateResult] = useState<ArticleCreateResult | null>(null)
 	const [adminArticles, setAdminArticles] = useState<Article[]>([])
 	const [isTestingConnection, setIsTestingConnection] = useState(false)
 	const [isCreatingTestFile, setIsCreatingTestFile] = useState(false)
 	const [isListingArticles, setIsListingArticles] = useState(false)
+	const [isCreatingArticle, setIsCreatingArticle] = useState(false)
+	const [articleTitle, setArticleTitle] = useState('')
+	const [articleSlug, setArticleSlug] = useState('')
+	const [isSlugEdited, setIsSlugEdited] = useState(false)
+	const [articleDate, setArticleDate] = useState(() => new Date().toISOString().slice(0, 10))
+	const [articleReadingTime, setArticleReadingTime] = useState('5 min de leitura')
+	const [articleSummary, setArticleSummary] = useState('')
+	const editor = useEditor({
+		extensions: [
+			StarterKit,
+		],
+		content: '',
+	})
 
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault()
@@ -62,6 +115,7 @@ function AdminPage() {
 		setConnectionResult(null)
 		setWriteResult(null)
 		setArticleListResult(null)
+		setArticleCreateResult(null)
 	}
 
 	function handleRemoveToken() {
@@ -72,6 +126,7 @@ function AdminPage() {
 		setConnectionResult(null)
 		setWriteResult(null)
 		setArticleListResult(null)
+		setArticleCreateResult(null)
 		setAdminArticles([])
 	}
 
@@ -155,7 +210,7 @@ function AdminPage() {
 				},
 				body: JSON.stringify({
 					message: 'Create admin test file',
-					content: btoa(fileContent),
+					content: encodeBase64Content(fileContent),
 				}),
 			})
 			const data: {
@@ -262,6 +317,129 @@ function AdminPage() {
 		}
 	}
 
+	function handleArticleTitleChange(value: string) {
+		setArticleTitle(value)
+
+		if (!isSlugEdited) {
+			setArticleSlug(createSlug(value))
+		}
+	}
+
+	function handleArticleSlugChange(value: string) {
+		setIsSlugEdited(true)
+		setArticleSlug(createSlug(value))
+	}
+
+	function buildArticleMarkdown(markdownContent: string) {
+		return [
+			'---',
+			`title: "${escapeFrontmatterValue(articleTitle.trim())}"`,
+			`slug: "${escapeFrontmatterValue(articleSlug.trim())}"`,
+			`date: "${escapeFrontmatterValue(articleDate.trim())}"`,
+			`readingTime: "${escapeFrontmatterValue(articleReadingTime.trim())}"`,
+			`summary: "${escapeFrontmatterValue(articleSummary.trim())}"`,
+			'---',
+			'',
+			markdownContent.trim(),
+			'',
+		].join('\n')
+	}
+
+	function resetArticleForm() {
+		setArticleTitle('')
+		setArticleSlug('')
+		setIsSlugEdited(false)
+		setArticleDate(new Date().toISOString().slice(0, 10))
+		setArticleReadingTime('5 min de leitura')
+		setArticleSummary('')
+		editor?.commands.clearContent()
+	}
+
+	async function handleCreateArticle(event: FormEvent<HTMLFormElement>) {
+		event.preventDefault()
+
+		const savedToken = localStorage.getItem(githubTokenStorageKey)
+
+		if (!savedToken) {
+			setArticleCreateResult({
+				status: 'error',
+				message: 'Nenhum token salvo para criar artigo.'
+			})
+			return
+		}
+
+		if (!articleTitle.trim() || !articleSlug.trim() || !articleDate.trim() || !articleReadingTime.trim() || !articleSummary.trim()) {
+			setArticleCreateResult({
+				status: 'error',
+				message: 'Preencha titulo, slug, data, tempo de leitura e resumo.'
+			})
+			return
+		}
+
+		if (!editor || editor.isEmpty) {
+			setArticleCreateResult({
+				status: 'error',
+				message: 'Escreva o conteudo do artigo antes de salvar.'
+			})
+			return
+		}
+
+		setIsCreatingArticle(true)
+		setArticleCreateResult(null)
+
+		try {
+			const markdownContent = turndownService.turndown(editor.getHTML())
+			const markdownFile = buildArticleMarkdown(markdownContent)
+			const articlePath = `content/articles/${articleSlug.trim()}.md`
+			const response = await fetch(`https://api.github.com/repos/markusvdc/portfolio/contents/${articlePath}`, {
+				method: 'PUT',
+				headers: {
+					Accept: 'application/vnd.github+json',
+					Authorization: `Bearer ${savedToken}`,
+					'Content-Type': 'application/json',
+					'X-GitHub-Api-Version': '2022-11-28',
+				},
+				body: JSON.stringify({
+					message: `Create article ${articleSlug.trim()}`,
+					content: encodeBase64Content(markdownFile),
+				}),
+			})
+			const data: {
+				message?: string
+				content?: { html_url?: string }
+				commit?: { html_url?: string }
+			} = await response.json()
+
+			if (!response.ok) {
+				setArticleCreateResult({
+					status: 'error',
+					message: data.message ?? 'Erro ao criar artigo.'
+				})
+				return
+			}
+
+			const createdArticle = parseArticleMarkdown(articlePath, markdownFile)
+
+			setAdminArticles((currentArticles) => [
+				createdArticle,
+				...currentArticles.filter((article) => article.filePath !== articlePath),
+			].sort((firstArticle, secondArticle) => secondArticle.date.localeCompare(firstArticle.date)))
+			setArticleCreateResult({
+				status: 'success',
+				message: 'Artigo Markdown criado com sucesso.',
+				link: data.content?.html_url ?? data.commit?.html_url,
+			})
+			resetArticleForm()
+		} catch (error) {
+			setArticleCreateResult({
+				status: 'error',
+				message: error instanceof Error ? error.message : 'Erro inesperado ao criar artigo.'
+			})
+		} finally {
+			setIsCreatingArticle(false)
+		}
+	}
+
 	return (
 		<main className="admin">
 			<section className="admin__panel" aria-labelledby="admin-title">
@@ -298,6 +476,107 @@ function AdminPage() {
 					</div>
 				</form>
 
+				<section className="admin__article-editor" aria-labelledby="admin-create-article-title">
+					<h2 id="admin-create-article-title">Criar artigo Markdown</h2>
+					<form className="admin__form" onSubmit={handleCreateArticle}>
+						<label htmlFor="article-title">Titulo</label>
+						<input
+							id="article-title"
+							type="text"
+							value={articleTitle}
+							onChange={(event) => handleArticleTitleChange(event.target.value)}
+							placeholder="Titulo do artigo"
+						/>
+
+						<label htmlFor="article-slug">Slug</label>
+						<input
+							id="article-slug"
+							type="text"
+							value={articleSlug}
+							onChange={(event) => handleArticleSlugChange(event.target.value)}
+							placeholder="slug-do-artigo"
+						/>
+
+						<label htmlFor="article-date">Data</label>
+						<input
+							id="article-date"
+							type="date"
+							value={articleDate}
+							onChange={(event) => setArticleDate(event.target.value)}
+						/>
+
+						<label htmlFor="article-reading-time">Tempo de leitura</label>
+						<input
+							id="article-reading-time"
+							type="text"
+							value={articleReadingTime}
+							onChange={(event) => setArticleReadingTime(event.target.value)}
+							placeholder="5 min de leitura"
+						/>
+
+						<label htmlFor="article-summary">Resumo</label>
+						<textarea
+							id="article-summary"
+							value={articleSummary}
+							onChange={(event) => setArticleSummary(event.target.value)}
+							placeholder="Resumo curto do artigo"
+							rows={4}
+						/>
+
+						<div className="admin__editor">
+							<div className="admin__editor-toolbar">
+								<button
+									type="button"
+									className={editor?.isActive('bold') ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleBold().run()}
+									disabled={!editor}
+								>
+									B
+								</button>
+								<button
+									type="button"
+									className={editor?.isActive('italic') ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleItalic().run()}
+									disabled={!editor}
+								>
+									I
+								</button>
+								<button
+									type="button"
+									className={editor?.isActive('heading', { level: 2 }) ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
+									disabled={!editor}
+								>
+									H2
+								</button>
+								<button
+									type="button"
+									className={editor?.isActive('bulletList') ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleBulletList().run()}
+									disabled={!editor}
+								>
+									Lista
+								</button>
+								<button
+									type="button"
+									className={editor?.isActive('blockquote') ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleBlockquote().run()}
+									disabled={!editor}
+								>
+									Citacao
+								</button>
+							</div>
+							<EditorContent editor={editor} />
+						</div>
+
+						<div className="admin__actions">
+							<button type="submit" disabled={!hasSavedToken || isCreatingArticle}>
+								{isCreatingArticle ? 'Criando artigo...' : 'Criar artigo Markdown'}
+							</button>
+						</div>
+					</form>
+				</section>
+
 				{message && <p className="admin__message">{message}</p>}
 				<p className="admin__status">
 					Status: {hasSavedToken ? 'token salvo' : 'nenhum token salvo'}
@@ -324,6 +603,18 @@ function AdminPage() {
 				{articleListResult && (
 					<div className={`admin__connection admin__connection--${articleListResult.status}`}>
 						<p>Status da listagem: {articleListResult.message}</p>
+					</div>
+				)}
+				{articleCreateResult && (
+					<div className={`admin__connection admin__connection--${articleCreateResult.status}`}>
+						<p>Status da criacao: {articleCreateResult.message}</p>
+						{articleCreateResult.link && (
+							<p>
+								<a href={articleCreateResult.link} target="_blank" rel="noopener noreferrer">
+									Abrir artigo no GitHub
+								</a>
+							</p>
+						)}
 					</div>
 				)}
 				{adminArticles.length > 0 && (
