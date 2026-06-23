@@ -189,9 +189,9 @@ export function useAdminPageController() {
 		}
 	}
 
-	function updateArticleForm(field: keyof ArticleFormState, value: string) {
+	function updateArticleForm(field: keyof ArticleFormState, value: ArticleFormState[keyof ArticleFormState]) {
 		setArticleForm((currentForm) => {
-			if (field === 'title' && !isSlugEdited) {
+			if (field === 'title' && !isSlugEdited && typeof value === 'string') {
 				return {
 					...currentForm,
 					title: value,
