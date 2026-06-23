@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { EditorContent, useEditor } from '@tiptap/react'
+import Image from '@tiptap/extension-image'
+import Link from '@tiptap/extension-link'
 import StarterKit from '@tiptap/starter-kit'
+import { marked } from 'marked'
 import TurndownService from 'turndown'
 import { parseArticleMarkdown } from '../utils/parseArticleMarkdown'
 import type { Article } from '../utils/parseArticleMarkdown'
+import { normalizeMarkdownCodeBlocks } from '../utils/normalizeMarkdownCodeBlocks'
 
 const githubTokenStorageKey = 'githubPersonalAccessToken'
 const githubRepositoryUrl = 'https://api.github.com/repos/markusvdc/portfolio'
@@ -30,6 +34,12 @@ type ArticleCreateResult = {
 	link?: string
 }
 
+type ArticleDeleteResult = {
+	status: 'success' | 'error'
+	message: string
+	link?: string
+}
+
 type ArticleListResult = {
 	status: 'success' | 'error'
 	message: string
@@ -38,9 +48,39 @@ type ArticleListResult = {
 type GitHubContentItem = {
 	name: string
 	path: string
+	sha: string
 	type: string
 	url: string
 }
+
+type GitHubReadFileResponse = {
+	message?: string
+	sha?: string
+	content?: string
+}
+
+type GitHubWriteFileResponse = {
+	message?: string
+	content?: {
+		html_url?: string
+		sha?: string
+	}
+	commit?: {
+		html_url?: string
+	}
+}
+
+type AdminArticle = Article & {
+	sha: string
+	apiUrl: string
+}
+
+type EditingArticle = {
+	filePath: string
+	sha: string
+}
+
+type CalloutType = 'INFO' | 'TIP' | 'WARNING'
 
 const turndownService = new TurndownService({
 	headingStyle: 'atx',
@@ -72,6 +112,14 @@ function encodeBase64Content(content: string) {
 	return btoa(binaryContent)
 }
 
+function parseMarkdownToEditorHtml(markdown: string) {
+	return marked.parse(markdown, { async: false }) as string
+}
+
+function createCalloutHtml(type: CalloutType) {
+	return `<blockquote><p>[!${type}]</p><p>Escreva o destaque aqui.</p></blockquote>`
+}
+
 function AdminPage() {
 	const [token, setToken] = useState(() => localStorage.getItem(githubTokenStorageKey) ?? '')
 	const [hasSavedToken, setHasSavedToken] = useState(() => Boolean(localStorage.getItem(githubTokenStorageKey)))
@@ -80,11 +128,15 @@ function AdminPage() {
 	const [writeResult, setWriteResult] = useState<WriteResult | null>(null)
 	const [articleListResult, setArticleListResult] = useState<ArticleListResult | null>(null)
 	const [articleCreateResult, setArticleCreateResult] = useState<ArticleCreateResult | null>(null)
-	const [adminArticles, setAdminArticles] = useState<Article[]>([])
+	const [articleDeleteResult, setArticleDeleteResult] = useState<ArticleDeleteResult | null>(null)
+	const [adminArticles, setAdminArticles] = useState<AdminArticle[]>([])
+	const [editingArticle, setEditingArticle] = useState<EditingArticle | null>(null)
 	const [isTestingConnection, setIsTestingConnection] = useState(false)
 	const [isCreatingTestFile, setIsCreatingTestFile] = useState(false)
 	const [isListingArticles, setIsListingArticles] = useState(false)
 	const [isCreatingArticle, setIsCreatingArticle] = useState(false)
+	const [isLoadingArticleForEdit, setIsLoadingArticleForEdit] = useState(false)
+	const [deletingArticlePath, setDeletingArticlePath] = useState('')
 	const [articleTitle, setArticleTitle] = useState('')
 	const [articleSlug, setArticleSlug] = useState('')
 	const [isSlugEdited, setIsSlugEdited] = useState(false)
@@ -94,6 +146,13 @@ function AdminPage() {
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
+			Link.configure({
+				openOnClick: false,
+			}),
+			Image.configure({
+				inline: false,
+				allowBase64: false,
+			}),
 		],
 		content: '',
 	})
@@ -116,6 +175,8 @@ function AdminPage() {
 		setWriteResult(null)
 		setArticleListResult(null)
 		setArticleCreateResult(null)
+		setArticleDeleteResult(null)
+		setEditingArticle(null)
 	}
 
 	function handleRemoveToken() {
@@ -127,7 +188,9 @@ function AdminPage() {
 		setWriteResult(null)
 		setArticleListResult(null)
 		setArticleCreateResult(null)
+		setArticleDeleteResult(null)
 		setAdminArticles([])
+		setEditingArticle(null)
 	}
 
 	async function handleTestConnection() {
@@ -291,13 +354,17 @@ function AdminPage() {
 			const markdownFiles = directoryData.filter((item) => item.type === 'file' && item.name.endsWith('.md'))
 			const articlesFromGithub = await Promise.all(markdownFiles.map(async (file) => {
 				const fileResponse = await fetch(file.url, { headers })
-				const fileData: { message?: string, content?: string } = await fileResponse.json()
+				const fileData: GitHubReadFileResponse = await fileResponse.json()
 
 				if (!fileResponse.ok || !fileData.content) {
 					throw new Error(fileData.message ?? `Erro ao carregar ${file.path}.`)
 				}
 
-				return parseArticleMarkdown(file.path, decodeBase64Content(fileData.content))
+				return {
+					...parseArticleMarkdown(file.path, decodeBase64Content(fileData.content)),
+					sha: fileData.sha ?? file.sha,
+					apiUrl: file.url,
+				}
 			}))
 
 			setAdminArticles(articlesFromGithub.sort((firstArticle, secondArticle) => (
@@ -327,7 +394,50 @@ function AdminPage() {
 
 	function handleArticleSlugChange(value: string) {
 		setIsSlugEdited(true)
-		setArticleSlug(createSlug(value))
+		setArticleSlug(value)
+	}
+
+	function handleSetLink() {
+		if (!editor) {
+			return
+		}
+
+		const previousUrl = editor.getAttributes('link').href as string | undefined
+		const url = window.prompt('URL do link', previousUrl ?? '')
+
+		if (url === null) {
+			return
+		}
+
+		if (!url.trim()) {
+			editor.chain().focus().extendMarkRange('link').unsetLink().run()
+			return
+		}
+
+		editor.chain().focus().extendMarkRange('link').setLink({ href: url.trim() }).run()
+	}
+
+	function handleInsertImage() {
+		if (!editor) {
+			return
+		}
+
+		const src = window.prompt('URL da imagem')
+
+		if (!src?.trim()) {
+			return
+		}
+
+		const alt = window.prompt('Texto alternativo da imagem') ?? ''
+
+		editor.chain().focus().setImage({
+			src: src.trim(),
+			alt: alt.trim(),
+		}).run()
+	}
+
+	function handleInsertCallout(type: CalloutType) {
+		editor?.chain().focus().insertContent(createCalloutHtml(type)).run()
 	}
 
 	function buildArticleMarkdown(markdownContent: string) {
@@ -352,7 +462,132 @@ function AdminPage() {
 		setArticleDate(new Date().toISOString().slice(0, 10))
 		setArticleReadingTime('5 min de leitura')
 		setArticleSummary('')
+		setEditingArticle(null)
 		editor?.commands.clearContent()
+	}
+
+	async function handleEditArticle(article: AdminArticle) {
+		const savedToken = localStorage.getItem(githubTokenStorageKey)
+
+		if (!savedToken) {
+			setArticleCreateResult({
+				status: 'error',
+				message: 'Nenhum token salvo para editar artigo.'
+			})
+			return
+		}
+
+		setIsLoadingArticleForEdit(true)
+		setArticleCreateResult(null)
+
+		try {
+			const response = await fetch(article.apiUrl, {
+				headers: {
+					Accept: 'application/vnd.github+json',
+					Authorization: `Bearer ${savedToken}`,
+					'X-GitHub-Api-Version': '2022-11-28',
+				},
+			})
+			const data: GitHubReadFileResponse = await response.json()
+
+			if (!response.ok || !data.content) {
+				setArticleCreateResult({
+					status: 'error',
+					message: data.message ?? 'Erro ao carregar artigo para edicao.'
+				})
+				return
+			}
+
+			const parsedArticle = parseArticleMarkdown(article.filePath, decodeBase64Content(data.content))
+
+			setArticleTitle(parsedArticle.title)
+			setArticleSlug(parsedArticle.slug)
+			setIsSlugEdited(true)
+			setArticleDate(parsedArticle.date)
+			setArticleReadingTime(parsedArticle.readingTime)
+			setArticleSummary(parsedArticle.summary)
+			setEditingArticle({
+				filePath: article.filePath,
+				sha: data.sha ?? article.sha,
+			})
+			editor?.commands.setContent(parseMarkdownToEditorHtml(parsedArticle.content))
+			setArticleCreateResult({
+				status: 'success',
+				message: 'Artigo carregado para edicao.'
+			})
+		} catch (error) {
+			setArticleCreateResult({
+				status: 'error',
+				message: error instanceof Error ? error.message : 'Erro inesperado ao carregar artigo.'
+			})
+		} finally {
+			setIsLoadingArticleForEdit(false)
+		}
+	}
+
+	async function handleDeleteArticle(article: AdminArticle) {
+		const savedToken = localStorage.getItem(githubTokenStorageKey)
+
+		if (!savedToken) {
+			setArticleDeleteResult({
+				status: 'error',
+				message: 'Nenhum token salvo para excluir artigo.'
+			})
+			return
+		}
+
+		const confirmed = window.confirm(`Excluir o artigo "${article.title}"?\n\nArquivo: ${article.filePath}`)
+
+		if (!confirmed) {
+			return
+		}
+
+		setDeletingArticlePath(article.filePath)
+		setArticleDeleteResult(null)
+
+		try {
+			const response = await fetch(`https://api.github.com/repos/markusvdc/portfolio/contents/${article.filePath}`, {
+				method: 'DELETE',
+				headers: {
+					Accept: 'application/vnd.github+json',
+					Authorization: `Bearer ${savedToken}`,
+					'Content-Type': 'application/json',
+					'X-GitHub-Api-Version': '2022-11-28',
+				},
+				body: JSON.stringify({
+					message: `Delete article ${article.slug}`,
+					sha: article.sha,
+				}),
+			})
+			const data: GitHubWriteFileResponse = await response.json()
+
+			if (!response.ok) {
+				setArticleDeleteResult({
+					status: 'error',
+					message: data.message ?? 'Erro ao excluir artigo.'
+				})
+				return
+			}
+
+			setAdminArticles((currentArticles) => currentArticles.filter((item) => item.filePath !== article.filePath))
+
+			if (editingArticle?.filePath === article.filePath) {
+				resetArticleForm()
+			}
+
+			setArticleDeleteResult({
+				status: 'success',
+				message: 'Artigo excluido com sucesso.',
+				link: data.commit?.html_url,
+			})
+		} catch (error) {
+			setArticleDeleteResult({
+				status: 'error',
+				message: error instanceof Error ? error.message : 'Erro inesperado ao excluir artigo.'
+			})
+		} finally {
+			setDeletingArticlePath('')
+		}
 	}
 
 	async function handleCreateArticle(event: FormEvent<HTMLFormElement>) {
@@ -388,9 +623,9 @@ function AdminPage() {
 		setArticleCreateResult(null)
 
 		try {
-			const markdownContent = turndownService.turndown(editor.getHTML())
+			const markdownContent = normalizeMarkdownCodeBlocks(turndownService.turndown(editor.getHTML()))
 			const markdownFile = buildArticleMarkdown(markdownContent)
-			const articlePath = `content/articles/${articleSlug.trim()}.md`
+			const articlePath = editingArticle?.filePath ?? `content/articles/${articleSlug.trim()}.md`
 			const response = await fetch(`https://api.github.com/repos/markusvdc/portfolio/contents/${articlePath}`, {
 				method: 'PUT',
 				headers: {
@@ -400,33 +635,34 @@ function AdminPage() {
 					'X-GitHub-Api-Version': '2022-11-28',
 				},
 				body: JSON.stringify({
-					message: `Create article ${articleSlug.trim()}`,
+					message: editingArticle ? `Update article ${articleSlug.trim()}` : `Create article ${articleSlug.trim()}`,
 					content: encodeBase64Content(markdownFile),
+					...(editingArticle ? { sha: editingArticle.sha } : {}),
 				}),
 			})
-			const data: {
-				message?: string
-				content?: { html_url?: string }
-				commit?: { html_url?: string }
-			} = await response.json()
+			const data: GitHubWriteFileResponse = await response.json()
 
 			if (!response.ok) {
 				setArticleCreateResult({
 					status: 'error',
-					message: data.message ?? 'Erro ao criar artigo.'
+					message: data.message ?? (editingArticle ? 'Erro ao atualizar artigo.' : 'Erro ao criar artigo.')
 				})
 				return
 			}
 
-			const createdArticle = parseArticleMarkdown(articlePath, markdownFile)
+			const savedArticle = {
+				...parseArticleMarkdown(articlePath, markdownFile),
+				sha: data.content?.sha ?? editingArticle?.sha ?? '',
+				apiUrl: `https://api.github.com/repos/markusvdc/portfolio/contents/${articlePath}`,
+			}
 
 			setAdminArticles((currentArticles) => [
-				createdArticle,
+				savedArticle,
 				...currentArticles.filter((article) => article.filePath !== articlePath),
 			].sort((firstArticle, secondArticle) => secondArticle.date.localeCompare(firstArticle.date)))
 			setArticleCreateResult({
 				status: 'success',
-				message: 'Artigo Markdown criado com sucesso.',
+				message: editingArticle ? 'Artigo Markdown atualizado com sucesso.' : 'Artigo Markdown criado com sucesso.',
 				link: data.content?.html_url ?? data.commit?.html_url,
 			})
 			resetArticleForm()
@@ -477,7 +713,7 @@ function AdminPage() {
 				</form>
 
 				<section className="admin__article-editor" aria-labelledby="admin-create-article-title">
-					<h2 id="admin-create-article-title">Criar artigo Markdown</h2>
+					<h2 id="admin-create-article-title">{editingArticle ? 'Editar artigo Markdown' : 'Criar artigo Markdown'}</h2>
 					<form className="admin__form" onSubmit={handleCreateArticle}>
 						<label htmlFor="article-title">Titulo</label>
 						<input
@@ -495,6 +731,7 @@ function AdminPage() {
 							value={articleSlug}
 							onChange={(event) => handleArticleSlugChange(event.target.value)}
 							placeholder="slug-do-artigo"
+							disabled={Boolean(editingArticle)}
 						/>
 
 						<label htmlFor="article-date">Data</label>
@@ -527,19 +764,27 @@ function AdminPage() {
 							<div className="admin__editor-toolbar">
 								<button
 									type="button"
-									className={editor?.isActive('bold') ? 'is-active' : ''}
-									onClick={() => editor?.chain().focus().toggleBold().run()}
+									className={editor?.isActive('link') ? 'is-active' : ''}
+									onClick={handleSetLink}
 									disabled={!editor}
 								>
-									B
+									Link
 								</button>
 								<button
 									type="button"
-									className={editor?.isActive('italic') ? 'is-active' : ''}
-									onClick={() => editor?.chain().focus().toggleItalic().run()}
+									className={editor?.isActive('code') ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleCode().run()}
 									disabled={!editor}
 								>
-									I
+									Inline code
+								</button>
+								<button
+									type="button"
+									className={editor?.isActive('codeBlock') ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
+									disabled={!editor}
+								>
+									Code block
 								</button>
 								<button
 									type="button"
@@ -551,6 +796,14 @@ function AdminPage() {
 								</button>
 								<button
 									type="button"
+									className={editor?.isActive('heading', { level: 3 }) ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
+									disabled={!editor}
+								>
+									H3
+								</button>
+								<button
+									type="button"
 									className={editor?.isActive('bulletList') ? 'is-active' : ''}
 									onClick={() => editor?.chain().focus().toggleBulletList().run()}
 									disabled={!editor}
@@ -559,11 +812,54 @@ function AdminPage() {
 								</button>
 								<button
 									type="button"
+									className={editor?.isActive('orderedList') ? 'is-active' : ''}
+									onClick={() => editor?.chain().focus().toggleOrderedList().run()}
+									disabled={!editor}
+								>
+									Numerada
+								</button>
+								<button
+									type="button"
+									onClick={() => editor?.chain().focus().setHorizontalRule().run()}
+									disabled={!editor}
+								>
+									Separador
+								</button>
+								<button
+									type="button"
 									className={editor?.isActive('blockquote') ? 'is-active' : ''}
 									onClick={() => editor?.chain().focus().toggleBlockquote().run()}
 									disabled={!editor}
 								>
-									Citacao
+									Citação
+								</button>
+								<button
+									type="button"
+									onClick={handleInsertImage}
+									disabled={!editor}
+								>
+									Imagem
+								</button>
+								<button
+									type="button"
+									onClick={() => handleInsertCallout('INFO')}
+									disabled={!editor}
+								>
+									INFO
+								</button>
+								<button
+									type="button"
+									onClick={() => handleInsertCallout('TIP')}
+									disabled={!editor}
+								>
+									TIP
+								</button>
+								<button
+									type="button"
+									onClick={() => handleInsertCallout('WARNING')}
+									disabled={!editor}
+								>
+									WARNING
 								</button>
 							</div>
 							<EditorContent editor={editor} />
@@ -571,8 +867,15 @@ function AdminPage() {
 
 						<div className="admin__actions">
 							<button type="submit" disabled={!hasSavedToken || isCreatingArticle}>
-								{isCreatingArticle ? 'Criando artigo...' : 'Criar artigo Markdown'}
+								{isCreatingArticle
+									? editingArticle ? 'Atualizando artigo...' : 'Criando artigo...'
+									: editingArticle ? 'Atualizar artigo' : 'Criar artigo Markdown'}
 							</button>
+							{editingArticle && (
+								<button type="button" onClick={resetArticleForm}>
+									Cancelar edicao
+								</button>
+							)}
 						</div>
 					</form>
 				</section>
@@ -617,6 +920,18 @@ function AdminPage() {
 						)}
 					</div>
 				)}
+				{articleDeleteResult && (
+					<div className={`admin__connection admin__connection--${articleDeleteResult.status}`}>
+						<p>Status da exclusao: {articleDeleteResult.message}</p>
+						{articleDeleteResult.link && (
+							<p>
+								<a href={articleDeleteResult.link} target="_blank" rel="noopener noreferrer">
+									Abrir commit no GitHub
+								</a>
+							</p>
+						)}
+					</div>
+				)}
 				{adminArticles.length > 0 && (
 					<section className="admin__articles" aria-labelledby="admin-articles-title">
 						<h2 id="admin-articles-title">Artigos Markdown</h2>
@@ -628,6 +943,20 @@ function AdminPage() {
 									<span>Arquivo: {article.filePath}</span>
 									<span>Data: {article.date}</span>
 									<span>Tempo de leitura: {article.readingTime}</span>
+									<button
+										type="button"
+										onClick={() => handleEditArticle(article)}
+										disabled={isLoadingArticleForEdit || deletingArticlePath === article.filePath}
+									>
+										{isLoadingArticleForEdit ? 'Carregando...' : 'Editar'}
+									</button>
+									<button
+										type="button"
+										onClick={() => handleDeleteArticle(article)}
+										disabled={Boolean(deletingArticlePath)}
+									>
+										{deletingArticlePath === article.filePath ? 'Excluindo...' : 'Excluir'}
+									</button>
 								</li>
 							))}
 						</ul>

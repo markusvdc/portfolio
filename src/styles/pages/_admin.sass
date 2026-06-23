@@ -121,23 +121,62 @@
 	p,
 	ul,
 	ol,
-	blockquote
+	blockquote,
+	pre
 		margin-bottom: 12px
 	h2
 		margin: 18px 0 10px
 		font-size: 1.4rem
+	h3
+		margin: 16px 0 8px
+		font-size: 1.1rem
 	ul,
 	ol
 		padding-left: 22px
+	ul
 		list-style: disc
+	ol
+		list-style: decimal
 	blockquote
-		padding-left: 12px
-		border-left: 3px solid #bbb
+		padding: 10px 12px
+		border-left: 4px solid #999
+		background: #f4f4f4
+		p:last-child
+			margin-bottom: 0
+	code
+		padding: 2px 5px
+		border-radius: 3px
+		background: #DDD
+		font-family: Consolas, monospace
+	pre
+		padding: 12px
+		border-radius: 4px
+		background: #222
+		color: #fff
+		overflow-x: auto
+		code
+			padding: 0
+			background: transparent
+			color: inherit
+	pre + pre
+		margin-top: -12px
+		border-top-left-radius: 0
+		border-top-right-radius: 0
+	img
+		max-width: 100%
+		height: auto
+	hr
+		width: 100%
+		margin: 18px 0
+		border: 0
+		border-top: 1px solid #ccc
 	p
 		line-height: 1.445rem
 	li
 		p
 			margin-bottom: 0
+	a
+		text-decoration: underline
 
 .admin__articles
 	margin-top: 24px
@@ -158,6 +197,23 @@
 		background: #fafafa
 	span
 		font-size: .9rem
+	button
+		width: fit-content
+		margin-top: 6px
+		padding: 8px 12px
+		border: 1px solid #333
+		border-radius: 4px
+		background: #222
+		color: #fff
+		cursor: pointer
+		font: inherit
+		&:disabled
+			cursor: not-allowed
+			opacity: .5
+	button + button
+		background: #fff
+		color: #b42318
+		border-color: #b42318
 
 @media (max-width: 520px)
 	.admin__actions

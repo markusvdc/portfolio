@@ -41,6 +41,30 @@
 		text-align: justify
 		strong
 			font-weight: variables.$font-weight-bd
+	code
+		padding: 2px 5px
+		border-radius: 3px
+		background: #f0f0f0
+		font-family: Consolas, monospace
+	pre
+		padding: 16px
+		border-radius: 4px
+		color: variables.$color-white
+		overflow-x: auto
+		font-size: .9rem
+		line-height: 1.5rem
+		code
+			padding: 0
+			background: transparent
+			color: inherit
+			font-size: inherit
+			line-height: inherit
+	.shiki
+		background: #0d1117 !important
+	pre + pre
+		margin-top: -25px
+		border-top-left-radius: 0
+		border-top-right-radius: 0
 	h2,
 	h3
 		color: variables.$color-black
@@ -62,8 +86,40 @@
 	ol
 		list-style: decimal
 	blockquote
-		padding-left: 15px
-		border-left: 3px solid variables.$color-primary
+		padding: 14px 16px
+		border-left: 4px solid #7b8794
+		background: #f6f8fa
+		p
+			margin-bottom: 0
+			color: variables.$color-black
+			font-style: italic
+	img
+		max-width: 100%
+		height: auto
+	hr
+		width: 100%
+		border: 0
+		border-top: 1px solid #ddd
+	.article__callout
+		padding: 14px 16px
+		border-left: 4px solid variables.$color-primary
+		background: #f7f7f7
+		strong
+			display: block
+			margin-bottom: 8px
+			font-size: .85rem
+			line-height: 1rem
+		p
+			margin-bottom: 0
+	.article__callout--info
+		border-left-color: #2563eb
+		background: #eff6ff
+	.article__callout--tip
+		border-left-color: #16803c
+		background: #ecfdf3
+	.article__callout--warning
+		border-left-color: #b45309
+		background: #fffbeb
 	a
 		color: variables.$color-primary
 		border-bottom: 1px solid variables.$color-primary
