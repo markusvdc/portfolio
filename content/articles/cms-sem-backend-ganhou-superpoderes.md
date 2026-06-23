@@ -37,11 +37,7 @@ Agora o editor possui algumas ferramentas que fazem bastante diferença.
 
 Você pode criar links externos como:
 
-[https://github.com](https://github.com)
-
-ou
-
-[https://vitejs.dev](https://vitejs.dev)
+[https://github.com](https://github.com) ou [https://vitejs.dev](https://vitejs.dev)
 
 ### Código inline
 
