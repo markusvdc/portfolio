@@ -1,5 +1,5 @@
 ---
-title: "Estou dominando meu projeto. Mas será que ainda domino o código?"
+title: "Estou dominando meu projeto, mas será que ainda domino o código"
 slug: "dominando-projeto-mas-ainda-codigo"
 date: "2026-06-23"
 readingTime: "15 min de leitura"
