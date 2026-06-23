@@ -45,9 +45,7 @@ ou
 
 ### Código inline
 
-Se você usa VSCode, provavelmente conhece o arquivo `settings.json`.
-
-Também pode mencionar comandos como `npm install` ou `git pull`.
+Se você usa VSCode, provavelmente conhece o arquivo `settings.json`. Também pode mencionar comandos como `npm install` ou `git pull`.
 
 ### Bloco de código
 
