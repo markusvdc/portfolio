@@ -14,60 +14,6 @@ Depois de alguns testes, cheguei à configuração abaixo. Ela é focada em dese
 
 Como adicionar: abra a paleta de comandos com **ctrl + shift + p**, pesquise por **Preferences: Open Settings (JSON)** para abrir o arquivo **settings.json**. Depois, basta adicionar a seguinte configuração:
 
-```json
-{
-	"editor.semanticTokenColorCustomizations": {
-		"rules": {
-			"parameter": {
-				"italic": false
-			},
-			"parameter.declaration": {
-				"italic": false
-			},
-			"type": {
-				"italic": false
-			},
-			"namespace": {
-				"italic": false
-			},
-			"class": {
-				"italic": false
-			}
-		}
-	},
-	"editor.tokenColorCustomizations": {
-		"textMateRules": [
-			{
-				"scope": [
-					"comment",
-					"keyword",
-					"storage",
-					"entity.name.class",
-					"entity.other.attribute-name.class.css",
-					"entity.other.attribute-name.class.sass",
-					"entity.other.attribute-name.class.scss",
-					"entity.other.attribute-name.pseudo-element.css",
-					"entity.other.attribute-name.pseudo-element.sass",
-					"entity.other.attribute-name.pseudo-element.scss",
-					"entity.other.attribute-name.pseudo-class.css.sass",
-					"entity.other.attribute-name.html",
-					"entity.other.attribute-name.tsx",
-					"variable.other.object.tsx",
-					"variable.other.readwrite.tsx",
-					"support.type.primitive.ts",
-					"support.class.js",
-					"variable.language.this.js",
-					"entity.other.attribute-name.localname.svg",
-					"support.class.php",
-					"support.class.component.tsx"
-				],
-				"settings": {
-					"fontStyle": ""
-				}
-			}
-		]
-	}
-}
-```
+[https://gist.github.com/markusvdc/c5647e5b480922a7d36672f6902e709a](https://gist.github.com/markusvdc/c5647e5b480922a7d36672f6902e709a)
 
 Pronto. Se você trabalha principalmente com tecnologias Front-end, essa configuração deve remover a maior parte dos estilos em itálico do seu editor. E, se você é como eu e acha que código fica mais fácil de ler quando não parece ter sido escrito em um convite de casamento, provavelmente vai gostar do resultado.
