@@ -6,36 +6,52 @@ readingTime: "7 min de leitura"
 summary: "Descubra como transformar um portfólio estático em um CMS sem backend usando React, Markdown, GitHub API e GitHub Pages. Veja como criar artigos, versionar conteúdo automaticamente e publicar tudo sem banco de dados, servidor ou infraestrutura complexa."
 ---
 
-Durante muito tempo eu pensei que, para ter um painel administrativo, era obrigatório criar um backend.
+Durante muito tempo eu pensei que, para ter um painel administrativo, era obrigatório criar um backend completo.
 
--   Node.
+Isso normalmente significava:
+
+-   Node.js;
     
--   Banco de dados.
+-   Banco de dados;
     
--   Autenticação.
+-   Sistema de autenticação;
     
--   Deploy.
+-   Infraestrutura e deploy.
     
 
-Mas aí surgiu uma pergunta: Será que eu consigo fazer tudo usando apenas GitHub Pages? A resposta foi: sim.
+Mas aí surgiu uma pergunta:
+
+> Será que eu consigo fazer tudo isso usando apenas GitHub Pages?
+
+A resposta me surpreendeu: **Sim.**
 
 ## A ideia
 
-O GitHub já possui:
+Quando você para para pensar, o GitHub já oferece praticamente tudo o que um CMS precisa:
 
 -   Armazenamento de arquivos;
     
--   Histórico de versões;
+-   Histórico completo de versões;
     
--   Autenticação;
+-   Sistema de autenticação;
     
--   API;
+-   API para leitura e escrita;
     
--   Hospedagem estática.
+-   Hospedagem estática gratuita.
     
 
-Então por que não usar isso como banco de dados?
+Então veio o estalo:
+
+> Por que não usar o próprio repositório como banco de dados?
+
+Em vez de armazenar dados em uma base tradicional, eu poderia salvar todo o conteúdo em arquivos **Markdown** dentro do repositório.
+
+Cada alteração se transformaria em um **commit**, criando automaticamente um histórico completo das mudanças.
+
+O que antes parecia uma gambiarra começou a parecer uma solução extremamente elegante.
 
 ## O fluxo
 
-A arquitetura ficou assim: Admin React → GitHub API → Commit automático → Markdown → GitHub Pages
+A arquitetura acabou ficando assim:
+
+Painel administrativo em React → API do GitHub → Criação automática de arquivos Markdown → Versionamento com commits → Publicação automática no GitHub Pages
