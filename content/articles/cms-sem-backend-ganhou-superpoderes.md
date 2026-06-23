@@ -26,7 +26,7 @@ Hoje o projeto já possui:
     
 -   Listagem automática;
     
--   Renderização no front-end.
+-   Renderização no FRONT-END.
     
 
 ## Recursos adicionados
@@ -39,7 +39,7 @@ Você pode criar links externos como: [https://github.com](https://github.com) o
 
 ### Código inline
 
-Se você usa VSCode, provavelmente conhece o arquivo `settings.json`. Também pode mencionar comandos como `npm install` ou `git pull`.
+Se você usa VSCODE, provavelmente conhece o arquivo `settings.json`. Também pode mencionar comandos como `npm install` ou `git pull`.
 
 ### Bloco de código
 

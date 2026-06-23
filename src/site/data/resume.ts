@@ -13,25 +13,25 @@ export const resumeItems = [
 	],
 	[
 		'Empresa: JET E-commerce',
-		'Cargo: Desenvolvedor Front-end',
+		'Cargo: Desenvolvedor FRONT-END',
 		'Período: Novembro 2012 - Abril 2015',
-		"Atribuições: Desenvolvimento do front-end de e-commerces para computadores e dispositivos móveis, integrado ao sistema de back-end da empresa. Implementação de funcionalidades e correção de problemas em e-commerces já publicados, atendendo demandas de manutenção, melhorias e suporte aos clientes."
+		"Atribuições: Desenvolvimento do FRONT-END de e-commerces para computadores e dispositivos móveis, integrado ao sistema de back-end da empresa. Implementação de funcionalidades e correção de problemas em e-commerces já publicados, atendendo demandas de manutenção, melhorias e suporte aos clientes."
 	],
 	[
 		'Empresa: Labcom Advertising',
-		'Cargo: Desenvolvedor Front-end',
+		'Cargo: Desenvolvedor FRONT-END',
 		'Período: Março 2016 - Abril 2018',
-		'Atribuições: Desenvolvimento e manutenção do front-end de sites institucionais e promocionais, em colaboração com a equipe de back-end. Criação e disparo de campanhas de e-mail utilizando Mailchimp, além do desenvolvimento de interfaces interativas personalizadas para eventos e ações publicitárias.'
+		'Atribuições: Desenvolvimento e manutenção do FRONT-END de sites institucionais e promocionais, em colaboração com a equipe de back-end. Criação e disparo de campanhas de e-mail utilizando Mailchimp, além do desenvolvimento de interfaces interativas personalizadas para eventos e ações publicitárias.'
 	],
 	[
 		'Empresa: Bluestorm Software',
-		'Cargo: Desenvolvedor Front-end',
+		'Cargo: Desenvolvedor FRONT-END',
 		'Período: Maio 2018 - Julho 2021',
 		'Atribuições: Desenvolvimento e manutenção de sistemas utilizados por clientes e farmácias dos Estados Unidos para gerenciamento e aplicação de descontos em medicamentos. Implementação de funcionalidades em React, integração com APIs de back-end e correção de problemas em sistemas já publicados.'
 	],
 	[
 		'Empresa: Experiência Freelance',
-		'Cargo: Web Designer / Front-end WordPress',
+		'Cargo: Web Designer / FRONT-END WordPress',
 		'Período: Julho 2021 - Presente',
 		'Atribuições: Desenvolvimento e manutenção de sites e páginas de captura em WordPress para clientes de diversos segmentos. Desenvolvimento de projetos utilizando WordPress com e sem Elementor, implementação de funcionalidades com JavaScript, integração com serviços externos, otimização de desempenho e correção de problemas. Atuação em projetos de criação, atualização e evolução de sites, aplicando boas práticas de SEO e responsividade, com foco em usabilidade, experiência do usuário, qualidade técnica e desempenho geral dos projetos.'
 	],
