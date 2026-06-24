@@ -1,7 +1,6 @@
 import Link from '@tiptap/extension-link'
 import { marked } from 'marked'
 import TurndownService from 'turndown'
-import type { CalloutType } from '../types/adminTypes'
 
 export const ManualLink = Link.extend({
 	addPasteRules() {
@@ -69,8 +68,4 @@ export function stripLinksFromPastedHtml(html: string) {
 	})
 
 	return document.body.innerHTML
-}
-
-export function createCalloutHtml(type: CalloutType) {
-	return `<blockquote><p>[!${type}]</p><p>Escreva o destaque aqui.</p></blockquote>`
 }

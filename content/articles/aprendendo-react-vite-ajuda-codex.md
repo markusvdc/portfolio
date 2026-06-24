@@ -2,6 +2,7 @@
 title: "Aprendendo React, Vite e TypeScript com a ajuda do Codex"
 slug: "aprendendo-react-vite-ajuda-codex"
 date: "2026-05-30T20:40"
+updatedAt: "2026-05-30T20:40"
 readingTime: 8
 summary: "Minha experiência aprendendo React, Vite e TypeScript tem sido muito mais produtiva do que eu imaginava. Com a ajuda do Codex, consigo criar projetos reais, entender cada etapa do processo e dedicar mais tempo a melhorar o código em vez de ficar preso procurando bugs."
 ---

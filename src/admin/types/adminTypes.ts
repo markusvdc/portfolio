@@ -47,6 +47,7 @@ export type ArticleFormState = {
 	title: string
 	slug: string
 	date: string
+	updatedAt: string
 	readingTime: number
 	summary: string
 }
@@ -55,5 +56,3 @@ export type LinkDraft = {
 	url: string
 	hasLink: boolean
 }
-
-export type CalloutType = 'INFO' | 'TIP' | 'WARNING'

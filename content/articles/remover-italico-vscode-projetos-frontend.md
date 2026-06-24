@@ -2,6 +2,7 @@
 title: "Como remover texto em itálico no VSCODE para projetos FRONT-END"
 slug: "remover-italico-vscode-projetos-frontend"
 date: "2026-06-18T22:15"
+updatedAt: "2026-06-18T22:15"
 readingTime: 6
 summary: "Se o texto em itálico no VSCODE dificulta a leitura do seu código, este guia é para você. Aprenda a desativar itálicos para os principais elementos do FRONT-END usando uma configuração pronta para uso, testada com HTML, CSS, SCSS, SASS, JavaScript, TypeScript, React, PHP e WordPress."
 ---

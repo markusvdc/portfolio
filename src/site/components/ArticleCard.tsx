@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Article } from '../data/articles'
-import { formatArticleDate } from '../utils/formatArticleDate'
+import { formatArticleDate, formatArticleDateTime } from '../utils/formatArticleDate'
 
 function ArticleCard({ article }: { article: Article }) {
 	return (
@@ -8,6 +8,9 @@ function ArticleCard({ article }: { article: Article }) {
 			<h2>{article.title}</h2>
 			<div className="writing__meta">
 				<time dateTime={article.date}>{formatArticleDate(article.date)}</time>
+				<span>
+					Atualizado em <time dateTime={article.updatedAt}>{formatArticleDateTime(article.updatedAt)}</time>
+				</span>
 				<span>{article.readingTime} min de leitura</span>
 			</div>
 			<p>{article.summary}</p>

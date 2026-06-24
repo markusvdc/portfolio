@@ -14,13 +14,22 @@ import {
 } from '../services/githubAdminService'
 import { useArticleRichTextEditor } from './useArticleRichTextEditor'
 
-const emptyArticleForm = (): ArticleFormState => ({
-	title: '',
-	slug: '',
-	date: new Date().toISOString().slice(0, 16),
-	readingTime: 1,
-	summary: '',
-})
+function getCurrentDatetimeLocal() {
+	return new Date().toISOString().slice(0, 16)
+}
+
+const emptyArticleForm = (): ArticleFormState => {
+	const currentDatetime = getCurrentDatetimeLocal()
+
+	return {
+		title: '',
+		slug: '',
+		date: currentDatetime,
+		updatedAt: currentDatetime,
+		readingTime: 1,
+		summary: '',
+	}
+}
 
 function getSavedToken() {
 	return localStorage.getItem(githubTokenStorageKey)
@@ -177,7 +186,7 @@ export function useAdminPageController() {
 			setAdminArticles(articlesFromGithub)
 			setArticleListResult({
 				status: 'success',
-				message: `${articlesFromGithub.length} artigo(s) Markdown encontrado(s).`,
+				message: `${articlesFromGithub.length} artigo(s) encontrado(s).`,
 			})
 		} catch (error) {
 			setArticleListResult({
@@ -238,6 +247,7 @@ export function useAdminPageController() {
 				title: loadedArticle.article.title,
 				slug: loadedArticle.article.slug,
 				date: loadedArticle.article.date,
+				updatedAt: loadedArticle.article.updatedAt,
 				readingTime: loadedArticle.article.readingTime,
 				summary: loadedArticle.article.summary,
 			})
@@ -339,7 +349,11 @@ export function useAdminPageController() {
 
 		try {
 			const markdownContent = richTextEditor.getMarkdownContent()
-			const markdownFile = buildArticleMarkdown(articleForm, markdownContent)
+			const articleFormForSave = {
+				...articleForm,
+				updatedAt: editingArticle ? getCurrentDatetimeLocal() : articleForm.date,
+			}
+			const markdownFile = buildArticleMarkdown(articleFormForSave, markdownContent)
 			const articlePath = editingArticle?.filePath ?? `content/articles/${articleForm.slug.trim()}.md`
 			const savedResult = await saveMarkdownArticle(savedToken, articlePath, markdownFile, editingArticle?.sha)
 
@@ -395,7 +409,6 @@ export function useAdminPageController() {
 		handleApplyLink: richTextEditor.applyLink,
 		handleRemoveLink: richTextEditor.removeLink,
 		handleInsertImage: richTextEditor.insertImage,
-		handleInsertCallout: richTextEditor.insertCallout,
 		resetArticleForm,
 		handleEditArticle,
 		handleDeleteArticle,

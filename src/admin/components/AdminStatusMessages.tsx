@@ -19,6 +19,8 @@ function AdminStatusMessages({
 	articleCreateResult,
 	articleDeleteResult,
 }: AdminStatusMessagesProps) {
+	const getResultClass = (status: AdminResult['status']) => status === 'success' ? 'admin__connection--success' : 'admin__connection--error'
+
 	return (
 		<>
 			{message && <p className="admin__message">{message}</p>}
@@ -26,14 +28,14 @@ function AdminStatusMessages({
 				Status: {hasSavedToken ? 'token salvo' : 'nenhum token salvo'}
 			</p>
 			{connectionResult && (
-				<div className={`admin__connection admin__connection--${connectionResult.status}`}>
+				<div className={`admin__connection ${getResultClass(connectionResult.status)}`}>
 					<p>Status da conexão: {connectionResult.message}</p>
 					{connectionResult.repositoryName && <p>Repositório: {connectionResult.repositoryName}</p>}
 					{connectionResult.defaultBranch && <p>Branch padrão: {connectionResult.defaultBranch}</p>}
 				</div>
 			)}
 			{writeResult && (
-				<div className={`admin__connection admin__connection--${writeResult.status}`}>
+				<div className={`admin__connection ${getResultClass(writeResult.status)}`}>
 					<p>Status da escrita: {writeResult.message}</p>
 					{writeResult.link && (
 						<p>
@@ -45,12 +47,12 @@ function AdminStatusMessages({
 				</div>
 			)}
 			{articleListResult && (
-				<div className={`admin__connection admin__connection--${articleListResult.status}`}>
+				<div className={`admin__connection ${getResultClass(articleListResult.status)}`}>
 					<p>Status da listagem: {articleListResult.message}</p>
 				</div>
 			)}
 			{articleCreateResult && (
-				<div className={`admin__connection admin__connection--${articleCreateResult.status}`}>
+				<div className={`admin__connection ${getResultClass(articleCreateResult.status)}`}>
 					<p>Status da criacao: {articleCreateResult.message}</p>
 					{articleCreateResult.link && (
 						<p>
@@ -62,7 +64,7 @@ function AdminStatusMessages({
 				</div>
 			)}
 			{articleDeleteResult && (
-				<div className={`admin__connection admin__connection--${articleDeleteResult.status}`}>
+				<div className={`admin__connection ${getResultClass(articleDeleteResult.status)}`}>
 					<p>Status da exclusao: {articleDeleteResult.message}</p>
 					{articleDeleteResult.link && (
 						<p>

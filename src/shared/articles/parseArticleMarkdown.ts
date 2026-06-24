@@ -2,6 +2,7 @@ export type Article = {
 	title: string
 	slug: string
 	date: string
+	updatedAt: string
 	readingTime: number
 	summary: string
 	content: string
@@ -52,6 +53,7 @@ export function parseArticleMarkdown(filePath: string, markdown: string): Articl
 		title: frontmatter.title,
 		slug: frontmatter.slug,
 		date: frontmatter.date,
+		updatedAt: frontmatter.updatedAt || frontmatter.date,
 		readingTime: frontmatter.readingTime,
 		summary: frontmatter.summary,
 		content: contentSource.trim(),

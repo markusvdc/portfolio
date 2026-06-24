@@ -2,6 +2,7 @@
 title: "Estou dominando meu projeto, mas será que ainda domino o código"
 slug: "dominando-projeto-mas-ainda-codigo"
 date: "2026-06-23T09:18"
+updatedAt: "2026-06-23T09:18"
 readingTime: 15
 summary: "Estou construindo um blog em React com ajuda do Codex e vivendo um paradoxo curioso: domino completamente o projeto, mas ainda não domino todo o código. Estou ganhando produtividade ou perdendo conhecimento? E, sem IA, eu sequer teria construído isso?"
 ---

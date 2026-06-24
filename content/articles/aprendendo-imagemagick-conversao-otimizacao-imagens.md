@@ -2,6 +2,7 @@
 title: "Aprendendo ImageMagick para conversão e otimização de imagens"
 slug: "aprendendo-imagemagick-conversao-otimizacao-imagens"
 date: "2026-05-26T09:15"
+updatedAt: "2026-05-26T09:15"
 readingTime: 6
 summary: "Uma introdução simples ao ImageMagick, uma ferramenta gratuita e de código aberto para converter e otimizar imagens pela linha de comando. Aprenda a instalar, converter PNG para WEBP, reduzir o tamanho dos arquivos e processar várias imagens ao mesmo tempo com alguns comandos simples."
 ---

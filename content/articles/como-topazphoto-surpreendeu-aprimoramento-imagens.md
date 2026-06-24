@@ -2,6 +2,7 @@
 title: "Como o Topaz Photo AI me surpreendeu com aprimoramento de imagens"
 slug: "como-topazphoto-surpreendeu-aprimoramento-imagens"
 date: "2026-06-07T21:10"
+updatedAt: "2026-06-07T21:10"
 readingTime: 6
 summary: "Nunca imaginei encontrar um aplicativo para Windows capaz de manipular imagens com IA de forma tão impressionante. O que começou como uma simples ferramenta de upscale rapidamente se tornou uma das aplicações de IA mais interessantes que usei recentemente, mudando a forma como penso sobre edição de imagens."
 ---

@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { marked } from 'marked'
 import Overview from '../components/Overview'
 import { articles } from '../data/articles'
-import { formatArticleDate } from '../utils/formatArticleDate'
+import { formatArticleDate, formatArticleDateTime } from '../utils/formatArticleDate'
 import { normalizeMarkdownCodeBlocks } from '../../shared/articles/normalizeMarkdownCodeBlocks'
 
 const codeBlockTheme = 'github-dark'
@@ -224,6 +224,9 @@ function ArticlePage() {
 						<h1>{article.title}</h1>
 						<div className="article__meta">
 							<time dateTime={article.date}>{formatArticleDate(article.date)}</time>
+							<span>
+								Atualizado em <time dateTime={article.updatedAt}>{formatArticleDateTime(article.updatedAt)}</time>
+							</span>
 							<span>{article.readingTime} min de leitura</span>
 						</div>
 					</header>

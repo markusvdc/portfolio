@@ -1,4 +1,5 @@
 import type { FormEvent } from 'react'
+import { FlaskConical, ListChecks, Save, Trash2, Wifi } from 'lucide-react'
 
 type AdminTokenPanelProps = {
 	token: string
@@ -38,18 +39,25 @@ function AdminTokenPanel({
 				rows={2}
 			/>
 
-			<div className="admin__actions">
-				<button type="submit">Salvar token</button>
-				<button type="button" onClick={onRemoveToken} disabled={!hasSavedToken}>
-					Remover token
+			<div className="admin__actions admin__actions--stack">
+				<button className="admin__button admin__button--primary" type="submit">
+					<Save size={24} />
+					Salvar token
 				</button>
-				<button type="button" onClick={onTestConnection} disabled={!hasSavedToken || isTestingConnection}>
-					{isTestingConnection ? 'Testando...' : 'Testar conexão'}
+				<button className="admin__button" type="button" onClick={onRemoveToken} disabled={!hasSavedToken}>
+					<Trash2 size={24} />
+					Remover
 				</button>
-				<button type="button" onClick={onCreateTestFile} disabled={!hasSavedToken || isCreatingTestFile}>
+				<button className="admin__button" type="button" onClick={onTestConnection} disabled={!hasSavedToken || isTestingConnection}>
+					<Wifi size={24} />
+					{isTestingConnection ? 'Testando...' : 'Testar conexao'}
+				</button>
+				<button className="admin__button" type="button" onClick={onCreateTestFile} disabled={!hasSavedToken || isCreatingTestFile}>
+					<FlaskConical size={24} />
 					{isCreatingTestFile ? 'Criando...' : 'Gerar teste'}
 				</button>
-				<button type="button" onClick={onListArticles} disabled={!hasSavedToken || isListingArticles}>
+				<button className="admin__button" type="button" onClick={onListArticles} disabled={!hasSavedToken || isListingArticles}>
+					<ListChecks size={24} />
 					{isListingArticles ? 'Listando...' : 'Listar artigos'}
 				</button>
 			</div>

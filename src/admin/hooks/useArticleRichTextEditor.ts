@@ -3,11 +3,10 @@ import { useEditor } from '@tiptap/react'
 import Image from '@tiptap/extension-image'
 import StarterKit from '@tiptap/starter-kit'
 import { normalizeMarkdownCodeBlocks } from '../../shared/articles/normalizeMarkdownCodeBlocks'
-import type { CalloutType, LinkDraft } from '../types/adminTypes'
+import type { LinkDraft } from '../types/adminTypes'
 import {
 	ManualLink,
 	convertEditorHtmlToMarkdown,
-	createCalloutHtml,
 	parseMarkdownToEditorHtml,
 	stripLinksFromPastedHtml,
 } from '../utils/editorMarkdown'
@@ -97,10 +96,6 @@ export function useArticleRichTextEditor() {
 		}).run()
 	}
 
-	function insertCallout(type: CalloutType) {
-		editor?.chain().focus().insertContent(createCalloutHtml(type)).run()
-	}
-
 	function setMarkdownContent(markdown: string) {
 		editor?.commands.setContent(parseMarkdownToEditorHtml(markdown))
 	}
@@ -126,7 +121,6 @@ export function useArticleRichTextEditor() {
 		applyLink,
 		removeLink,
 		insertImage,
-		insertCallout,
 		setMarkdownContent,
 		getMarkdownContent,
 		clearContent,
