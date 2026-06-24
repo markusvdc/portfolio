@@ -1,4 +1,4 @@
-import { Edit3, MoreHorizontal, RefreshCw, Trash2 } from 'lucide-react'
+import { FilePen, MoreHorizontal, RefreshCw, Trash2 } from 'lucide-react'
 import type { AdminArticle } from '../types/adminTypes'
 import { formatArticleDateTime } from '../../site/utils/formatArticleDate'
 
@@ -13,7 +13,7 @@ type AdminArticleListProps = {
 }
 
 function getArticleStatus(article: AdminArticle) {
-	return article.title.toLowerCase().includes('draft') ? 'Draft' : 'Published'
+	return article.title.toLowerCase().includes('Rascunho') ? 'Rascunho' : 'Publicado'
 }
 
 function AdminArticleList({
@@ -27,22 +27,14 @@ function AdminArticleList({
 }: AdminArticleListProps) {
 	return (
 		<section className="admin__articles" aria-labelledby="admin-articles-title">
-			<div className="admin__bar">
-				<div className="admin__tools admin__tools--right">
-					<button className="admin__icon" type="button" onClick={onListArticles} disabled={isListingArticles} aria-label="Atualizar lista" title="Atualizar lista">
-						<RefreshCw size={24} />
-					</button>
-				</div>
-			</div>
-
 			<div className="admin__frame">
 				<table className="admin__table admin__table--strapi">
 					<thead>
 						<tr>
-							<th>Title</th>
+							<th>Titulo</th>
 							<th>Criado em</th>
 							<th>Ultima edicao</th>
-							<th>Status</th>
+							<th>Estado</th>
 							<th aria-label="Acoes"></th>
 						</tr>
 					</thead>
@@ -57,7 +49,7 @@ function AdminArticleList({
 							</tr>
 						) : articles.map((article) => {
 							const status = getArticleStatus(article)
-							const statusClass = status === 'Draft' ? 'admin__badge--draft' : 'admin__badge--published'
+							const statusClass = status === 'Rascunho' ? 'admin__badge--Rascunho' : 'admin__badge--Publicado'
 
 							return (
 								<tr key={article.filePath}>
@@ -92,7 +84,7 @@ function AdminArticleList({
 												aria-label="Editar artigo"
 												title="Editar"
 											>
-												<Edit3 size={24} />
+												<FilePen size={24} />
 											</button>
 											<button
 												className="admin__ghost admin__ghost--danger"
@@ -111,6 +103,13 @@ function AdminArticleList({
 						})}
 					</tbody>
 				</table>
+			</div>
+			<div className="admin__bar">
+				<div className="admin__tools admin__tools--right">
+					<button className="admin__icon" type="button" onClick={onListArticles} disabled={isListingArticles} aria-label="Atualizar lista" title="Atualizar lista">
+						<RefreshCw size={24} />
+					</button>
+				</div>
 			</div>
 		</section>
 	)

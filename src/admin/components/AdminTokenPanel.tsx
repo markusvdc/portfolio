@@ -1,5 +1,4 @@
 import type { FormEvent } from 'react'
-import { FlaskConical, ListChecks, Save, Trash2, Wifi } from 'lucide-react'
 
 type AdminTokenPanelProps = {
 	token: string
@@ -20,45 +19,35 @@ function AdminTokenPanel({
 	hasSavedToken,
 	isTestingConnection,
 	isCreatingTestFile,
-	isListingArticles,
 	onTokenChange,
 	onSaveToken,
 	onRemoveToken,
 	onTestConnection,
 	onCreateTestFile,
-	onListArticles,
 }: AdminTokenPanelProps) {
 	return (
 		<form className="admin__form" onSubmit={onSaveToken}>
 			<label htmlFor="github-token">Token</label>
-			<textarea
+			<input
 				id="github-token"
+				type="text"
 				value={token}
 				onChange={(event) => onTokenChange(event.target.value)}
 				placeholder="Cole seu GitHub Personal Access Token aqui"
-				rows={2}
 			/>
 
 			<div className="admin__actions admin__actions--stack">
 				<button className="admin__button admin__button--primary" type="submit">
-					<Save size={24} />
 					Salvar token
 				</button>
 				<button className="admin__button" type="button" onClick={onRemoveToken} disabled={!hasSavedToken}>
-					<Trash2 size={24} />
 					Remover
 				</button>
 				<button className="admin__button" type="button" onClick={onTestConnection} disabled={!hasSavedToken || isTestingConnection}>
-					<Wifi size={24} />
 					{isTestingConnection ? 'Testando...' : 'Testar conexao'}
 				</button>
 				<button className="admin__button" type="button" onClick={onCreateTestFile} disabled={!hasSavedToken || isCreatingTestFile}>
-					<FlaskConical size={24} />
 					{isCreatingTestFile ? 'Criando...' : 'Gerar teste'}
-				</button>
-				<button className="admin__button" type="button" onClick={onListArticles} disabled={!hasSavedToken || isListingArticles}>
-					<ListChecks size={24} />
-					{isListingArticles ? 'Listando...' : 'Listar artigos'}
 				</button>
 			</div>
 		</form>

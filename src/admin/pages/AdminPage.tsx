@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import {
+	FilePlus,
 	FileText,
-	FilePlus2,
 	Home,
-	KeyRound,
 	LayoutDashboard,
-	PenLine,
 	Plus,
 	Settings,
+	Newspaper,
+	ShieldCheck,
 } from 'lucide-react'
 import AdminArticleEditorForm from '../components/AdminArticleEditorForm'
 import AdminArticleList from '../components/AdminArticleList'
@@ -37,11 +37,11 @@ function AdminPage() {
 	return (
 		<main className="admin">
 			<aside className="admin__rail" aria-label="Menu principal">
-				<a className="admin__brand" href="/portfolio/" aria-label="Voltar para o site">
-					<span></span>
+				<a className="admin__brand" href="/portfolio/admin/" aria-label="Inicio do painel administrativo">
+					<LayoutDashboard size={24} strokeWidth={2} />
 				</a>
 				<nav className="admin__shortcuts" aria-label="Ferramentas do admin">
-					<a className="admin__shortcut" href="/portfolio/" aria-label="Inicio">
+					<a className="admin__shortcut" href="/portfolio/admin/" aria-label="Inicio do painel administrativo">
 						<Home size={24} />
 					</a>
 					<button
@@ -50,7 +50,7 @@ function AdminPage() {
 						onClick={() => setActiveView('article-list')}
 						aria-label="Conteudo"
 					>
-						<PenLine size={24} />
+						<Newspaper size={24} />
 					</button>
 				</nav>
 				<button
@@ -65,14 +65,12 @@ function AdminPage() {
 
 			<aside className="admin__sidebar" aria-label="Navegacao do conteudo">
 				<header className="admin__header">
-					<LayoutDashboard size={24} strokeWidth={2} />
 					<span>Painel Administrativo</span>
 				</header>
 
 				<div className="admin__group">
 					<div className="admin__heading">
 						<span>Principal</span>
-						<span className="admin__counter">{admin.adminArticles.length || 1}</span>
 					</div>
 					<button
 						className={`admin__item ${isArticleListView ? 'admin__item--active' : ''}`}
@@ -87,44 +85,13 @@ function AdminPage() {
 						type="button"
 						onClick={handleOpenCreateArticle}
 					>
-						<FilePlus2 size={24} />
+						<FilePlus size={24} />
 						Criar Artigo
-					</button>
-				</div>
-
-				<div className="admin__group">
-					<div className="admin__heading">
-						<span>Configurações</span>
-						<span className="admin__counter">1</span>
-					</div>
-					<button
-						className={`admin__item ${activeView === 'token' ? 'admin__item--active' : ''}`}
-						type="button"
-						onClick={() => setActiveView('token')}
-					>
-						<KeyRound size={24} />
-						Token Pessoal
 					</button>
 				</div>
 			</aside>
 
 			<section className="admin__workspace" aria-labelledby="admin-title">
-				<header className="admin__topbar">
-					<div>
-						<h1 id="admin-title">
-							{isArticleListView && 'Artigos'}
-							{isArticleEditorView && (admin.editingArticle ? 'Editar artigo' : 'Criar artigo')}
-							{activeView === 'token' && 'GitHub Token'}
-						</h1>
-					</div>
-					{isArticleListView && (
-						<button className="admin__action" type="button" onClick={handleOpenCreateArticle}>
-							<Plus size={24} />
-							Novo artigo
-						</button>
-					)}
-				</header>
-
 				{isArticleListView && (
 					<div className="admin__content">
 						<AdminArticleList
@@ -190,7 +157,6 @@ function AdminPage() {
 				{activeView === 'token' && (
 					<div className="admin__settings">
 						<section className="admin__card" aria-labelledby="admin-token-title">
-							<h2 id="admin-token-title">GitHub Token</h2>
 							<p>Conexao de publicacao do portfolio.</p>
 							<AdminTokenPanel
 								token={admin.token}

@@ -1,6 +1,5 @@
 import type { FormEvent } from 'react'
 import type { Editor } from '@tiptap/react'
-import { Save, X } from 'lucide-react'
 import ArticleRichTextEditor from './ArticleRichTextEditor'
 import type { ArticleFormState, EditingArticle, LinkDraft } from '../types/adminTypes'
 import { formatArticleDateTime } from '../../site/utils/formatArticleDate'
@@ -45,15 +44,17 @@ function AdminArticleEditorForm({
 	return (
 		<section className="admin__publisher" aria-labelledby="admin-create-article-title">
 			<div className="admin__summary">
-				<div>
-					<h2 id="admin-create-article-title">{editingArticle ? 'Editar artigo' : 'Criar artigo'}</h2>
-					<p>{editingArticle ? 'Atualize o conteudo publicado.' : 'Preencha os campos para criar uma nova entrada.'}</p>
-				</div>
+				<p>{editingArticle ? 'Edite as informações do artigo e salve as alterações quando concluir.' : 'Preencha os dados do artigo e publique quando estiver pronto.'}</p>
 			</div>
 			<form className="admin__form" onSubmit={onSubmit}>
 				<div className="admin__grid">
 					<div className="admin__field admin__field--wide">
-						<label htmlFor="article-title">Titulo</label>
+						<label htmlFor="article-title">
+							Titulo
+							<span className="admin__character">
+								{form.title.length}/75
+							</span>
+						</label>
 						<input
 							id="article-title"
 							type="text"
@@ -61,9 +62,6 @@ function AdminArticleEditorForm({
 							onChange={(event) => onFormChange('title', event.target.value)}
 							placeholder="Titulo do artigo"
 						/>
-						<span className="admin__character">
-							{form.title.length}/75
-						</span>
 					</div>
 
 					<div className="admin__field">
@@ -113,17 +111,19 @@ function AdminArticleEditorForm({
 					</div>
 
 					<div className="admin__field admin__field--wide">
-						<label htmlFor="article-summary">Resumo</label>
+						<label htmlFor="article-summary">
+							Resumo
+							<span className="admin__character">
+								{form.summary.length}/270
+							</span>
+						</label>
 						<textarea
 							id="article-summary"
 							value={form.summary}
 							onChange={(event) => onFormChange('summary', event.target.value)}
 							placeholder="Resumo do artigo"
-							rows={4}
+							rows={2}
 						/>
-						<span className="admin__character">
-							{form.summary.length}/270
-						</span>
 					</div>
 				</div>
 
@@ -142,18 +142,16 @@ function AdminArticleEditorForm({
 				</div>
 
 				<div className="admin__actions">
+					{editingArticle && (
+						<button className="admin__button" type="button" onClick={onCancelEdit}>
+							Cancelar edicao
+						</button>
+					)}
 					<button className="admin__button admin__button--primary" type="submit" disabled={!hasSavedToken || isCreatingArticle}>
-						<Save size={24} />
 						{isCreatingArticle
 							? editingArticle ? 'Atualizando artigo...' : 'Criando artigo...'
 							: editingArticle ? 'Atualizar artigo' : 'Criar artigo'}
 					</button>
-					{editingArticle && (
-						<button className="admin__button" type="button" onClick={onCancelEdit}>
-							<X size={24} />
-							Cancelar edicao
-						</button>
-					)}
 				</div>
 			</form>
 		</section>

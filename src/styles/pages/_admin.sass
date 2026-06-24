@@ -3,7 +3,7 @@
 .admin
 	min-height: 100vh
 	display: grid
-	grid-template-columns: 70px 285px minmax(960px, 1fr)
+	grid-template-columns: 70px 300px max(1280px)
 	background: #F6F8FA
 	font-family: variables.$font-primary
 
@@ -14,17 +14,17 @@
 	display: flex
 	flex-direction: column
 	align-items: center
-	gap: 20px
+	gap: 10px
 	padding: 20px 0
 	border-right: 1px solid #e5e7f2
 	background: #ffffff
 
 .admin__brand
-	width: 32px
-	height: 32px
+	width: 40px
+	height: 40px
 	display: grid
 	place-items: center
-	border-radius: 8px
+	border-radius: 5px
 	background: variables.$color-admin-primary
 	color: #ffffff
 	font-size: 0.75rem
@@ -33,21 +33,23 @@
 .admin__shortcuts
 	display: flex
 	flex-direction: column
-	gap: 8px
+	gap: 10px
 
 .admin__shortcut
 	width: 40px
 	height: 40px
 	display: grid
 	place-items: center
-	border-radius: 6px
+	border-radius: 5px
 	transition: background 160ms ease, color 160ms ease
 	color: variables.$color-black
-	&:hover,
+	&:hover
+		background: variables.$color-admin-hover
+		color: variables.$color-admin-primary
 	&:focus-visible
 		background: variables.$color-admin-hover
 		color: variables.$color-admin-primary
-	&.admin__item--active
+	&.admin__shortcut--active
 		background: variables.$color-admin-hover
 		color: variables.$color-admin-primary
 	&.admin__shortcut--bottom
@@ -57,7 +59,7 @@
 	position: sticky
 	top: 0
 	height: 100vh
-	padding: 25px 15px
+	padding: 31px 15px
 	border-right: 1px solid #e1e3ee
 	background: #ffffff
 	overflow-y: auto
@@ -69,6 +71,7 @@
 	font-size: 1.055rem
 	font-weight: variables.$font-weight-bd
 	text-transform: uppercase
+	letter-spacing: .3px
 
 .admin__group
 	margin-top: 25px
@@ -86,9 +89,11 @@
 	font-weight: variables.$font-weight-sm
 	line-height: variables.$font-height-md
 	text-transform: uppercase
+	padding-left: 10px
+	letter-spacing: .3px
 
 .admin__counter
-	border-radius: 3px
+	border-radius: 5px
 	background: variables.$color-admin-hover
 	height: 30px
 	width: 30px
@@ -105,37 +110,57 @@
 	gap: 8px
 	padding: 10px
 	border: 0
-	border-radius: 4px
+	border-radius: 5px
 	background: transparent
 	font-size: variables.$font-size-md
 	color: variables.$color-black
 	text-align: left
 	transition: background 160ms ease, color 160ms ease
 	font-weight: variables.$font-weight-sm
-	&:hover,
+	letter-spacing: .3px
+	&:hover
+		background: variables.$color-admin-hover
+		color: variables.$color-admin-primary
 	&:focus-visible
 		background: variables.$color-admin-hover
 		color: variables.$color-admin-primary
-	&.admin__shortcut--active
+	&.admin__item--active
 		background: variables.$color-admin-hover
 		color: variables.$color-admin-primary
 
 .admin__workspace
 	min-height: 100vh
-	padding: 24px 32px 48px
+	padding: 30px
 
 .admin__topbar
 	display: flex
-	align-items: flex-start
-	justify-content: space-between
+	justify-content: flex-end
 	gap: 24px
 	h1
 		font-size: 2rem
 		line-height: 1.15
 		font-weight: variables.$font-weight-bd
 
-.admin__action,
 .admin__button
+	display: flex
+	align-items: center
+	text-transform: uppercase
+	column-gap: 10px
+	padding: 13px 20px
+	border: 0
+	border-radius: 5px
+	background: transparent
+	font-size: variables.$font-size-md
+	color: variables.$color-black
+	text-align: left
+	transition: background 160ms ease, color 160ms ease
+	font-weight: variables.$font-weight-sm
+	letter-spacing: .3px
+	&:disabled
+		cursor: not-allowed
+		opacity: .55
+
+.admin__action
 	min-height: 36px
 	text-transform: uppercase
 	display: inline-flex
@@ -144,7 +169,7 @@
 	gap: 8px
 	padding: 0 14px
 	border: 1px solid #d8dbe8
-	border-radius: 4px
+	border-radius: 5px
 	background: #ffffff
 	font-size: variables.$font-size-md
 	font-weight: variables.$font-weight-sm
@@ -153,28 +178,38 @@
 		cursor: not-allowed
 		opacity: .55
 
-.admin__action,
 .admin__button--primary
 	border-color: variables.$color-admin-primary
 	background: variables.$color-admin-primary
 	color: #ffffff
 
+.admin__action
+	border-color: variables.$color-admin-primary
+	background: variables.$color-admin-primary
+	color: #ffffff
+
 .admin__content
-	margin-top: 40px
 	display: flex
 	flex-direction: column
 
 .admin__settings
-	width: min(100%, 720px)
 	display: flex
 	flex-direction: column
 	gap: 24px
 
-.admin__publisher,
-.admin__articles,
+.admin__publisher
+	border: 1px solid #e3e5ef
+	border-radius: 5px
+	background: #ffffff
+
+.admin__articles
+	border: 1px solid #e3e5ef
+	border-radius: 5px
+	background: #ffffff
+
 .admin__card
 	border: 1px solid #e3e5ef
-	border-radius: 6px
+	border-radius: 5px
 	background: #ffffff
 
 .admin__card
@@ -191,14 +226,9 @@
 	display: flex
 	align-items: center
 	justify-content: space-between
-	gap: 16px
 	padding: 20px 24px
 	border-bottom: 1px solid #eef0f6
-	h2
-		font-size: 1.15rem
-		line-height: 1.25
 	p
-		margin-top: 6px
 		color: variables.$color-black
 		font-size: variables.$font-size-md
 
@@ -208,40 +238,50 @@
 	gap: 16px
 	padding: 24px
 	label
-		display: block
 		margin-bottom: 8px
 		font-size: variables.$font-size-md
 		font-weight: variables.$font-weight-bd
-	input,
-	textarea
+		display: flex
+		justify-content: space-between
+	input
 		width: 100%
 		border: 1px solid #d8dbe8
-		border-radius: 4px
+		border-radius: 5px
 		background: #ffffff
-		color: #20243f
+		color: variables.$color-black
 		font: inherit
-		font-size: 0.9rem
-		line-height: 1.45
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
 		transition: border-color 160ms ease, box-shadow 160ms ease
 		&:focus
 			border-color: variables.$color-admin-primary
-			box-shadow: 0 0 0 2px rgba(73, 69, 255, .12)
 		&:disabled
-			background: #f6f7fb
+			background: #F6F8FA
 			color: variables.$color-black
 	input
-		height: 38px
-		padding: 0 12px
+		padding: 8px 15px
 	textarea
-		min-height: 88px
+		width: 100%
+		border: 1px solid #d8dbe8
+		border-radius: 5px
+		background: #ffffff
+		color: #20243f
+		font: inherit
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
+		transition: border-color 160ms ease, box-shadow 160ms ease
 		padding: 10px 12px
 		resize: vertical
+		&:focus
+			border-color: variables.$color-admin-primary
+		&:disabled
+			background: #F6F8FA
+			color: variables.$color-black
 
 .admin__card
 	display: flex
 	flex-direction: column
 	row-gap: 10px
-	margin-top: 20px
 
 .admin__card .admin__form
 	padding: 18px 0 0
@@ -264,41 +304,37 @@
 	font-weight: variables.$font-weight-bd
 
 .admin__value
-	min-height: 38px
 	display: flex
 	align-items: center
-	padding: 0 12px
-	border: 1px solid #e3e5ef
-	border-radius: 4px
-	background: #f6f7fb
-	color: #5f6381
-	font-size: 0.9rem
+	padding: 8px 15px
+	border: 1px solid #d8dbe8
+	border-radius: 5px
+	background: #F6F8FA
+	color: variables.$color-black
+	font-size: variables.$font-size-md
+	line-height: variables.$font-height-md
 
 .admin__character
-	display: flex
-	justify-content: flex-end
-	margin-top: 6px
+	display: inline-flex
 	color: variables.$color-black
 	font-size: 0.75rem
-	font-weight: variables.$font-weight-bd
 
 .admin__actions
 	display: flex
-	flex-wrap: wrap
-	gap: 10px
-	&.admin__actions--stack
-		align-items: stretch
-		.admin__button
-			width: 100%
+	column-gap: 20px
+	justify-content: flex-end
 
-.admin__message,
 .admin__status
 	color: #4d536f
 	font-size: 0.875rem
 
 .admin__message
+	color: #4d536f
+	font-size: 0.875rem
+
+.admin__message
 	padding: 10px 12px
-	border-radius: 4px
+	border-radius: 5px
 	background: #f5f5ff
 	color: #0860CA
 	font-weight: variables.$font-weight-bd
@@ -306,7 +342,7 @@
 .admin__connection
 	padding: 12px
 	border: 1px solid #d8dbe8
-	border-radius: 4px
+	border-radius: 5px
 	background: #fafafb
 	color: #4d536f
 	font-size: .85rem
@@ -326,7 +362,7 @@
 
 .admin__editor
 	border: 1px solid #d8dbe8
-	border-radius: 6px
+	border-radius: 5px
 	background: #ffffff
 	overflow: hidden
 
@@ -338,23 +374,22 @@
 	border-bottom: 1px solid #eef0f6
 	background: #fafafb
 	button
-		min-width: 32px
-		height: 32px
 		display: inline-flex
 		align-items: center
 		justify-content: center
 		gap: 6px
-		padding: 0 9px
+		padding: 10px
 		border: 1px solid transparent
-		border-radius: 4px
+		border-radius: 5px
 		color: #5f6381
 		font-size: 0.72rem
 		font-weight: variables.$font-weight-bk
 		transition: background 160ms ease, border-color 160ms ease, color 160ms ease
-		&:hover,
+		&:hover
+			border-color: #cfd2e2
+			color: variables.$color-admin-primary
 		&:focus-visible
 			border-color: #cfd2e2
-			background: #ffffff
 			color: variables.$color-admin-primary
 		&.is-active
 			border-color: variables.$color-admin-primary
@@ -379,21 +414,19 @@
 	flex-wrap: wrap
 	gap: 8px
 	button
-		min-height: 32px
+		text-transform: uppercase
 		display: inline-flex
 		align-items: center
-		gap: 6px
-		padding: 0 10px
+		justify-content: center
+		gap: 8px
+		padding: 8px 20px
 		border: 1px solid #d8dbe8
-		border-radius: 4px
+		border-radius: 5px
 		background: #ffffff
-		color: #32385c
-		font-size: 0.8rem
-		font-weight: variables.$font-weight-bd
-		&:first-child
-			border-color: variables.$color-admin-primary
-			background: variables.$color-admin-primary
-			color: #ffffff
+		color: variables.$color-black
+		font-size: variables.$font-size-md
+		font-weight: variables.$font-weight-sm
+		transition: background 160ms ease, border-color 160ms ease, color 160ms ease
 
 .tiptap
 	min-height: 300px
@@ -402,11 +435,15 @@
 	color: #20243f
 	font-size: 0.94rem
 	line-height: 1.58
-	p,
-	ul,
-	ol,
-	blockquote,
 	pre
+		margin-bottom: 12px
+	p
+		margin-bottom: 12px
+	ul
+		margin-bottom: 12px
+	ol
+		margin-bottom: 12px
+	blockquote
 		margin-bottom: 12px
 	h2
 		margin: 20px 0 10px
@@ -414,10 +451,10 @@
 	h3
 		margin: 18px 0 8px
 		font-size: 1.1rem
-	ul,
 	ol
 		padding-left: 22px
 	ul
+		padding-left: 22px
 		list-style: disc
 	ol
 		list-style: decimal
@@ -429,12 +466,12 @@
 			margin-bottom: 0
 	code
 		padding: 2px 5px
-		border-radius: 3px
+		border-radius: 5px
 		background: #eff0f6
 		font-family: Consolas, monospace
 	pre
 		padding: 12px
-		border-radius: 4px
+		border-radius: 5px
 		background: #20243f
 		color: #ffffff
 		overflow-x: auto
@@ -481,55 +518,35 @@
 
 .admin__frame
 	border: 1px solid #e3e5ef
-	border-radius: 4px
+	border-radius: 5px
 	background: #ffffff
 	overflow: hidden
-	margin-top: 20px
 
 .admin__table
 	width: 100%
 	border-collapse: collapse
-	font-size: 0.86rem
-	th,
+	th
+		padding: 14px 16px
+		border-bottom: 1px solid #eef0f6
+		text-align: left
+		vertical-align: middle
+		color: variables.$color-black
+		font-size: variables.$font-size-md
+		font-weight: variables.$font-weight-bd
 	td
 		padding: 14px 16px
 		border-bottom: 1px solid #eef0f6
 		text-align: left
 		vertical-align: middle
-	th
-		color: #666b88
-		font-size: variables.$font-size-md
-		font-weight: variables.$font-weight-bk
-		text-transform: uppercase
-	td
-		color: #4d536f
-		&:first-child
-			color: #20243f
 	tr:last-child td
 		border-bottom: 0
-	tbody tr
-		transition: background 160ms ease
-		&:hover
-			background: #fafafb
 
 .admin__table--strapi
 	min-width: 1060px
-	th,
+	th
+		padding: 12px 16px
 	td
 		padding: 12px 16px
-	th
-		height: 56px
-		color: #3b4167
-		font-size: variables.$font-size-md
-		font-weight: variables.$font-weight-sm
-	td
-		color: variables.$color-black
-		font-size: variables.$font-size-md
-		line-height: variables.$font-height-md
-		&:nth-child(2)
-			width: 32%
-		&:nth-child(6)
-			width: 22%
 
 .admin__select
 	width: 44px
@@ -539,7 +556,7 @@
 	height: 20px
 	display: inline-block
 	border: 1px solid #c6cadb
-	border-radius: 4px
+	border-radius: 5px
 	background: #ffffff
 	vertical-align: middle
 
@@ -553,7 +570,8 @@
 	text-align: left
 	text-overflow: ellipsis
 	white-space: nowrap
-	&:hover,
+	&:hover
+		color: variables.$color-admin-primary
 	&:focus-visible
 		color: variables.$color-admin-primary
 	&:disabled
@@ -563,13 +581,15 @@
 .admin__badge
 	display: inline-flex
 	align-items: center
-	min-height: 30px
-	padding: 0 10px
+	padding: 5px 15px
 	border: 1px solid #bddfbf
-	border-radius: 4px
+	border-radius: 5px
 	background: #effcef
 	color: #177245
 	font-weight: variables.$font-weight-sm
+	font-size: variables.$font-size-md
+	line-height: variables.$font-height-md
+	text-transform: uppercase
 	&.admin__badge--draft
 		border-color: #b9dcff
 		background: #edf7ff
@@ -594,33 +614,40 @@
 	display: grid
 	place-items: center
 	border: 1px solid #d8dbe8
-	border-radius: 4px
+	border-radius: 5px
 	background: #ffffff
 	color: #5f6381
 	transition: background 160ms ease, border-color 160ms ease, color 160ms ease
-	&:hover,
+	&:hover
+		border-color: variables.$color-admin-primary
+		color: variables.$color-admin-primary
 	&:focus-visible
 		border-color: variables.$color-admin-primary
 		color: variables.$color-admin-primary
 	&:disabled
 		cursor: not-allowed
 		opacity: .5
+
 .admin__ghost
 	width: 40px
 	height: 40px
 	display: grid
 	place-items: center
-	border-radius: 4px
+	border-radius: 5px
 	color: variables.$color-black
 	transition: background 160ms ease, color 160ms ease
-	&:hover,
+	&:hover
+		background: variables.$color-admin-hover
+		color: variables.$color-admin-primary
 	&:focus-visible
 		background: variables.$color-admin-hover
 		color: variables.$color-admin-primary
 	&:disabled
 		cursor: not-allowed
 		opacity: .5
-	&.admin__ghost--danger:hover,
+	&.admin__ghost--danger:hover
+		background: #fff4f3
+		color: #d02b20
 	&.admin__ghost--danger:focus-visible
 		background: #fff4f3
 		color: #d02b20
@@ -628,29 +655,31 @@
 .admin__table
 	table-layout: fixed
 	width: 100%
-
-	th:nth-child(1),
+	th:nth-child(1)
+		width: 35%
 	td:nth-child(1)
 		width: 35%
-
-	th:nth-child(2),
+	th:nth-child(2)
+		width: 140px
 	td:nth-child(2)
 		width: 140px
-
-	th:nth-child(3),
+	th:nth-child(3)
+		width: 140px
 	td:nth-child(3)
 		width: 140px
-
-	th:nth-child(4),
+	th:nth-child(4)
+		width: 120px
 	td:nth-child(4)
 		width: 120px
-
-	th:nth-child(5),
+	th:nth-child(5)
+		width: 110px
 	td:nth-child(5)
 		width: 110px
 
 .admin__table--strapi
-	th,
+	th
+		height: 60px
+		padding: 8px 16px
 	td
 		height: 60px
 		padding: 8px 16px

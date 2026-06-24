@@ -5,13 +5,10 @@ import {
 	Code,
 	FileCode2,
 	Heading2,
-	Image,
 	Link,
 	List,
 	ListOrdered,
-	Minus,
 	Quote,
-	Unlink,
 } from 'lucide-react'
 import type { LinkDraft } from '../types/adminTypes'
 
@@ -34,7 +31,6 @@ function ArticleRichTextEditor({
 	onApplyLink,
 	onRemoveLink,
 	onCancelLink,
-	onInsertImage,
 }: ArticleRichTextEditorProps) {
 	return (
 		<div className="admin__editor">
@@ -111,15 +107,6 @@ function ArticleRichTextEditor({
 				</button>
 				<button
 					type="button"
-					onClick={() => editor?.chain().focus().setHorizontalRule().run()}
-					disabled={!editor}
-					aria-label="Separador"
-					title="Separador"
-				>
-					<Minus size={24} />
-				</button>
-				<button
-					type="button"
 					className={editor?.isActive('blockquote') ? 'is-active' : ''}
 					onClick={() => editor?.chain().focus().toggleBlockquote().run()}
 					disabled={!editor}
@@ -127,9 +114,6 @@ function ArticleRichTextEditor({
 					title="Citacao"
 				>
 					<Quote size={24} />
-				</button>
-				<button type="button" onClick={onInsertImage} disabled={!editor} aria-label="Imagem" title="Imagem">
-					<Image size={24} />
 				</button>
 			</div>
 			{linkDraft && (
@@ -154,7 +138,6 @@ function ArticleRichTextEditor({
 						</button>
 						{linkDraft.hasLink && (
 							<button type="button" onClick={onRemoveLink}>
-								<Unlink size={24} />
 								Remover link
 							</button>
 						)}
