@@ -2,7 +2,7 @@
 title: "Meu CMS sem backend finalmente ganhou superpoderes graças à IA"
 slug: "cms-sem-backend-ganhou-superpoderes"
 date: "2026-06-03T18:25"
-updatedAt: "2026-06-03T18:25"
+updatedAt: "2026-06-24T12:54"
 readingTime: 8
 summary: "Depois de criar um CMS sem backend usando React, GitHub API e Markdown, resolvi ir além. Chegou a hora de testar recursos mais avançados, como links, blocos de código, listas, imagens e callouts, para transformar a experiência de escrita em algo mais rico, flexível e agradável."
 ---
