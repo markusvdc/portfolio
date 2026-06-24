@@ -1,5 +1,5 @@
 ---
-title: "Meu CMS sem backend finalmente ganhou superpoderes"
+title: "Meu CMS sem backend finalmente ganhou superpoderes graças à IA"
 slug: "cms-sem-backend-ganhou-superpoderes"
 date: "2026-06-03T18:25"
 updatedAt: "2026-06-03T18:25"

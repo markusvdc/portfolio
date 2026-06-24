@@ -1,5 +1,5 @@
 ---
-title: "Como criar um CMS sem backend usando GitHub Pages"
+title: "Como criar um CMS sem backend usando GitHub Pages e Markdown"
 slug: "criando-cms-usando-github-pages"
 date: "2026-06-11T14:50"
 updatedAt: "2026-06-11T14:50"
