@@ -4,10 +4,8 @@ import {
 	FileText,
 	Home,
 	LayoutDashboard,
-	Plus,
 	Settings,
 	Newspaper,
-	ShieldCheck,
 } from 'lucide-react'
 import AdminArticleEditorForm from '../components/AdminArticleEditorForm'
 import AdminArticleList from '../components/AdminArticleList'
