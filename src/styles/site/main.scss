@@ -1,0 +1,11 @@
+@use './base/variables';
+@use './base/reset';
+@use './base/global';
+@use './base/header';
+@use './base/footer';
+
+@use './pages/home';
+@use './pages/portfolio';
+@use './pages/resume';
+@use './pages/writing';
+@use './pages/article';

@@ -1,13 +1,5 @@
 import type { Article } from '../../shared/articles/parseArticleMarkdown'
 
-export type AdminResult = {
-	status: 'success' | 'error'
-	message: string
-	link?: string
-	repositoryName?: string
-	defaultBranch?: string
-}
-
 export type GitHubContentItem = {
 	name: string
 	path: string

@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { marked } from 'marked'
 import Overview from '../components/Overview'
 import { articles } from '../data/articles'
-import { formatArticleDate, formatArticleDateTime } from '../utils/formatArticleDate'
+import { formatArticleDate } from '../utils/formatArticleDate'
 import { normalizeMarkdownCodeBlocks } from '../../shared/articles/normalizeMarkdownCodeBlocks'
 
 const codeBlockTheme = 'github-dark'
@@ -129,26 +129,6 @@ function resolveCodeLanguage(language = '', code = '') {
 	)
 }
 
-function transformCallouts(html: string) {
-	return html.replace(/<blockquote>\s*([\s\S]*?)\s*<\/blockquote>/g, (blockquote, blockquoteContent: string) => {
-		const standaloneMarker = blockquoteContent.match(/^\s*<p>\s*\[!(INFO|TIP|WARNING)\]\s*<\/p>\s*/i)
-		const inlineMarker = blockquoteContent.match(/^\s*<p>\s*\[!(INFO|TIP|WARNING)\]\s*(?:<br\s*\/?>)?/i)
-		const marker = standaloneMarker ?? inlineMarker
-
-		if (!marker) {
-			return blockquote
-		}
-
-		const type = marker[1].toLowerCase()
-		const label = marker[1].toUpperCase()
-		const body = standaloneMarker
-			? blockquoteContent.replace(standaloneMarker[0], '')
-			: blockquoteContent.replace(inlineMarker?.[0] ?? '', '<p>')
-
-		return `<aside class="article__callout article__callout--${type}"><strong>${label}</strong>${body}</aside>`
-	})
-}
-
 async function renderArticleMarkdown(content: string) {
 	const normalizedContent = normalizeMarkdownCodeBlocks(content)
 	const highlightedCodeBlocks: string[] = []
@@ -181,7 +161,7 @@ async function renderArticleMarkdown(content: string) {
 		html = html.replace(`<!--SHIKI_CODE_BLOCK_${index}-->`, codeBlockHtml)
 	})
 
-	return transformCallouts(html)
+	return html
 }
 
 function ArticlePage() {
@@ -224,9 +204,6 @@ function ArticlePage() {
 						<h1>{article.title}</h1>
 						<div className="article__meta">
 							<time dateTime={article.date}>{formatArticleDate(article.date)}</time>
-							<span>
-								Atualizado em <time dateTime={article.updatedAt}>{formatArticleDateTime(article.updatedAt)}</time>
-							</span>
 							<span>{article.readingTime} min de leitura</span>
 						</div>
 					</header>

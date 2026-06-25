@@ -53,7 +53,8 @@ body
 	color: variables.$color-black
 
 .button
-	height: 40px
+	padding-top: 15px
+	padding-bottom: 15px
 	border: 1px solid transparent
 	font-size: 0.875rem
 	line-height: 0.875rem
@@ -64,7 +65,7 @@ body
 	text-transform: uppercase
 	transition: transform 0.2s ease
 	font-weight: variables.$font-weight-bd
-	letter-spacing: .2px
+	letter-spacing: .6px
 	&:hover
 		transform: translateY(-2px)
 	&.button--primary
@@ -73,6 +74,23 @@ body
 	&.button--secondary
 		color: variables.$color-black
 		border-color: variables.$color-black
+
+.overview
+	background-color: variables.$color-primary
+	color: variables.$color-secondary
+	padding: 45px 0
+
+.overview__texts
+	text-align: justify
+	p
+		color: variables.$color-secondary
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
+
+.overview__container
+	height: 100%
+	display: flex
+	align-items: center
 
 @media (max-width: variables.$breakpoint-md)
 	.container

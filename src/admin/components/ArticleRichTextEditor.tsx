@@ -1,13 +1,16 @@
-import { EditorContent } from '@tiptap/react'
+import { EditorContent, useEditorState } from '@tiptap/react'
 import type { Editor } from '@tiptap/react'
 import {
 	Bold,
 	Code,
-	FileCode2,
+	Braces,
 	Heading2,
-	Link,
+	Link2,
+	Link2Off,
+	ExternalLink,
 	List,
 	ListOrdered,
+	X,
 	Quote,
 } from 'lucide-react'
 import type { LinkDraft } from '../types/adminTypes'
@@ -23,6 +26,17 @@ type ArticleRichTextEditorProps = {
 	onInsertImage: () => void
 }
 
+const inactiveControls = {
+	heading: false,
+	bold: false,
+	link: false,
+	bulletList: false,
+	orderedList: false,
+	blockquote: false,
+	codeBlock: false,
+	code: false,
+}
+
 function ArticleRichTextEditor({
 	editor,
 	linkDraft,
@@ -32,93 +46,113 @@ function ArticleRichTextEditor({
 	onRemoveLink,
 	onCancelLink,
 }: ArticleRichTextEditorProps) {
+	const activeControls = useEditorState({
+		editor,
+		selector: ({ editor: currentEditor }) => {
+			if (!currentEditor) {
+				return inactiveControls
+			}
+
+			return {
+				heading: currentEditor.isActive('heading', { level: 2 }),
+				bold: currentEditor.isActive('bold'),
+				link: currentEditor.isActive('link'),
+				bulletList: currentEditor.isActive('bulletList'),
+				orderedList: currentEditor.isActive('orderedList'),
+				blockquote: currentEditor.isActive('blockquote'),
+				codeBlock: currentEditor.isActive('codeBlock'),
+				code: currentEditor.isActive('code'),
+			}
+		},
+	}) ?? inactiveControls
+	const getControlClass = (isActive: boolean) => `button button--secondary tooltip tooltip--top${isActive ? ' button--active' : ''}`
+
 	return (
 		<div className="admin__editor">
 			<div className="admin__toolbar">
 				<button
 					type="button"
-					className={editor?.isActive('bold') ? 'is-active' : ''}
-					onClick={() => editor?.chain().focus().toggleBold().run()}
-					disabled={!editor}
-					aria-label="Negrito"
-					title="Negrito"
-				>
-					<Bold size={24} />
-				</button>
-				<button
-					type="button"
-					className={editor?.isActive('link') ? 'is-active' : ''}
-					onClick={onOpenLinkPanel}
-					disabled={!editor}
-					aria-label="Link"
-					title="Link"
-				>
-					<Link size={24} />
-				</button>
-				<button
-					type="button"
-					className={editor?.isActive('code') ? 'is-active' : ''}
-					onClick={() => editor?.chain().focus().toggleCode().run()}
-					disabled={!editor}
-					aria-label="Inline code"
-					title="Inline code"
-				>
-					<Code size={24} />
-				</button>
-				<button
-					type="button"
-					className={editor?.isActive('codeBlock') ? 'is-active' : ''}
-					onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
-					disabled={!editor}
-					aria-label="Code block"
-					title="Code block"
-				>
-					<FileCode2 size={24} />
-				</button>
-				<button
-					type="button"
-					className={editor?.isActive('heading', { level: 2 }) ? 'is-active' : ''}
+					className={getControlClass(activeControls.heading)}
 					onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
 					disabled={!editor}
 					aria-label="Heading 2"
-					title="Heading 2"
+					data-tooltip="Heading 2"
 				>
 					<Heading2 size={24} />
 				</button>
 				<button
 					type="button"
-					className={editor?.isActive('bulletList') ? 'is-active' : ''}
+					className={getControlClass(activeControls.bold)}
+					onClick={() => editor?.chain().focus().toggleBold().run()}
+					disabled={!editor}
+					aria-label="Negrito"
+					data-tooltip="Negrito"
+				>
+					<Bold size={24} />
+				</button>
+				<button
+					type="button"
+					className={getControlClass(activeControls.link)}
+					onClick={onOpenLinkPanel}
+					disabled={!editor}
+					aria-label="Link"
+					data-tooltip="Link"
+				>
+					<Link2 size={24} />
+				</button>
+				<button
+					type="button"
+					className={getControlClass(activeControls.bulletList)}
 					onClick={() => editor?.chain().focus().toggleBulletList().run()}
 					disabled={!editor}
 					aria-label="Lista"
-					title="Lista"
+					data-tooltip="Lista"
 				>
 					<List size={24} />
 				</button>
 				<button
 					type="button"
-					className={editor?.isActive('orderedList') ? 'is-active' : ''}
+					className={getControlClass(activeControls.orderedList)}
 					onClick={() => editor?.chain().focus().toggleOrderedList().run()}
 					disabled={!editor}
 					aria-label="Lista numerada"
-					title="Lista numerada"
+					data-tooltip="Lista numerada"
 				>
 					<ListOrdered size={24} />
 				</button>
 				<button
 					type="button"
-					className={editor?.isActive('blockquote') ? 'is-active' : ''}
+					className={getControlClass(activeControls.blockquote)}
 					onClick={() => editor?.chain().focus().toggleBlockquote().run()}
 					disabled={!editor}
-					aria-label="Citacao"
-					title="Citacao"
+					aria-label="Citação"
+					data-tooltip="Citação"
 				>
 					<Quote size={24} />
+				</button>
+				<button
+					type="button"
+					className={getControlClass(activeControls.codeBlock)}
+					onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
+					disabled={!editor}
+					aria-label="Code block"
+					data-tooltip="Code block"
+				>
+					<Braces size={24} />
+				</button>
+				<button
+					type="button"
+					className={getControlClass(activeControls.code)}
+					onClick={() => editor?.chain().focus().toggleCode().run()}
+					disabled={!editor}
+					aria-label="Inline code"
+					data-tooltip="Inline code"
+				>
+					<Code size={24} />
 				</button>
 			</div>
 			{linkDraft && (
 				<div className="admin__linkpanel">
-					<label htmlFor="article-link-url">URL do link</label>
 					<input
 						id="article-link-url"
 						type="text"
@@ -130,19 +164,19 @@ function ArticleRichTextEditor({
 						placeholder="https://exemplo.com ou /portfolio/artigos"
 					/>
 					<div className="admin__linkactions">
-						<button type="button" onClick={() => onApplyLink(false)}>
-							Salvar como link interno
+						<button className="button button--secondary tooltip tooltip--top" type="button" onClick={() => onApplyLink(false)} data-tooltip="Link interno">
+							<Link2 size={24} />
 						</button>
-						<button type="button" onClick={() => onApplyLink(true)}>
-							Salvar como link externo
+						<button className="button button--secondary tooltip tooltip--top" type="button" onClick={() => onApplyLink(true)} data-tooltip="Link externo">
+							<ExternalLink size={24} />
 						</button>
 						{linkDraft.hasLink && (
-							<button type="button" onClick={onRemoveLink}>
-								Remover link
+							<button className="button button--danger tooltip tooltip--top" type="button" onClick={onRemoveLink} data-tooltip="Remover link">
+								<Link2Off size={24} />
 							</button>
 						)}
-						<button type="button" onClick={onCancelLink}>
-							Cancelar
+						<button className="button button--secondary tooltip tooltip--top" type="button" onClick={onCancelLink} data-tooltip="Cancelar">
+							<X size={24} />
 						</button>
 					</div>
 				</div>

@@ -28,14 +28,14 @@ function AdminArticleList({
 	return (
 		<section className="admin__articles" aria-labelledby="admin-articles-title">
 			<div className="admin__frame">
-				<table className="admin__table admin__table--strapi">
+				<table className="admin__table admin__list">
 					<thead>
 						<tr>
-							<th>Titulo</th>
+							<th>Título</th>
 							<th>Criado em</th>
-							<th>Ultima edicao</th>
+							<th>Última edição</th>
 							<th>Estado</th>
-							<th aria-label="Acoes"></th>
+							<th aria-label="Ações"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -77,22 +77,22 @@ function AdminArticleList({
 									<td>
 										<div className="admin__actionsrow">
 											<button
-												className="admin__ghost"
+												className="button button--secondary tooltip tooltip--top"
 												type="button"
 												onClick={() => onEditArticle(article)}
 												disabled={isLoadingArticleForEdit || deletingArticlePath === article.filePath}
 												aria-label="Editar artigo"
-												title="Editar"
+												data-tooltip="Editar artigo"
 											>
 												<FilePen size={24} />
 											</button>
 											<button
-												className="admin__ghost admin__ghost--danger"
+												className="button button--danger tooltip tooltip--top"
 												type="button"
 												onClick={() => onDeleteArticle(article)}
 												disabled={Boolean(deletingArticlePath)}
 												aria-label="Excluir artigo"
-												title="Excluir"
+												data-tooltip="Excluir artigo"
 											>
 												{deletingArticlePath === article.filePath ? <MoreHorizontal size={24} /> : <Trash2 size={24} />}
 											</button>
@@ -106,7 +106,7 @@ function AdminArticleList({
 			</div>
 			<div className="admin__bar">
 				<div className="admin__tools admin__tools--right">
-					<button className="admin__icon" type="button" onClick={onListArticles} disabled={isListingArticles} aria-label="Atualizar lista" title="Atualizar lista">
+					<button className="button button--secondary tooltip tooltip--top" type="button" onClick={onListArticles} disabled={isListingArticles} aria-label="Atualizar lista" data-tooltip="Atualizar listagem">
 						<RefreshCw size={24} />
 					</button>
 				</div>

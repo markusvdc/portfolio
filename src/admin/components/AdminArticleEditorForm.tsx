@@ -3,6 +3,9 @@ import type { Editor } from '@tiptap/react'
 import ArticleRichTextEditor from './ArticleRichTextEditor'
 import type { ArticleFormState, EditingArticle, LinkDraft } from '../types/adminTypes'
 import { formatArticleDateTime } from '../../site/utils/formatArticleDate'
+import {
+	Save,
+} from 'lucide-react'
 
 type AdminArticleEditorFormProps = {
 	form: ArticleFormState
@@ -13,7 +16,6 @@ type AdminArticleEditorFormProps = {
 	linkDraft: LinkDraft | null
 	onFormChange: (field: keyof ArticleFormState, value: ArticleFormState[keyof ArticleFormState]) => void
 	onSubmit: (event: FormEvent<HTMLFormElement>) => void
-	onCancelEdit: () => void
 	onOpenLinkPanel: () => void
 	onChangeLinkDraft: (draft: LinkDraft) => void
 	onApplyLink: (isExternalLink: boolean) => void
@@ -31,7 +33,6 @@ function AdminArticleEditorForm({
 	linkDraft,
 	onFormChange,
 	onSubmit,
-	onCancelEdit,
 	onOpenLinkPanel,
 	onChangeLinkDraft,
 	onApplyLink,
@@ -50,7 +51,7 @@ function AdminArticleEditorForm({
 				<div className="admin__grid">
 					<div className="admin__field admin__field--wide">
 						<label htmlFor="article-title">
-							Titulo
+							Título
 							<span className="admin__character">
 								{form.title.length}/75
 							</span>
@@ -60,7 +61,7 @@ function AdminArticleEditorForm({
 							type="text"
 							value={form.title}
 							onChange={(event) => onFormChange('title', event.target.value)}
-							placeholder="Titulo do artigo"
+							placeholder="Título do artigo"
 						/>
 					</div>
 
@@ -73,23 +74,6 @@ function AdminArticleEditorForm({
 							onChange={(event) => onFormChange('slug', event.target.value)}
 							placeholder="slug-do-artigo"
 						/>
-					</div>
-
-					<div className="admin__field">
-						<label htmlFor="article-date">Criado em</label>
-						<input
-							id="article-date"
-							type="datetime-local"
-							value={form.date}
-							onChange={(event) => onFormChange('date', event.target.value)}
-						/>
-					</div>
-
-					<div className="admin__field">
-						<span className="admin__label">Ultima edicao</span>
-						<span className="admin__value">
-							{formatArticleDateTime(visibleUpdatedAt || form.date)}
-						</span>
 					</div>
 
 					<div className="admin__field">
@@ -110,6 +94,20 @@ function AdminArticleEditorForm({
 						/>
 					</div>
 
+					<div className="admin__field">
+						<span className="admin__label">Criado em</span>
+						<span className="admin__value">
+							{formatArticleDateTime(form.date)}
+						</span>
+					</div>
+
+					<div className="admin__field">
+						<span className="admin__label">Última edição</span>
+						<span className="admin__value">
+							{formatArticleDateTime(visibleUpdatedAt || form.date)}
+						</span>
+					</div>
+
 					<div className="admin__field admin__field--wide">
 						<label htmlFor="article-summary">
 							Resumo
@@ -127,8 +125,8 @@ function AdminArticleEditorForm({
 					</div>
 				</div>
 
-				<div className="admin__field">
-					<label htmlFor="article-summary">Conteudo</label>
+				<div className="admin__cms">
+					<label>Conteúdo</label>
 					<ArticleRichTextEditor
 						editor={editor}
 						linkDraft={linkDraft}
@@ -139,20 +137,13 @@ function AdminArticleEditorForm({
 						onCancelLink={onCancelLink}
 						onInsertImage={onInsertImage}
 					/>
+					<div className="admin__actions">
+						<button className="button button--primary tooltip tooltip--top" type="submit" disabled={!hasSavedToken || isCreatingArticle} data-tooltip={editingArticle ? 'Salvar artigo' : 'Publicar artigo'}>
+							<Save size={24} />
+						</button>
+					</div>
 				</div>
 
-				<div className="admin__actions">
-					{editingArticle && (
-						<button className="admin__button" type="button" onClick={onCancelEdit}>
-							Cancelar edicao
-						</button>
-					)}
-					<button className="admin__button admin__button--primary" type="submit" disabled={!hasSavedToken || isCreatingArticle}>
-						{isCreatingArticle
-							? editingArticle ? 'Atualizando artigo...' : 'Criando artigo...'
-							: editingArticle ? 'Atualizar artigo' : 'Criar artigo'}
-					</button>
-				</div>
 			</form>
 		</section>
 	)

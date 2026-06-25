@@ -11,13 +11,26 @@ export default defineConfig({
 			name: 'redirect-base-without-trailing-slash',
 			apply: 'serve',
 			configureServer(server) {
-				server.middlewares.use((request, response, next) => {
+				server.middlewares.use(async (request, response, next) => {
 					if (request.url?.startsWith('/portfolio?') || request.url === '/portfolio') {
 						const redirectUrl = request.url.replace('/portfolio', '/portfolio/')
 
 						response.statusCode = 302
 						response.setHeader('Location', redirectUrl)
 						response.end()
+						return
+					}
+
+					const acceptsHtml = request.headers.accept?.includes('text/html')
+					const isAdminRequest = request.url === '/portfolio/admin' || request.url?.startsWith('/portfolio/admin/')
+
+					if (acceptsHtml && isAdminRequest) {
+						const html = await readFile(resolve('admin.html'), 'utf-8')
+						const transformedHtml = await server.transformIndexHtml(request.url ?? '/portfolio/admin/', html)
+
+						response.statusCode = 200
+						response.setHeader('Content-Type', 'text/html')
+						response.end(transformedHtml)
 						return
 					}
 
@@ -41,13 +54,10 @@ export default defineConfig({
 					{
 						path: 'artigos',
 						title: 'ARTIGOS - MARKUS DOMENEGHETI'
-					},
-					{
-						path: 'admin',
-						title: 'ADMIN - MARKUS DOMENEGHETI'
 					}
 				]
 				const indexHtml = await readFile(resolve('dist/index.html'), 'utf-8')
+				const adminHtml = await readFile(resolve('dist/admin.html'), 'utf-8')
 				const baseRedirectHtml = [
 					'<!doctype html>',
 					'<html lang="pt-BR">',
@@ -72,9 +82,22 @@ export default defineConfig({
 					await mkdir(routeDir, { recursive: true })
 					await writeFile(resolve(routeDir, 'index.html'), routeHtml)
 				}))
+				const adminRouteDir = resolve('dist', 'admin')
+
+				await mkdir(adminRouteDir, { recursive: true })
+				await writeFile(resolve(adminRouteDir, 'index.html'), adminHtml)
 				await writeFile(resolve('dist/portfolio.html'), baseRedirectHtml)
 			},
 		},
 	],
 	base: '/portfolio/',
+	build: {
+		manifest: true,
+		rollupOptions: {
+			input: {
+				site: resolve('index.html'),
+				admin: resolve('admin.html'),
+			},
+		},
+	},
 })

@@ -29,7 +29,7 @@ export async function createAdminTestFile(token: string) {
 	const fileContent = [
 		'# Teste do admin',
 		'',
-		'Arquivo criado pela pagina de administracao.',
+		'Arquivo criado pela página de administração.',
 		`Criado em: ${new Date().toISOString()}`,
 		'',
 	].join('\n')
@@ -91,7 +91,7 @@ export async function loadMarkdownArticle(token: string, article: AdminArticle) 
 	const data: GitHubReadFileResponse = await response.json()
 
 	if (!response.ok || !data.content) {
-		throw new Error(data.message ?? 'Erro ao carregar artigo para edicão.')
+		throw new Error(data.message ?? 'Erro ao carregar artigo para edição.')
 	}
 
 	return {

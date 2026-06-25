@@ -1,0 +1,415 @@
+@use '../base/variables'
+
+.admin
+	width: 100%
+	height: 100vh
+	display: grid
+	grid-template-columns: 70px 300px minmax(0, 1fr)
+	background: #F6F8FA
+	font-family: variables.$font-primary
+	overflow: hidden
+
+.admin__rail
+	position: sticky
+	top: 0
+	height: 100vh
+	display: flex
+	flex-direction: column
+	align-items: center
+	gap: 10px
+	padding: 20px 0
+	border-right: 1px solid #e5e7f2
+	background: variables.$color-white
+	z-index: 2
+
+.admin__brand
+	background: variables.$color-primary-regular
+	border-color: variables.$color-primary-regular
+	color: variables.$color-white
+	font-size: 0.75rem
+	font-weight: variables.$font-weight-bk
+	&:hover
+		background: variables.$color-primary-regular
+		border-color: variables.$color-primary-regular
+		color: variables.$color-white
+
+.admin__shortcuts
+	display: flex
+	flex-direction: column
+	gap: 10px
+
+.admin__sidebar
+	position: sticky
+	top: 0
+	height: 100vh
+	padding: 31px 15px
+	border-right: 1px solid #e1e3ee
+	background: variables.$color-white
+	overflow-y: auto
+
+.admin__header
+	display: flex
+	align-items: center
+	gap: 10px
+	font-size: 1.055rem
+	font-weight: variables.$font-weight-bd
+	text-transform: uppercase
+	letter-spacing: .3px
+	padding-left: 10px
+
+.admin__group
+	margin-top: 25px
+	padding-top: 25px
+	display: flex
+	flex-direction: column
+	row-gap: 10px
+	border-top: 1px solid #e1e3ee
+
+.admin__heading
+	display: flex
+	align-items: center
+	justify-content: space-between
+	font-size: variables.$font-size-md
+	font-weight: variables.$font-weight-sm
+	line-height: variables.$font-height-md
+	text-transform: uppercase
+	padding-left: 10px
+	letter-spacing: .3px
+
+.admin__item
+	width: 100%
+	text-transform: uppercase
+	justify-content: flex-start
+	padding: 10px
+	text-align: left
+	letter-spacing: .3px
+	display: flex
+	column-gap: 10px
+	font-weight: variables.$font-weight-sm
+	border-radius: 5px
+	transition: all ease .2s
+	&.admin__item--active
+		background: variables.$color-primary-hover
+		color: variables.$color-primary-regular
+	&:hover
+		background: variables.$color-primary-hover
+		color: variables.$color-primary-regular
+
+.admin__workspace
+	min-width: 0
+	height: 100vh
+	padding: 30px
+	overflow-x: hidden
+	overflow-y: auto
+
+.admin__topbar
+	display: flex
+	justify-content: flex-end
+	gap: 24px
+	h1
+		font-size: 2rem
+		line-height: 1.15
+		font-weight: variables.$font-weight-bd
+
+.admin__content
+	min-width: 0
+	display: flex
+	flex-direction: column
+
+.admin__settings
+	display: flex
+	flex-direction: column
+	gap: 24px
+
+.admin__publisher
+	border: 1px solid variables.$color-gray-first
+	border-radius: 5px
+	background: variables.$color-white
+	padding-bottom: 20px
+
+.admin__token
+	padding: 0 20px
+
+.admin__articles
+	min-width: 0
+	border: 1px solid variables.$color-gray-first
+	border-radius: 5px
+	background: variables.$color-white
+
+.admin__card
+	padding: 20px
+	h2
+		font-size: variables.$font-size-md
+		color: variables.$color-black
+	p
+		font-size: variables.$font-size-md
+		color: variables.$color-black
+		line-height: variables.$font-height-md
+
+.admin__summary
+	display: flex
+	align-items: center
+	justify-content: space-between
+	padding: 20px
+	border-bottom: 1px solid #eef0f6
+	margin-bottom: 20px
+	p
+		color: variables.$color-black
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
+
+.admin__form
+	display: flex
+	flex-direction: column
+	gap: 20px
+	label
+		margin-bottom: 8px
+		font-size: variables.$font-size-md
+		font-weight: variables.$font-weight-bd
+		display: flex
+		justify-content: space-between
+	input
+		width: 100%
+		border: 1px solid #d8dbe8
+		border-radius: 5px
+		background: variables.$color-white
+		color: variables.$color-black
+		font: inherit
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
+		transition: border-color 160ms ease, box-shadow 160ms ease
+		&:focus
+			border-color: variables.$color-primary-regular
+		&:disabled
+			background: #F6F8FA
+			color: variables.$color-black
+	input
+		padding: 8px 15px
+	textarea
+		width: 100%
+		border: 1px solid #d8dbe8
+		border-radius: 5px
+		background: variables.$color-white
+		color: #20243f
+		font: inherit
+		font-size: variables.$font-size-md
+		line-height: variables.$font-height-md
+		transition: border-color 160ms ease, box-shadow 160ms ease
+		padding: 10px 12px
+		resize: vertical
+		&:focus
+			border-color: variables.$color-primary-regular
+		&:disabled
+			background: #F6F8FA
+			color: variables.$color-black
+
+.admin__card
+	display: flex
+	flex-direction: column
+	row-gap: 10px
+
+.admin__grid
+	display: grid
+	grid-template-columns: repeat(2, minmax(0, 1fr))
+	gap: 15px
+	padding: 0 20px
+
+.admin__cms
+	padding: 0 20px
+
+.admin__field
+	min-width: 0
+	&.admin__field--wide
+		grid-column: 1 / -1
+
+.admin__label
+	display: block
+	margin-bottom: 8px
+	color: #32385c
+	font-size: variables.$font-size-md
+	font-weight: variables.$font-weight-bd
+
+.admin__value
+	display: flex
+	align-items: center
+	padding: 8px 15px
+	border: 1px solid #d8dbe8
+	border-radius: 5px
+	background: #F6F8FA
+	color: variables.$color-black
+	font-size: variables.$font-size-md
+	line-height: variables.$font-height-md
+
+.admin__character
+	display: inline-flex
+	color: variables.$color-black
+	font-size: 0.75rem
+
+.admin__actions
+	display: flex
+	column-gap: 20px
+	justify-content: flex-end
+	padding-top: 20px
+
+.admin__editor
+	border: 1px solid #d8dbe8
+	border-radius: 5px
+	background: variables.$color-white
+	overflow: visible
+
+.admin__toolbar
+	display: flex
+	flex-wrap: wrap
+	gap: 6px
+	padding: 8px
+	border-bottom: 1px solid #eef0f6
+
+.admin__linkpanel
+	display: flex
+	flex-direction: column
+	gap: 10px
+	padding: 14px
+	border-bottom: 1px solid #eef0f6
+	background: #fcfcff
+	label
+		margin: 0
+
+.admin__linkactions
+	display: flex
+	flex-wrap: wrap
+	gap: 8px
+
+.admin__articles
+	border: 0
+	background: transparent
+	box-shadow: none
+
+.admin__bar
+	display: flex
+	align-items: center
+	justify-content: space-between
+	gap: 15px
+
+.admin__tools
+	display: flex
+	align-items: center
+	gap: 8px
+	&.admin__tools--right
+		margin-left: auto
+
+.admin__frame
+	min-width: 0
+	border: 1px solid variables.$color-gray-first
+	border-radius: 5px
+	background: variables.$color-white
+	overflow: visible
+
+.admin__table
+	width: 100%
+	min-width: 0
+	border-collapse: collapse
+	th
+		padding: 14px 16px
+		border-bottom: 1px solid #eef0f6
+		text-align: left
+		vertical-align: middle
+		color: variables.$color-black
+		font-size: variables.$font-size-md
+		font-weight: variables.$font-weight-bd
+	td
+		padding: 14px 16px
+		border-bottom: 1px solid #eef0f6
+		text-align: left
+		vertical-align: middle
+	tr:last-child td
+		border-bottom: 0
+
+.admin__list
+	min-width: 0
+	th
+		padding: 12px 16px
+	td
+		padding: 12px 16px
+
+.admin__select
+	width: 44px
+
+.admin__checkbox
+	width: 20px
+	height: 20px
+	display: inline-block
+	border: 1px solid #c6cadb
+	border-radius: 5px
+	background: variables.$color-white
+	vertical-align: middle
+
+.admin__title
+	width: 360px
+	white-space: nowrap
+	overflow: hidden
+	text-overflow: ellipsis
+	&:hover
+		color: variables.$color-primary-regular
+
+.admin__badge
+	display: inline-flex
+	align-items: center
+	padding: 8px 15px
+	border: 1px solid #bddfbf
+	border-radius: 5px
+	background: #effcef
+	color: #177245
+	font-weight: variables.$font-weight-sm
+	font-size: 0.865rem
+	line-height: 0.865rem
+	text-transform: uppercase
+	&.admin__badge--draft
+		border-color: #b9dcff
+		background: #edf7ff
+		color: #0c75bb
+	&.admin__badge--published
+		border-color: #bddfbf
+		background: #effcef
+		color: #177245
+
+.admin__empty
+	padding: 22px 0
+	color: variables.$color-black
+	text-align: center
+
+.admin__actionsrow
+	display: flex
+	justify-content: flex-end
+	column-gap: 10px
+
+.admin__table
+	table-layout: fixed
+	width: 100%
+	th:nth-child(1)
+		width: 35%
+	td:nth-child(1)
+		width: 35%
+	th:nth-child(2)
+		width: 140px
+	td:nth-child(2)
+		width: 140px
+	th:nth-child(3)
+		width: 140px
+	td:nth-child(3)
+		width: 140px
+	th:nth-child(4)
+		width: 120px
+	td:nth-child(4)
+		width: 120px
+	th:nth-child(5)
+		width: 110px
+	td:nth-child(5)
+		width: 110px
+
+.admin__table--strapi
+	th
+		height: 60px
+		padding: 8px 16px
+	td
+		height: 60px
+		padding: 8px 16px

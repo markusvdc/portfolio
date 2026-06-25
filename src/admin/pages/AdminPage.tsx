@@ -2,14 +2,14 @@ import { useState } from 'react'
 import {
 	FilePlus,
 	FileText,
-	Home,
 	LayoutDashboard,
 	Settings,
+	ShieldCheck,
 	Newspaper,
+	Users,
 } from 'lucide-react'
 import AdminArticleEditorForm from '../components/AdminArticleEditorForm'
 import AdminArticleList from '../components/AdminArticleList'
-import AdminStatusMessages from '../components/AdminStatusMessages'
 import AdminTokenPanel from '../components/AdminTokenPanel'
 import { useAdminPageController } from '../hooks/useAdminPageController'
 
@@ -33,65 +33,89 @@ function AdminPage() {
 	}
 
 	return (
-		<main className="admin">
-			<aside className="admin__rail" aria-label="Menu principal">
-				<a className="admin__brand" href="/portfolio/admin/" aria-label="Inicio do painel administrativo">
-					<LayoutDashboard size={24} strokeWidth={2} />
-				</a>
-				<nav className="admin__shortcuts" aria-label="Ferramentas do admin">
-					<a className="admin__shortcut" href="/portfolio/admin/" aria-label="Inicio do painel administrativo">
-						<Home size={24} />
-					</a>
+		<>
+			<main className="admin">
+				<aside className="admin__rail" aria-label="Menu principal">
 					<button
-						className={`admin__shortcut ${isArticleSection ? 'admin__shortcut--active' : ''}`}
+						className="button button--secondary admin__brand tooltip tooltip--right"
 						type="button"
 						onClick={() => setActiveView('article-list')}
-						aria-label="Conteudo"
+						aria-label="Artigos"
+						data-tooltip="Artigos"
+					>
+						<LayoutDashboard size={24} />
+					</button>
+					<button
+						className={`button button--secondary admin__shortcut tooltip tooltip--right ${isArticleSection ? 'button--active' : ''}`}
+						type="button"
+						onClick={() => setActiveView('article-list')}
+						aria-label="Artigos"
+						data-tooltip="Artigos"
 					>
 						<Newspaper size={24} />
 					</button>
-				</nav>
-				<button
-					className={`admin__shortcut admin__shortcut--bottom ${activeView === 'token' ? 'admin__shortcut--active' : ''}`}
-					type="button"
-					onClick={() => setActiveView('token')}
-					aria-label="Configuracoes"
-				>
-					<Settings size={24} />
-				</button>
-			</aside>
-
-			<aside className="admin__sidebar" aria-label="Navegacao do conteudo">
-				<header className="admin__header">
-					<span>Painel Administrativo</span>
-				</header>
-
-				<div className="admin__group">
-					<div className="admin__heading">
-						<span>Principal</span>
-					</div>
 					<button
-						className={`admin__item ${isArticleListView ? 'admin__item--active' : ''}`}
+						className={`button button--secondary admin__shortcut tooltip tooltip--right`}
 						type="button"
-						onClick={() => setActiveView('article-list')}
+						// onClick={() => setActiveView('token')}
+						aria-label="Usuários"
+						data-tooltip="Usuários"
 					>
-						<FileText size={24} />
-						Listar Artigos
+						<Users size={24} />
 					</button>
 					<button
-						className={`admin__item ${isArticleEditorView ? 'admin__item--active' : ''}`}
+						className={`button button--secondary admin__shortcut tooltip tooltip--right ${activeView === 'token' ? 'button--active' : ''}`}
 						type="button"
-						onClick={handleOpenCreateArticle}
+						onClick={() => setActiveView('token')}
+						aria-label="Configurações"
+						data-tooltip="Configurações"
 					>
-						<FilePlus size={24} />
-						Criar Artigo
+						<Settings size={24} />
 					</button>
-				</div>
-			</aside>
+				</aside>
 
-			<section className="admin__workspace" aria-labelledby="admin-title">
-				{isArticleListView && (
-					<div className="admin__content">
+				<aside className="admin__sidebar" aria-label="Navegação do conteúdo">
+					<header className="admin__header">
+						<span>Painel Administrativo</span>
+					</header>
+
+					{isArticleSection && (
+						<div className="admin__group">
+							<button
+								className={`admin__item ${isArticleListView ? 'admin__item--active' : ''}`}
+								type="button"
+								onClick={() => setActiveView('article-list')}
+							>
+								<FileText size={24} />
+								Listar Artigos
+							</button>
+							<button
+								className={`admin__item ${isArticleEditorView ? 'admin__item--active' : ''}`}
+								type="button"
+								onClick={handleOpenCreateArticle}
+							>
+								<FilePlus size={24} />
+								Criar Artigo
+							</button>
+						</div>
+					)}
+
+					{activeView === 'token' && (
+						<div className="admin__group">
+							<button
+								className="admin__item admin__item--active"
+								type="button"
+								onClick={() => setActiveView('token')}
+							>
+								<ShieldCheck size={24} />
+								Token Pessoal
+							</button>
+						</div>
+					)}
+				</aside>
+
+				<section className="admin__workspace" aria-labelledby="admin-title">
+					{isArticleListView && (
 						<AdminArticleList
 							articles={admin.adminArticles}
 							isListingArticles={admin.isListingArticles}
@@ -101,24 +125,9 @@ function AdminPage() {
 							onEditArticle={handleEditArticle}
 							onDeleteArticle={admin.handleDeleteArticle}
 						/>
+					)}
 
-						<section className="admin__card" aria-labelledby="admin-list-status-title">
-							<h2 id="admin-list-status-title">Status</h2>
-							<AdminStatusMessages
-								message={admin.message}
-								hasSavedToken={admin.hasSavedToken}
-								connectionResult={null}
-								writeResult={null}
-								articleListResult={admin.articleListResult}
-								articleCreateResult={null}
-								articleDeleteResult={admin.articleDeleteResult}
-							/>
-						</section>
-					</div>
-				)}
-
-				{isArticleEditorView && (
-					<div className="admin__content">
+					{isArticleEditorView && (
 						<AdminArticleEditorForm
 							form={admin.articleForm}
 							editingArticle={admin.editingArticle}
@@ -128,7 +137,6 @@ function AdminPage() {
 							linkDraft={admin.linkDraft}
 							onFormChange={admin.updateArticleForm}
 							onSubmit={admin.handleSaveArticle}
-							onCancelEdit={admin.resetArticleForm}
 							onOpenLinkPanel={admin.handleSetLink}
 							onChangeLinkDraft={admin.setLinkDraft}
 							onApplyLink={admin.handleApplyLink}
@@ -136,26 +144,13 @@ function AdminPage() {
 							onCancelLink={() => admin.setLinkDraft(null)}
 							onInsertImage={admin.handleInsertImage}
 						/>
+					)}
 
-						<section className="admin__card" aria-labelledby="admin-editor-status-title">
-							<h2 id="admin-editor-status-title">Status</h2>
-							<AdminStatusMessages
-								message={admin.message}
-								hasSavedToken={admin.hasSavedToken}
-								connectionResult={null}
-								writeResult={null}
-								articleListResult={null}
-								articleCreateResult={admin.articleCreateResult}
-								articleDeleteResult={null}
-							/>
-						</section>
-					</div>
-				)}
-
-				{activeView === 'token' && (
-					<div className="admin__settings">
-						<section className="admin__card" aria-labelledby="admin-token-title">
-							<p>Conexao de publicacao do portfolio.</p>
+					{activeView === 'token' && (
+						<div className="admin__publisher">
+							<div className="admin__summary">
+								<p>Configure o token de acesso do GitHub utilizado pelo painel administrativo.</p>
+							</div>
 							<AdminTokenPanel
 								token={admin.token}
 								hasSavedToken={admin.hasSavedToken}
@@ -169,24 +164,11 @@ function AdminPage() {
 								onCreateTestFile={admin.handleCreateTestFile}
 								onListArticles={admin.handleListArticles}
 							/>
-						</section>
-
-						<section className="admin__card" aria-labelledby="admin-status-title">
-							<h2 id="admin-status-title">Status</h2>
-							<AdminStatusMessages
-								message={admin.message}
-								hasSavedToken={admin.hasSavedToken}
-								connectionResult={admin.connectionResult}
-								writeResult={admin.writeResult}
-								articleListResult={admin.articleListResult}
-								articleCreateResult={admin.articleCreateResult}
-								articleDeleteResult={admin.articleDeleteResult}
-							/>
-						</section>
-					</div>
-				)}
-			</section>
-		</main>
+						</div>
+					)}
+				</section>
+			</main>
+		</>
 	)
 }
 

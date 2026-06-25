@@ -1,1 +1,1 @@
-export type Page = 'home' | 'portfolio' | 'resume' | 'writing' | 'admin'
+export type Page = 'home' | 'portfolio' | 'resume' | 'writing'
