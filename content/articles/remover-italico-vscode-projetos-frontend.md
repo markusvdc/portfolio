@@ -2,7 +2,7 @@
 title: "Como remover texto em itálico no VSCODE para projetos FRONT-END"
 slug: "remover-italico-vscode-projetos-frontend"
 date: "2026-06-18T22:15"
-updatedAt: "2026-06-18T22:15"
+updatedAt: "2026-06-25T19:50"
 readingTime: 6
 summary: "Se o texto em itálico no VSCODE dificulta a leitura do seu código, este guia é para você. Aprenda a desativar itálicos para os principais elementos do FRONT-END usando uma configuração pronta para uso, testada com HTML, CSS, SCSS, SASS, JavaScript, TypeScript, React, PHP e WordPress."
 ---
@@ -11,7 +11,7 @@ Se você usa um tema estilizado no VSCODE, provavelmente já percebeu comentári
 
 É uma pequena mudança, mas que melhorou bastante minha experiência no dia a dia. A parte complicada é que não existe uma única configuração que desative itálico em todos os lugares. Alguns elementos são estilizados usando **TextMate Tokens, outros utilizam Semantic Tokens,** e os temas ainda podem aplicar regras próprias por cima disso.
 
-Depois de alguns testes, cheguei à configuração abaixo. Ela é focada em desenvolvimento FRONT-END e remove a maior parte dos estilos em itálico que encontro diariamente. Foi testada com: **HTML, CSS, SCSS, SASS, JavaScript, TypeScript, React, PHP e WordPress.**
+Depois de alguns testes, cheguei à configuração abaixo. Ela é focada em desenvolvimento FRONT-END e remove a maior parte dos estilos em itálico que encontro diariamente. Foi testada com: **HTML, CSS, SASS, JavaScript, TypeScript, React, PHP e WordPress.**
 
 Como adicionar: abra a paleta de comandos com `ctrl + shift + p`, pesquise por `Preferences: Open Settings (JSON)` para abrir o arquivo `settings.json`. Depois, basta adicionar a seguinte configuração:
 
