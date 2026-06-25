@@ -2,7 +2,7 @@
 title: "Estou dominando meu projeto, mas será que ainda domino o código"
 slug: "dominando-projeto-mas-ainda-codigo"
 date: "2026-06-23T09:18"
-updatedAt: "2026-06-24T17:32"
+updatedAt: "2026-06-25T20:26"
 readingTime: 15
 summary: "Estou construindo um blog em React com ajuda do Codex e vivendo um paradoxo curioso: domino completamente o projeto, mas ainda não domino todo o código. Estou ganhando produtividade ou perdendo conhecimento? E, sem IA, eu sequer teria construído isso?"
 ---
@@ -35,7 +35,7 @@ Hoje eu gasto menos tempo pensando: Como faço isso em TypeScript? E mais tempo 
 
 Eu discuto responsabilidades. Experiência do usuário. Fluxos. Estrutura de pastas. Legibilidade. Escalabilidade. Talvez eu esteja deixando de ser um executor de código para me tornar um arquiteto de sistemas. Ou talvez eu esteja só me enganando. Ainda não sei.
 
-## O paradoxo
+## Qual é o paradoxo
 
 Mas existe uma pergunta que sempre volta. Se eu estiver perdendo conhecimento...
 
