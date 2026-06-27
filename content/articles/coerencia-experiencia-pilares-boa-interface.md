@@ -2,12 +2,14 @@
 title: "A coerência da experiência é um dos pilares de uma boa interface"
 slug: "coerencia-experiencia-pilares-boa-interface"
 date: "2026-06-27T08:51"
-updatedAt: "2026-06-27T08:51"
+updatedAt: "2026-06-27T09:30"
 readingTime: 8
 summary: "Usuários não aprendem telas, aprendem regras. Neste artigo compartilho uma reflexão sobre como pequenas quebras de consistência afetam a experiência e por que páginas e modais devem ser escolhidos pelo contexto da interação, e não apenas pela implementação."
 ---
 
-Esses dias percebi um detalhe no VS Code que me fez refletir sobre a forma como projetamos interfaces. Quase tudo dentro do editor abre da mesma maneira: arquivos. Você clica em um arquivo, ele ocupa o editor. Abre outro, ele vira uma nova aba. **O fluxo é consistente.** Mas quando abri as Configurações, a experiência mudou completamente. Em vez de uma página ocupando o editor, surgiu uma interface centralizada, quase como um grande modal. Não é um problema técnico. Funciona perfeitamente. O problema é outro: **quebra a linguagem que a própria aplicação ensinou.** Foi aí que pensei em uma regra extremamente simples. **Se a experiência pede uma página, então faça uma página.** Parece óbvio, mas acho que esquecemos disso com frequência.
+Esses dias percebi um detalhe no VS Code que me fez refletir sobre a forma como projetamos interfaces. Quase tudo dentro do editor abre da mesma maneira: arquivos. Você clica em um arquivo, ele ocupa o editor. Abre outro, ele vira uma nova aba. **O fluxo é consistente.** Mas quando abri as Configurações, a experiência mudou completamente.
+
+Em vez de uma página ocupando o editor, surgiu uma interface centralizada, quase como um grande modal. Não é um problema técnico. Funciona perfeitamente. O problema é outro: **quebra a linguagem que a própria aplicação ensinou.** Foi aí que pensei em uma regra extremamente simples. **Se a experiência pede uma página, então faça uma página.** Parece óbvio, mas acho que esquecemos disso com frequência.
 
 ## O usuário aprende regras, não telas
 
