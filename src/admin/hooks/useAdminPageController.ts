@@ -241,9 +241,8 @@ export function useAdminPageController() {
 				sha: loadedArticle.sha,
 			})
 			richTextEditor.setMarkdownContent(loadedArticle.article.content)
-			showAdminToast('info', 'Artigo carregado para edição.')
 		} catch (error) {
-			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao carregar artigo.'))
+			showAdminToast('error', getErrorMessage(error, 'Erro ao carregar artigo.'))
 		} finally {
 			setIsLoadingArticleForEdit(false)
 		}

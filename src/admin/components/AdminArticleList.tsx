@@ -27,21 +27,28 @@ function AdminArticleList({
 }: AdminArticleListProps) {
 	return (
 		<section className="admin__articles" aria-labelledby="admin-articles-title">
+			<div className="admin__bar">
+				<div className="admin__tools admin__tools--right">
+					<button className="button button--secondary tooltip tooltip--left" type="button" onClick={onListArticles} disabled={isListingArticles} aria-label="Atualizar lista" data-tooltip="Atualizar listagem">
+						<RefreshCw size={24} />
+					</button>
+				</div>
+			</div>
 			<div className="admin__frame">
 				<table className="admin__table admin__list">
 					<thead>
 						<tr>
 							<th>Título</th>
-							<th>Criado em</th>
-							<th>Última edição</th>
+							<th>Ações</th>
+							<th>Criação</th>
+							<th>Editado</th>
 							<th>Estado</th>
-							<th aria-label="Ações"></th>
 						</tr>
 					</thead>
 					<tbody>
 						{articles.length === 0 ? (
 							<tr>
-								<td colSpan={6}>
+								<td colSpan={5}>
 									<div className="admin__empty">
 										Nenhum artigo listado ainda.
 									</div>
@@ -53,26 +60,8 @@ function AdminArticleList({
 
 							return (
 								<tr key={article.filePath}>
-									<td>
-										<button
-											className="admin__title"
-											type="button"
-											onClick={() => onEditArticle(article)}
-											disabled={isLoadingArticleForEdit || deletingArticlePath === article.filePath}
-										>
-											{article.title}
-										</button>
-									</td>
-									<td>
-										<time dateTime={article.date}>{formatArticleDateTime(article.date)}</time>
-									</td>
-									<td>
-										<time dateTime={article.updatedAt}>{formatArticleDateTime(article.updatedAt)}</time>
-									</td>
-									<td>
-										<span className={`admin__badge ${statusClass}`}>
-											{status}
-										</span>
+									<td className="admin__title">
+										<span>{article.title}</span>
 									</td>
 									<td>
 										<div className="admin__actionsrow">
@@ -98,18 +87,22 @@ function AdminArticleList({
 											</button>
 										</div>
 									</td>
+									<td>
+										<time dateTime={article.date}>{formatArticleDateTime(article.date)}</time>
+									</td>
+									<td>
+										<time dateTime={article.updatedAt}>{formatArticleDateTime(article.updatedAt)}</time>
+									</td>
+									<td>
+										<span className={`admin__badge ${statusClass}`}>
+											{status}
+										</span>
+									</td>
 								</tr>
 							)
 						})}
 					</tbody>
 				</table>
-			</div>
-			<div className="admin__bar">
-				<div className="admin__tools admin__tools--right">
-					<button className="button button--secondary tooltip tooltip--top" type="button" onClick={onListArticles} disabled={isListingArticles} aria-label="Atualizar lista" data-tooltip="Atualizar listagem">
-						<RefreshCw size={24} />
-					</button>
-				</div>
 			</div>
 		</section>
 	)

@@ -95,14 +95,14 @@ function AdminArticleEditorForm({
 					</div>
 
 					<div className="admin__field">
-						<span className="admin__label">Criado em</span>
+						<span className="admin__label">Criação</span>
 						<span className="admin__value">
 							{formatArticleDateTime(form.date)}
 						</span>
 					</div>
 
 					<div className="admin__field">
-						<span className="admin__label">Última edição</span>
+						<span className="admin__label">Editado</span>
 						<span className="admin__value">
 							{formatArticleDateTime(visibleUpdatedAt || form.date)}
 						</span>
