@@ -1,0 +1,33 @@
+# Arquivos de texto sempre em LF
+* text=auto eol=lf
+
+# Binários
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.svg text eol=lf
+*.ico binary
+*.pdf binary
+*.zip binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+
+# Código
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.md text eol=lf
+*.php text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
