@@ -6,7 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-* text=auto eol=lf
+* text=auto
+*.sh text eol=lf
+*.bash text eol=lf
 
 node_modules
 dist
