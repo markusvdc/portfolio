@@ -2,7 +2,7 @@
 title: "Hierarquia em tecnologia deveria ser uma camada de tradução"
 slug: "hierarquia-tecnologia-comunicacao-camadas-traducao"
 date: "2026-07-12T11:54"
-updatedAt: "2026-07-12T11:54"
+updatedAt: "2026-07-13T09:52"
 readingTime: 15
 summary: "Hierarquia em empresas de tecnologia costuma ser associada a poder e autoridade. Mas talvez sua função mais importante seja outra: traduzir contexto entre diferentes níveis de abstração e permitir que informações atravessem a empresa sem perder significado."
 ---
@@ -21,7 +21,7 @@ O nível 4 trabalha diretamente com problemas específicos. Pode ser um desenvol
 
 Em software, uma interface estabelece uma forma de comunicação entre partes diferentes de um sistema. Um tech lead pode exercer uma função semelhante. Ele compreende detalhes técnicos suficientes para conversar com desenvolvedores e também entende as abstrações necessárias para transmitir contexto a outros níveis da empresa. Sua principal função, nesse modelo, não seria controlar quem está abaixo. Seria preservar o significado durante a transmissão da informação.
 
-**Implementação → Contexto técnico → Impacto no produto → Decisão estratégica**
+**Implementação → Contexto técnico → Impacto no produto → Decisão estratégica.**
 
 Cada camada recebe uma mensagem e precisa transmiti-la utilizando outra linguagem. Isso é tradução.
 
