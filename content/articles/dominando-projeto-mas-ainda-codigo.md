@@ -1,60 +1,53 @@
 ---
-title: "Estou dominando meu projeto, mas será que ainda domino o código"
+title: "Domino meu projeto, mas ainda estou aprendendo o código"
 slug: "dominando-projeto-mas-ainda-codigo"
 date: "2026-06-23T09:18"
-updatedAt: "2026-06-25T20:26"
+updatedAt: "2026-10-06T08:04"
 readingTime: 15
-summary: "Estou construindo um blog em React com ajuda do Codex e vivendo um paradoxo curioso: domino completamente o projeto, mas ainda não domino todo o código. Estou ganhando produtividade ou perdendo conhecimento? E, sem IA, eu sequer teria construído isso?"
+summary: "Estou criando um blog em React com ajuda do Codex e vivendo um paradoxo: domino o projeto, mas ainda não todo o código. Será que ganho produtividade ou perco conhecimento? Talvez sem IA eu nem tivesse começado. Essa experiência me faz rever como aprendo enquanto construo e assumo decisões sobre meu próprio projeto."
 ---
 
-Nas últimas semanas eu venho construindo um projeto que, honestamente, eu provavelmente não teria construído sozinho. Um blog em React. Com CMS próprio. Sem backend. Usando GitHub API, Markdown e GitHub Pages. E uma ajuda constante do Codex. O mais curioso é que estou percebendo uma sensação estranha. **Eu domino completamente o projeto.**
+Nas últimas semanas, venho construindo algo que provavelmente não faria sozinho: um blog em React, com CMS próprio e sem backend, usando GitHub API, Markdown e GitHub Pages. O Codex me acompanha durante o desenvolvimento, e o mais curioso é a sensação que isso provoca: eu domino completamente o projeto.
 
-Eu sei exatamente o que ele faz. Sei por que determinada funcionalidade existe. Sei como quero a experiência do usuário. Sei quando a arquitetura está ficando ruim. Sei quando preciso modularizar. Sei quando algo não está elegante. **Mas, eu não domino completamente o código.**
+Sei o que ele faz, por que cada funcionalidade existe e que experiência quero criar. Percebo quando a arquitetura precisa melhorar, quando vale modularizar e quando uma solução parece pouco elegante. Ainda não domino todo o código, mas quero entender como cada parte funciona para evoluir o projeto com autonomia.
 
-Ainda não. Não porque o código seja ruim. Pelo contrário. Muitas vezes ele é melhor estruturado do que eu faria sozinho. Mas existe um detalhe:
+## Ganhos concretos ao dirigir projetos
 
-> O Codex não escreve como eu... E eu ainda não sei escrever como o Codex.
+Estou construindo coisas, e isso não é pouca coisa. Antes, eu consumia cursos, lia documentações e assistia a vídeos. Agora tomo decisões, peço refatorações, questiono arquiteturas e discuto a organização do projeto. Também avalio nomes de componentes e se uma abstração resolve um problema real para quem vai usar o sistema.
 
-Então comecei a me perguntar: **Até onde estou ganhando e até onde estou perdendo?**
+Não estou apenas assistindo a outras pessoas programarem: estou dirigindo um projeto. Essa mudança transformou minha relação com tecnologia. Em vez de esperar até me sentir pronto, consigo experimentar ideias, comparar caminhos e ver as consequências das escolhas em algo que estou criando, sem deixar de aprender e revisar cada decisão.
 
-## O que estou ganhando
+## A profundidade técnica ainda me desafia
 
-Estou construindo coisas. E isso não é pouca coisa. Antes eu consumia cursos. Lia documentações. Assistia vídeos. Agora eu tomo decisões. Peço refatorações. Questiono arquiteturas. Discuto organização de pastas. Peço nomes melhores para componentes. Avalio se uma abstração faz sentido ou não. Eu não estou apenas assistindo programação. Eu estou dirigindo um projeto. E isso mudou completamente minha relação com tecnologia.
+Às vezes, olho para um hook criado pelo Codex e entendo a ideia geral, mas percebo que não teria escrito aquela solução sozinho. Isso me incomoda porque programar sempre pareceu exigir domínio de cada linha: saber qual método chamar, que API usar e qual padrão aplicar em cada situação e por que ele faz sentido para aquele problema.
 
-## O que estou perdendo
+O código muitas vezes fica mais bem estruturado do que eu conseguiria produzir sem ajuda, mas isso não elimina a distância entre entender a intenção e dominar a implementação. A questão que tento responder é quanto estou ganhando em capacidade de construir e quanto deixo de aprender sobre os detalhes técnicos que sustentam cada decisão.
 
-Talvez profundidade. Às vezes eu olho para um hook criado pelo Codex e penso:
+## Programadores assumem novas funções
 
-> Eu entendi a ideia geral. Mas eu não teria escrito isso sozinho.
+Hoje, gasto menos tempo pensando “como faço isso em TypeScript?” e mais tempo perguntando “qual é a melhor forma de resolver este problema?”. Discuto responsabilidades, experiência do usuário, fluxos, estrutura de pastas, legibilidade e escalabilidade antes de aceitar uma solução fácil de entender e manter no futuro.
 
-E essa frase incomoda. Porque programar sempre foi associado a dominar cada linha. Saber exatamente qual método chamar. Qual API usar. Qual padrão aplicar. Mas será que isso continua sendo verdade? Ou será que estamos entrando numa época em que o conhecimento muda de lugar?
+Talvez eu esteja deixando de ser apenas um executor de código e assumindo parte do trabalho de um arquiteto de sistemas. Ou talvez essa descrição seja otimista demais. Ainda estou entendendo como muda o papel de quem programa quando ferramentas de IA participam da implementação cotidiana e mudam minhas decisões técnicas.
 
-## O programador vira arquiteto?
+## O paradoxo entre aprender e criar com IA
 
-Hoje eu gasto menos tempo pensando: Como faço isso em TypeScript? E mais tempo pensando: **Qual é a melhor forma de resolver esse problema?**
+A pergunta sempre volta: se estou perdendo conhecimento, será que perderia algo que teria conquistado sem IA? Este blog talvez nem existisse; o CMS e a arquitetura poderiam nunca sair da minha cabeça. Sem o Codex, eu talvez desistisse antes, escolhesse algo mais simples ou adiasse o projeto por meses, sem descobrir até onde conseguiria chegar.
 
-Eu discuto responsabilidades. Experiência do usuário. Fluxos. Estrutura de pastas. Legibilidade. Escalabilidade. Talvez eu esteja deixando de ser um executor de código para me tornar um arquiteto de sistemas. Ou talvez eu esteja só me enganando. Ainda não sei.
+Por isso, é difícil dizer que estou apenas perdendo quando a ferramenta também me permitiu começar. A experiência me faz questionar a comparação com um caminho ideal em que eu aprenderia cada detalhe primeiro e só depois construiria algo. Talvez esse caminho nem fosse o que eu escolheria na prática, mesmo que parecesse mais tradicional e previsível.
 
-## Qual é o paradoxo
+## Aprender pela prática também ensina
 
-Mas existe uma pergunta que sempre volta. Se eu estiver perdendo conhecimento...
+Talvez a pergunta mais útil não seja se a IA está me fazendo perder conhecimento, mas que tipo de conhecimento vale a pena desenvolver agora. Continuo estudando, curioso e tentando entender o código. A diferença é que também aprendo enquanto construo, tomando decisões e observando como cada mudança afeta o projeto.
 
-> Eu estaria perdendo alguma coisa que eu teria conquistado sem IA?
+Ainda não tenho uma resposta definitiva. Sei que hoje domino o projeto e que isso me faz querer dominar cada vez mais o código. Talvez esse seja um dos efeitos mais interessantes da automação: ela pode ampliar a curiosidade e dar mais espaço para transformar ideias em experiências concretas.
 
-Porque a verdade é que esse blog talvez nem existisse. Esse CMS talvez nem existisse. Essa arquitetura talvez nunca tivesse saído da minha cabeça. Sem o Codex, eu provavelmente teria desistido antes. Ou escolhido algo mais simples. Ou adiado por meses. Então como eu posso dizer que estou perdendo (...) se sem essa ferramenta eu talvez nem tivesse entrado no jogo?
+## Ferramentas mudam os gestos artísticos
 
-## Talvez a pergunta esteja errada
+Às vezes, penso em como os artistas podem ter se sentido quando surgiu a fotografia, quando chegaram os softwares de edição ou quando a música se tornou digital. Será que também sentiram fascínio e desconforto ao ganhar novas possibilidades e, ao mesmo tempo, se perguntar se estavam perdendo alguma coisa?
 
-Talvez a pergunta não seja: A IA está me fazendo perder conhecimento? Talvez seja: **Que tipo de conhecimento vale a pena desenvolver agora?** Porque eu continuo estudando. Continuo curioso. Continuo tentando entender o código. Mas agora eu aprendo enquanto construo. E isso me parece muito mais interessante do que estudar esperando um dia estar pronto.
+A tecnologia sempre mudou a forma como criamos, mas talvez não substitua o que vem antes da criação: intenção, curiosidade, gosto e visão. Eu não escrevi cada linha do projeto, mas imaginei a ideia, escolhi uma arquitetura e decidi o que funcionava e o que precisava ser refeito, sempre guiado pela experiência que eu queria criar.
 
-Ainda não tenho resposta. Só sei que hoje eu domino meu projeto. E curiosamente, isso me faz querer dominar o código cada vez mais. Talvez seja esse o maior presente da automação: não substituir a curiosidade, mas ampliá-la.
+As ferramentas, os pincéis e os instrumentos mudam, mas a vontade de criar continua sendo humana. Talvez seja por isso que essa experiência me confunda tanto: pela primeira vez, não estou apenas programando. Estou imaginando, escolhendo e criando — e começo a me sentir também um artista, com uma curiosidade que nenhuma ferramenta consegue substituir.
 
-## Os artistas já passaram por isso
 
-E às vezes eu me pergunto se é assim que os artistas se sentem. Quando surgiu a fotografia. Quando apareceram os softwares de edição. Quando a música virou digital. Quando uma máquina passou a fazer, em segundos, algo que antes levava horas. **Será que eles também sentiram essa mistura estranha de fascínio e desconforto?** A sensação de ganhar poder e, ao mesmo tempo, se perguntar se estão perdendo alguma coisa.
 
-Porque, no fundo, a tecnologia sempre mexeu com a forma como criamos. Mas talvez ela nunca tenha sido capaz de substituir aquilo que vem antes da criação: intenção, curiosidade, gosto, visão...
-
-Eu não escrevi cada linha desse projeto. Mas fui eu quem imaginou a ideia. Fui eu quem escolheu a arquitetura. Fui eu quem decidiu o que era bom e o que precisava ser refeito. Talvez seja isso que os artistas descobriram ao longo do tempo. As ferramentas mudam. Os pincéis mudam. Os instrumentos mudam. **Mas a vontade de criar continua sendo profundamente humana.**
-
-E talvez seja por isso que essa experiência esteja me confundindo tanto. Porque, pela primeira vez, eu não estou apenas programando. Estou imaginando, estou escolhendo, estou criando. E por algum motivo que eu ainda não consigo explicar... **Talvez agora, eu também esteja me sentindo um artista.**

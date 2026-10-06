@@ -172,6 +172,10 @@ function ArticlePage() {
 	useEffect(() => {
 		let isCurrentArticle = true
 
+		if (article) {
+			document.title = `${article.title} - MARKUS DOMENEGHETI`
+		}
+
 		async function renderArticle() {
 			if (!article) {
 				return

@@ -17,6 +17,10 @@ function SiteApp() {
 	const page: Page = getRouteFromPath(location.pathname)
 
 	useEffect(() => {
+		if (location.pathname.includes('/artigos/')) {
+			return
+		}
+
 		const pageTitles: Record<Page, string> = {
 			home: 'MARKUS DOMENEGHETI',
 			portfolio: 'PORTFOLIO - MARKUS DOMENEGHETI',
@@ -25,7 +29,7 @@ function SiteApp() {
 		}
 
 		document.title = pageTitles[page]
-	}, [page])
+	}, [location.pathname, page])
 
 	return (
 		<>

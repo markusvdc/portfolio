@@ -1,43 +1,46 @@
 ---
-title: "A coerência da experiência é um dos pilares de uma boa interface"
+title: "Coerência da experiência sustenta interfaces bem projetadas"
 slug: "coerencia-experiencia-pilares-boa-interface"
 date: "2026-06-27T08:51"
-updatedAt: "2026-06-27T09:30"
+updatedAt: "2026-10-06T07:57"
 readingTime: 8
-summary: "Usuários não aprendem telas, aprendem regras. Neste artigo compartilho uma reflexão sobre como pequenas quebras de consistência afetam a experiência e por que páginas e modais devem ser escolhidos pelo contexto da interação, e não apenas pela implementação."
+summary: "Usuários aprendem regras, não telas. Pequenas quebras de consistência afetam a experiência e mudam a forma como as pessoas entendem uma interface. Por isso, páginas e modais precisam acompanhar o contexto e as expectativas criadas durante a navegação, tornando cada interação mais coerente para quem usa o produto."
 ---
 
-Esses dias percebi um detalhe no VS Code que me fez refletir sobre a forma como projetamos interfaces. Quase tudo dentro do editor abre da mesma maneira: arquivos. Você clica em um arquivo, ele ocupa o editor. Abre outro, ele vira uma nova aba. **O fluxo é consistente.** Mas quando abri as Configurações, a experiência mudou completamente.
+Esses dias, percebi um detalhe no VS Code que me fez refletir sobre a forma como projetamos interfaces. Quase tudo no editor abre da mesma maneira: como arquivo. Você seleciona um item, ele ocupa o espaço de edição; abre outro, ele aparece em uma nova aba. Esse fluxo consistente cria uma expectativa que se quebra quando as Configurações surgem em uma interface centralizada.
 
-Em vez de uma página ocupando o editor, surgiu uma interface centralizada, quase como um grande modal. Não é um problema técnico. Funciona perfeitamente. O problema é outro: **quebra a linguagem que a própria aplicação ensinou.** Foi aí que pensei em uma regra extremamente simples. **Se a experiência pede uma página, então faça uma página.** Parece óbvio, mas acho que esquecemos disso com frequência.
+Não é um problema técnico: as Configurações funcionam. O incômodo vem de a interface mudar a linguagem que ensinou até então. Foi aí que pensei em uma regra simples: se a experiência pede uma página, então faça uma página. Parece óbvio, mas é fácil priorizar a implementação e esquecer como as pessoas aprenderam a usar o produto.
 
-## O usuário aprende regras, não telas
+## Usuários aprendem padrões, não telas
 
-Quando usamos um software, **não decoramos cada tela individualmente**. Nosso cérebro aprende padrões. Se tudo abre como uma página, passamos a esperar que tudo continue abrindo como uma página. Quando uma única tela resolve funcionar de outra forma, acontece um pequeno atrito cognitivo. É quase imperceptível, mas ele existe. Não porque a interface seja ruim. Mas porque **ela deixou de ser coerente.**
+Quando usamos um software, não decoramos cada tela individualmente. Nosso cérebro aprende padrões. Se tudo abre como uma página, esperamos que outras seções sigam a mesma lógica. Quando uma tela muda esse comportamento, surge um atrito cognitivo pequeno, mas real, mesmo que a interface continue funcional e visualmente bem resolvida.
 
-## O papel do modal
+O problema não é necessariamente a aparência daquela tela. É a quebra da regra que a própria aplicação estabeleceu. Manter padrões coerentes ajuda as pessoas a prever como uma ação vai funcionar e a entender onde estão dentro do produto, sem precisar reaprender a navegação a cada etapa.
 
-Na minha visão, **um modal representa uma interrupção curta.**
+## O modal serve para interrupções breves
 
--   Confirmar uma exclusão;
-    
--   Renomear um arquivo;
-    
--   Escolher uma opção;
-    
--   Fazer login.
-    
+Na minha visão, um modal representa uma interrupção curta. Ele funciona bem quando a pessoa precisa resolver uma tarefa pontual e depois continuar exatamente de onde parou. Assim, a ação se conclui sem afastá-la do conteúdo que já estava usando. Alguns exemplos comuns são:
 
-Você entra. Resolve. Sai. **O contexto principal continua exatamente o mesmo.** Agora pense em texto institucional. Sabe quando você está na home, clica em "Sobre a empresa" e, em vez de ir para uma página, abre um modal com um monte de texto? Você começa a ler, rola, tenta entender a história, os valores, o posicionamento. **Isso não parece uma interrupção. Parece um novo contexto.** E **novos contextos**, na minha opinião, merecem páginas.
+- Confirmar uma exclusão;
+- Renomear um arquivo;
+- Escolher uma opção;
+- Acessar a sua conta.
 
-## React mudou o jogo
+A pessoa entra, resolve e sai; o contexto principal continua o mesmo. Já um texto institucional costuma exigir outro tipo de atenção. Ao abrir “Sobre a empresa”, por exemplo, a pessoa pode querer ler a história, conhecer os valores e entender o posicionamento com calma. Isso parece menos uma interrupção e mais um novo contexto, que merece uma página própria.
 
-Durante muitos anos fazia sentido evitar mudanças de página. Cada navegação significava uma nova requisição, recarregamento completo da aplicação e perda de estado. Hoje isso mudou. Com React, Vite e outras bibliotecas modernas, **navegar entre páginas praticamente não possui custo perceptível para o usuário.** Hoje, inclusive, até aplicações back-end podem ser serverless, reduzindo ainda mais o impacto de mudanças de rota e carregamentos. Se a tecnologia deixou de ser a limitação, talvez possamos voltar a tomar decisões baseadas na experiência. **Não na implementação.**
+## React reduziu o custo de mudar páginas
 
-## Minha regra
+Durante muito tempo, evitar mudanças de página fazia sentido: cada navegação podia exigir outra requisição, recarregar a aplicação e apagar seu estado. Com React, Vite e outras ferramentas modernas, mudar de página pode ser quase instantâneo para quem usa. Isso reduz o peso técnico de escolher uma rota própria para cada contexto.
 
-Hoje tenho usado uma pergunta muito simples quando projeto uma interface:
+Aplicações também podem usar arquiteturas serverless para reduzir a infraestrutura necessária, embora isso não elimine todos os custos de navegação. O ponto é escolher a estrutura pela experiência que ela oferece. Se a limitação técnica deixou de ser decisiva, podemos avaliar melhor o contexto da interação antes de definir a implementação.
 
-> O usuário sente que entrou em outro lugar?
+## A experiência deve orientar cada escolha
 
-Se a resposta for sim, **provavelmente aquilo deveria ser uma página.** Se a resposta for não, e a interação apenas interrompe momentaneamente o fluxo principal, **um modal costuma fazer mais sentido.** Percebi que essa pergunta me ajuda muito mais do que pensar primeiro em componentes. No fim das contas, **páginas e modais não são apenas elementos de interface.** Eles precisam se encaixar dentro de um fluxo coerente, onde cada parte contribui para a composição da experiência como um todo. E manter essa continuidade talvez seja **uma das formas mais simples de construir produtos que parecem naturais de usar.**
+Hoje, uso uma pergunta simples ao projetar uma interface: “O usuário sente que entrou em outro lugar?” Se a resposta for sim, provavelmente aquilo deveria ser uma página. Se a interação apenas interrompe por um instante o fluxo principal e preserva o mesmo contexto, um modal pode fazer mais sentido.
+
+Essa pergunta me ajuda mais do que começar escolhendo componentes. Páginas e modais participam de um fluxo maior e precisam se encaixar na experiência como um todo. Preservar essa continuidade é uma forma direta de criar produtos que parecem naturais de usar e ajudam as pessoas a entender cada etapa com mais clareza.
+
+
+
+
+
