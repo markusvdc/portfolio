@@ -36,12 +36,9 @@ export const resumeItems = [
 		'Atribuições: Desenvolvimento e manutenção de sites e páginas de captura em WordPress para clientes de diversos segmentos. Desenvolvimento de projetos utilizando WordPress com e sem Elementor, implementação de funcionalidades com JavaScript, integração com serviços externos, otimização de desempenho e correção de problemas. Atuação em projetos de criação, atualização e evolução de sites, aplicando boas práticas de SEO e responsividade, com foco em usabilidade, experiência do usuário, qualidade técnica e desempenho geral dos projetos.'
 	],
 	[
-		'Desenvolvimento: JavaScript, React (aprendendo), SASS e Versionamento Git.',
+		'Desenvolvimento: JavaScript, SASS e Versionamento Git.',
 		'WordPress: Elementor, Advanced Custom Fields (ACF) e Integração com REST API.',
-		'Inteligência Artificial: OpenAI Codex e Topaz Photo AI.',
 		'Otimização: Design Responsivo, PageSpeed Insights e SEO.',
-		'Design: Figma, Photoshop, Illustrator e Magnific.',
-		'Infraestrutura: Mailchimp, cPanel, Hostinger e Locaweb.',
-		'Produtividade: Notion, Trello e Google Drive.'
+		'Design: Figma, Photoshop e Illustrator.',
 	]
 ]
