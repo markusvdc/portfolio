@@ -7,12 +7,12 @@ import HomePage from './pages/HomePage'
 import PortfolioPage from './pages/PortfolioPage'
 import ResumePage from './pages/ResumePage'
 import BlogPage from './pages/BlogPage'
-import type { Page } from '../types/page'
+import type { Page } from './types/page'
 import { getRouteFromPath } from './utils/routes'
 
 const PostPage = lazy(() => import('./pages/PostPage'))
 
-function SiteApp() {
+function App() {
 	const location = useLocation()
 	const page: Page = getRouteFromPath(location.pathname)
 
@@ -48,4 +48,4 @@ function SiteApp() {
 	)
 }
 
-export default SiteApp
+export default App

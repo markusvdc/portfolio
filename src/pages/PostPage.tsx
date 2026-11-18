@@ -4,7 +4,7 @@ import { marked } from 'marked'
 import Overview from '../components/Overview'
 import { posts } from '../data/posts'
 import { formatPostDate } from '../utils/PostDate'
-import { normalizeMarkdownCodeBlocks } from '../../shared/posts/CodeBlocks'
+import { normalizeMarkdownCodeBlocks } from '../posts/CodeBlocks'
 
 const codeBlockTheme = 'github-dark'
 const supportedLanguages = [
