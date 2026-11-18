@@ -47,9 +47,9 @@ function Header({ page }: { page: Page }) {
 							<NavLink
 								aria-current={page === 'writing' ? 'page' : undefined}
 								className={({ isActive }) => isActive ? 'is-active' : ''}
-								to="/artigos"
+								to="/blog"
 							>
-								Artigos
+								Blog
 							</NavLink>
 						</li>
 					</ul>

@@ -1,4 +1,4 @@
-import type { Article } from '../../shared/articles/parseArticleMarkdown'
+import type { Article } from '../../shared/posts/parsePostMarkdown'
 
 export type GitHubContentItem = {
 	name: string

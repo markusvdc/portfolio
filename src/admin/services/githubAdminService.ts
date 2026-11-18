@@ -1,10 +1,10 @@
-import { parseArticleMarkdown } from '../../shared/articles/parseArticleMarkdown'
+import { parsePostMarkdown } from '../../shared/posts/parsePostMarkdown'
 import type { AdminArticle, GitHubContentItem, GitHubReadFileResponse, GitHubWriteFileResponse } from '../types/adminTypes'
 import { decodeBase64Content, encodeBase64Content } from '../utils/base64Content'
 import {
 	createGitHubHeaders,
 	createGitHubJsonHeaders,
-	githubArticlesDirectoryUrl,
+	githubPostsDirectoryUrl,
 	githubRepositoryUrl,
 	githubTestFileUrl,
 } from './githubAdminConfig'
@@ -52,11 +52,11 @@ export async function createAdminTestFile(token: string) {
 
 export async function listMarkdownArticles(token: string): Promise<AdminArticle[]> {
 	const headers = createGitHubHeaders(token)
-	const directoryResponse = await fetch(githubArticlesDirectoryUrl, { headers })
+	const directoryResponse = await fetch(githubPostsDirectoryUrl, { headers })
 	const directoryData: GitHubContentItem[] | { message?: string } = await directoryResponse.json()
 
 	if (!directoryResponse.ok) {
-		throw new Error('message' in directoryData ? directoryData.message ?? 'Erro ao listar artigos.' : 'Erro ao listar artigos.')
+		throw new Error('message' in directoryData ? directoryData.message ?? 'Erro ao listar posts.' : 'Erro ao listar posts.')
 	}
 
 	if (!Array.isArray(directoryData)) {
@@ -73,7 +73,7 @@ export async function listMarkdownArticles(token: string): Promise<AdminArticle[
 		}
 
 		return {
-			...parseArticleMarkdown(file.path, decodeBase64Content(fileData.content)),
+			...parsePostMarkdown(file.path, decodeBase64Content(fileData.content)),
 			sha: fileData.sha ?? file.sha,
 			apiUrl: file.url,
 		}
@@ -91,17 +91,17 @@ export async function loadMarkdownArticle(token: string, article: AdminArticle) 
 	const data: GitHubReadFileResponse = await response.json()
 
 	if (!response.ok || !data.content) {
-		throw new Error(data.message ?? 'Erro ao carregar artigo para edição.')
+		throw new Error(data.message ?? 'Erro ao carregar post para edição.')
 	}
 
 	return {
-		article: parseArticleMarkdown(article.filePath, decodeBase64Content(data.content)),
+		article: parsePostMarkdown(article.filePath, decodeBase64Content(data.content)),
 		sha: data.sha ?? article.sha,
 	}
 }
 
 export async function saveMarkdownArticle(token: string, articlePath: string, markdownFile: string, sha?: string) {
-	const parsedArticle = parseArticleMarkdown(articlePath, markdownFile)
+	const parsedArticle = parsePostMarkdown(articlePath, markdownFile)
 	const response = await fetch(`${githubRepositoryUrl}/contents/${articlePath}`, {
 		method: 'PUT',
 		headers: createGitHubJsonHeaders(token),
@@ -114,7 +114,7 @@ export async function saveMarkdownArticle(token: string, articlePath: string, ma
 	const data: GitHubWriteFileResponse = await response.json()
 
 	if (!response.ok) {
-		throw new Error(data.message ?? (sha ? 'Erro ao atualizar artigo.' : 'Erro ao criar artigo.'))
+		throw new Error(data.message ?? (sha ? 'Erro ao atualizar post.' : 'Erro ao criar post.'))
 	}
 
 	return {
@@ -139,7 +139,7 @@ export async function deleteMarkdownArticle(token: string, article: AdminArticle
 	const data: GitHubWriteFileResponse = await response.json()
 
 	if (!response.ok) {
-		throw new Error(data.message ?? 'Erro ao excluir artigo.')
+		throw new Error(data.message ?? 'Erro ao excluir post.')
 	}
 
 	return data.commit?.html_url

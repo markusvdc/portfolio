@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useEditor } from '@tiptap/react'
 import Image from '@tiptap/extension-image'
 import StarterKit from '@tiptap/starter-kit'
-import { normalizeMarkdownCodeBlocks } from '../../shared/articles/normalizeMarkdownCodeBlocks'
+import { normalizeMarkdownCodeBlocks } from '../../shared/posts/normalizeMarkdownCodeBlocks'
 import type { LinkDraft } from '../types/adminTypes'
 import {
 	ManualLink,
@@ -11,7 +11,7 @@ import {
 	stripLinksFromPastedHtml,
 } from '../utils/editorMarkdown'
 
-export function useArticleRichTextEditor() {
+export function usePostRichTextEditor() {
 	const [linkDraft, setLinkDraft] = useState<LinkDraft | null>(null)
 	const editor = useEditor({
 		extensions: [

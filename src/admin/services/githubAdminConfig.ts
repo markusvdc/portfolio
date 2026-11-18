@@ -1,7 +1,7 @@
 export const githubTokenStorageKey = 'githubPersonalAccessToken'
 export const githubRepositoryUrl = 'https://api.github.com/repos/markusvdc/portfolio'
 export const githubTestFileUrl = `${githubRepositoryUrl}/contents/content/test-admin.md`
-export const githubArticlesDirectoryUrl = `${githubRepositoryUrl}/contents/content/articles`
+export const githubPostsDirectoryUrl = `${githubRepositoryUrl}/contents/content/posts`
 
 export function createGitHubHeaders(token: string) {
 	return {

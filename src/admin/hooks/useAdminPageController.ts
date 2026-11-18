@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import toast from 'react-hot-toast'
 import type { AdminArticle, ArticleFormState, EditingArticle } from '../types/adminTypes'
-import { buildArticleMarkdown } from '../utils/articleMarkdownBuilder'
-import { createArticleSlug } from '../utils/createArticleSlug'
+import { buildArticleMarkdown } from '../utils/postMarkdownBuilder'
+import { createPostSlug } from '../utils/createPostSlug'
 import { githubTokenStorageKey } from '../services/githubAdminConfig'
 import {
 	createAdminTestFile,
@@ -13,7 +13,7 @@ import {
 	saveMarkdownArticle,
 	testRepositoryConnection,
 } from '../services/githubAdminService'
-import { useArticleRichTextEditor } from './useArticleRichTextEditor'
+import { usePostRichTextEditor } from './usePostRichTextEditor'
 
 function getCurrentDatetimeLocal() {
 	return new Date().toISOString().slice(0, 16)
@@ -74,7 +74,7 @@ export function useAdminPageController() {
 	const [articleForm, setArticleForm] = useState<ArticleFormState>(() => emptyArticleForm())
 	const [isSlugEdited, setIsSlugEdited] = useState(false)
 	const hasLoadedInitialArticles = useRef(false)
-	const richTextEditor = useArticleRichTextEditor()
+	const richTextEditor = usePostRichTextEditor()
 
 	function handleTokenChange(value: string) {
 		setToken(value)
@@ -155,10 +155,10 @@ export function useAdminPageController() {
 			setAdminArticles(articlesFromGithub)
 
 			if (shouldNotify) {
-				showAdminToast('success', `${articlesFromGithub.length} artigo(s) encontrado(s).`)
+				showAdminToast('success', `${articlesFromGithub.length} post(s) encontrado(s).`)
 			}
 		} catch (error) {
-			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao listar artigos.'))
+			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao listar posts.'))
 		} finally {
 			setIsListingArticles(false)
 		}
@@ -179,7 +179,7 @@ export function useAdminPageController() {
 		const savedToken = getSavedToken()
 
 		if (!savedToken) {
-			showAdminToast('info', 'Nenhum token salvo para listar artigos.')
+			showAdminToast('info', 'Nenhum token salvo para listar posts.')
 			return
 		}
 
@@ -192,7 +192,7 @@ export function useAdminPageController() {
 				return {
 					...currentForm,
 					title: value,
-					slug: createArticleSlug(value),
+					slug: createPostSlug(value),
 				}
 			}
 
@@ -218,7 +218,7 @@ export function useAdminPageController() {
 		const savedToken = getSavedToken()
 
 		if (!savedToken) {
-			showAdminToast('info', 'Nenhum token salvo para editar artigo.')
+			showAdminToast('info', 'Nenhum token salvo para editar post.')
 			return
 		}
 
@@ -242,7 +242,7 @@ export function useAdminPageController() {
 			})
 			richTextEditor.setMarkdownContent(loadedArticle.article.content)
 		} catch (error) {
-			showAdminToast('error', getErrorMessage(error, 'Erro ao carregar artigo.'))
+			showAdminToast('error', getErrorMessage(error, 'Erro ao carregar post.'))
 		} finally {
 			setIsLoadingArticleForEdit(false)
 		}
@@ -252,11 +252,11 @@ export function useAdminPageController() {
 		const savedToken = getSavedToken()
 
 		if (!savedToken) {
-			showAdminToast('info', 'Nenhum token salvo para excluir artigo.')
+			showAdminToast('info', 'Nenhum token salvo para excluir post.')
 			return
 		}
 
-		const confirmed = window.confirm(`Excluir o artigo "${article.title}"?\n\nArquivo: ${article.filePath}`)
+		const confirmed = window.confirm(`Excluir o post "${article.title}"?\n\nArquivo: ${article.filePath}`)
 
 		if (!confirmed) {
 			return
@@ -273,9 +273,9 @@ export function useAdminPageController() {
 				resetArticleForm()
 			}
 
-			showAdminToast('success', 'Artigo removido com sucesso.')
+			showAdminToast('success', 'Post removido com sucesso.')
 		} catch (error) {
-			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao excluir artigo.'))
+			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao excluir post.'))
 		} finally {
 			setDeletingArticlePath('')
 		}
@@ -287,7 +287,7 @@ export function useAdminPageController() {
 		const savedToken = getSavedToken()
 
 		if (!savedToken) {
-			showAdminToast('info', 'Nenhum token salvo para criar artigo.')
+			showAdminToast('info', 'Nenhum token salvo para criar post.')
 			return
 		}
 
@@ -297,7 +297,7 @@ export function useAdminPageController() {
 		}
 
 		if (richTextEditor.isContentEmpty()) {
-			showAdminToast('info', 'Escreva o conteúdo do artigo antes de salvar.')
+			showAdminToast('info', 'Escreva o conteúdo do post antes de salvar.')
 			return
 		}
 
@@ -310,17 +310,17 @@ export function useAdminPageController() {
 				updatedAt: editingArticle ? getCurrentDatetimeLocal() : articleForm.date,
 			}
 			const markdownFile = buildArticleMarkdown(articleFormForSave, markdownContent)
-			const articlePath = editingArticle?.filePath ?? `content/articles/${articleForm.slug.trim()}.md`
+			const articlePath = editingArticle?.filePath ?? `content/posts/${articleForm.slug.trim()}.md`
 			const savedResult = await saveMarkdownArticle(savedToken, articlePath, markdownFile, editingArticle?.sha)
 
 			setAdminArticles((currentArticles) => [
 				savedResult.savedArticle,
 				...currentArticles.filter((article) => article.filePath !== articlePath),
 			].sort((firstArticle, secondArticle) => secondArticle.date.localeCompare(firstArticle.date)))
-			showAdminToast('success', editingArticle ? 'Artigo publicado com sucesso.' : 'Artigo criado com sucesso.')
+			showAdminToast('success', editingArticle ? 'Post publicado com sucesso.' : 'Post criado com sucesso.')
 			resetArticleForm()
 		} catch (error) {
-			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao criar artigo.'))
+			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao criar post.'))
 		} finally {
 			setIsCreatingArticle(false)
 		}

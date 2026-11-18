@@ -52,8 +52,8 @@ export default defineConfig({
 						title: 'CURRÍCULO - MARKUS DOMENEGHETI'
 					},
 					{
-						path: 'artigos',
-						title: 'ARTIGOS - MARKUS DOMENEGHETI'
+						path: 'blog',
+						title: 'BLOG - MARKUS DOMENEGHETI'
 					}
 				]
 				const indexHtml = await readFile(resolve('dist/index.html'), 'utf-8')

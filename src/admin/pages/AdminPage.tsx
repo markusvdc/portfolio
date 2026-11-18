@@ -8,28 +8,28 @@ import {
 	Newspaper,
 	Users,
 } from 'lucide-react'
-import AdminArticleEditorForm from '../components/AdminArticleEditorForm'
-import AdminArticleList from '../components/AdminArticleList'
+import AdminPostEditorForm from '../components/AdminPostEditorForm'
+import AdminPostList from '../components/AdminPostList'
 import AdminTokenPanel from '../components/AdminTokenPanel'
 import { useAdminPageController } from '../hooks/useAdminPageController'
 
-type AdminView = 'article-list' | 'article-editor' | 'token'
+type AdminView = 'post-list' | 'post-editor' | 'token'
 
 function AdminPage() {
 	const admin = useAdminPageController()
-	const [activeView, setActiveView] = useState<AdminView>('article-list')
-	const isArticleSection = activeView === 'article-list' || activeView === 'article-editor'
-	const isArticleListView = activeView === 'article-list'
-	const isArticleEditorView = activeView === 'article-editor'
+	const [activeView, setActiveView] = useState<AdminView>('post-list')
+	const isArticleSection = activeView === 'post-list' || activeView === 'post-editor'
+	const isArticleListView = activeView === 'post-list'
+	const isArticleEditorView = activeView === 'post-editor'
 
 	function handleOpenCreateArticle() {
 		admin.resetArticleForm()
-		setActiveView('article-editor')
+		setActiveView('post-editor')
 	}
 
 	function handleEditArticle(article: Parameters<typeof admin.handleEditArticle>[0]) {
 		admin.handleEditArticle(article)
-		setActiveView('article-editor')
+		setActiveView('post-editor')
 	}
 
 	return (
@@ -39,18 +39,18 @@ function AdminPage() {
 					<button
 						className="button button--secondary admin__brand tooltip tooltip--right"
 						type="button"
-						onClick={() => setActiveView('article-list')}
-						aria-label="Artigos"
-						data-tooltip="Artigos"
+						onClick={() => setActiveView('post-list')}
+						aria-label="Blog"
+						data-tooltip="Blog"
 					>
 						<LayoutDashboard size={24} />
 					</button>
 					<button
 						className={`button button--secondary admin__shortcut tooltip tooltip--right ${isArticleSection ? 'button--active' : ''}`}
 						type="button"
-						onClick={() => setActiveView('article-list')}
-						aria-label="Artigos"
-						data-tooltip="Artigos"
+						onClick={() => setActiveView('post-list')}
+						aria-label="Blog"
+						data-tooltip="Blog"
 					>
 						<Newspaper size={24} />
 					</button>
@@ -84,10 +84,10 @@ function AdminPage() {
 							<button
 								className={`admin__item ${isArticleListView ? 'admin__item--active' : ''}`}
 								type="button"
-								onClick={() => setActiveView('article-list')}
+								onClick={() => setActiveView('post-list')}
 							>
 								<FileText size={24} />
-								Listar Artigos
+								Listar Blog
 							</button>
 							<button
 								className={`admin__item ${isArticleEditorView ? 'admin__item--active' : ''}`}
@@ -95,7 +95,7 @@ function AdminPage() {
 								onClick={handleOpenCreateArticle}
 							>
 								<FilePlus size={24} />
-								Criar Artigo
+								Criar Post
 							</button>
 						</div>
 					)}
@@ -116,7 +116,7 @@ function AdminPage() {
 
 				<section className="admin__workspace" aria-labelledby="admin-title">
 					{isArticleListView && (
-						<AdminArticleList
+						<AdminPostList
 							articles={admin.adminArticles}
 							isListingArticles={admin.isListingArticles}
 							isLoadingArticleForEdit={admin.isLoadingArticleForEdit}
@@ -128,7 +128,7 @@ function AdminPage() {
 					)}
 
 					{isArticleEditorView && (
-						<AdminArticleEditorForm
+						<AdminPostEditorForm
 							form={admin.articleForm}
 							editingArticle={admin.editingArticle}
 							hasSavedToken={admin.hasSavedToken}

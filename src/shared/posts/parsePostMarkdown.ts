@@ -21,7 +21,7 @@ function parseFrontmatterValue(value: string) {
 	return trimmedValue
 }
 
-export function parseArticleMarkdown(filePath: string, markdown: string): Article {
+export function parsePostMarkdown(filePath: string, markdown: string): Article {
 	const frontmatterMatch = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
 
 	if (!frontmatterMatch) {

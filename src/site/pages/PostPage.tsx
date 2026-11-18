@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { marked } from 'marked'
 import Overview from '../components/Overview'
-import { articles } from '../data/articles'
-import { formatArticleDate } from '../utils/formatArticleDate'
-import { normalizeMarkdownCodeBlocks } from '../../shared/articles/normalizeMarkdownCodeBlocks'
+import { articles } from '../data/posts'
+import { formatPostDate } from '../utils/formatPostDate'
+import { normalizeMarkdownCodeBlocks } from '../../shared/posts/normalizeMarkdownCodeBlocks'
 
 const codeBlockTheme = 'github-dark'
 const supportedLanguages = [
@@ -164,7 +164,7 @@ async function renderArticleMarkdown(content: string) {
 	return html
 }
 
-function ArticlePage() {
+function PostPage() {
 	const { slug } = useParams()
 	const article = articles.find((item) => item.slug === slug)
 	const [articleHtml, setArticleHtml] = useState('')
@@ -196,7 +196,7 @@ function ArticlePage() {
 	}, [article])
 
 	if (!article) {
-		return <Navigate to="/artigos" replace />
+		return <Navigate to="/blog" replace />
 	}
 
 	return (
@@ -207,7 +207,7 @@ function ArticlePage() {
 					<header className="article__header">
 						<h1>{article.title}</h1>
 						<div className="article__meta">
-							<time dateTime={article.date}>{formatArticleDate(article.date)}</time>
+							<time dateTime={article.date}>{formatPostDate(article.date)}</time>
 							<span>{article.readingTime} min de leitura</span>
 						</div>
 					</header>
@@ -215,8 +215,8 @@ function ArticlePage() {
 						className="article__content"
 						dangerouslySetInnerHTML={{ __html: articleHtml }}
 					/>
-					<Link className="article__back button button--secondary" to="/artigos">
-						Voltar Para Artigos
+					<Link className="article__back button button--secondary" to="/blog">
+						Voltar Para Blog
 					</Link>
 				</div>
 			</article>
@@ -224,4 +224,4 @@ function ArticlePage() {
 	)
 }
 
-export default ArticlePage
+export default PostPage

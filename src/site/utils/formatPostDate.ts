@@ -1,4 +1,4 @@
-export function formatArticleDate(date: string) {
+export function formatPostDate(date: string) {
 	const formattedDate = new Intl.DateTimeFormat('pt-BR', {
 		day: 'numeric',
 		month: 'long',
@@ -11,7 +11,7 @@ export function formatArticleDate(date: string) {
 	)
 }
 
-export function formatArticleDateTime(date: string) {
+export function formatPostDateTime(date: string) {
 	return new Intl.DateTimeFormat('pt-BR', {
 		day: '2-digit',
 		month: '2-digit',

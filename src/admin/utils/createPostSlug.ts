@@ -1,4 +1,4 @@
-export function createArticleSlug(value: string) {
+export function createPostSlug(value: string) {
 	return value
 		.normalize('NFD')
 		.replace(/[\u0300-\u036f]/g, '')

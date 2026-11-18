@@ -1,8 +1,8 @@
 import { FilePen, MoreHorizontal, RefreshCw, Trash2 } from 'lucide-react'
 import type { AdminArticle } from '../types/adminTypes'
-import { formatArticleDateTime } from '../../site/utils/formatArticleDate'
+import { formatPostDateTime } from '../../site/utils/formatPostDate'
 
-type AdminArticleListProps = {
+type AdminPostListProps = {
 	articles: AdminArticle[]
 	isListingArticles: boolean
 	isLoadingArticleForEdit: boolean
@@ -16,7 +16,7 @@ function getArticleStatus(article: AdminArticle) {
 	return article.title.toLowerCase().includes('Rascunho') ? 'Rascunho' : 'Publicado'
 }
 
-function AdminArticleList({
+function AdminPostList({
 	articles,
 	isListingArticles,
 	isLoadingArticleForEdit,
@@ -24,7 +24,7 @@ function AdminArticleList({
 	onListArticles,
 	onEditArticle,
 	onDeleteArticle,
-}: AdminArticleListProps) {
+}: AdminPostListProps) {
 	return (
 		<section className="admin__articles" aria-labelledby="admin-articles-title">
 			<div className="admin__bar">
@@ -50,7 +50,7 @@ function AdminArticleList({
 							<tr>
 								<td colSpan={5}>
 									<div className="admin__empty">
-										Nenhum artigo listado ainda.
+										Nenhum post listado ainda.
 									</div>
 								</td>
 							</tr>
@@ -70,8 +70,8 @@ function AdminArticleList({
 												type="button"
 												onClick={() => onEditArticle(article)}
 												disabled={isLoadingArticleForEdit || deletingArticlePath === article.filePath}
-												aria-label="Editar artigo"
-												data-tooltip="Editar artigo"
+												aria-label="Editar post"
+												data-tooltip="Editar post"
 											>
 												<FilePen size={24} />
 											</button>
@@ -80,18 +80,18 @@ function AdminArticleList({
 												type="button"
 												onClick={() => onDeleteArticle(article)}
 												disabled={Boolean(deletingArticlePath)}
-												aria-label="Excluir artigo"
-												data-tooltip="Excluir artigo"
+												aria-label="Excluir post"
+												data-tooltip="Excluir post"
 											>
 												{deletingArticlePath === article.filePath ? <MoreHorizontal size={24} /> : <Trash2 size={24} />}
 											</button>
 										</div>
 									</td>
 									<td>
-										<time dateTime={article.date}>{formatArticleDateTime(article.date)}</time>
+										<time dateTime={article.date}>{formatPostDateTime(article.date)}</time>
 									</td>
 									<td>
-										<time dateTime={article.updatedAt}>{formatArticleDateTime(article.updatedAt)}</time>
+										<time dateTime={article.updatedAt}>{formatPostDateTime(article.updatedAt)}</time>
 									</td>
 									<td>
 										<span className={`admin__badge ${statusClass}`}>
@@ -108,4 +108,4 @@ function AdminArticleList({
 	)
 }
 
-export default AdminArticleList
+export default AdminPostList

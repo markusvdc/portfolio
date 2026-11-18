@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 import type { LinkDraft } from '../types/adminTypes'
 
-type ArticleRichTextEditorProps = {
+type PostRichTextEditorProps = {
 	editor: Editor | null
 	linkDraft: LinkDraft | null
 	onOpenLinkPanel: () => void
@@ -37,7 +37,7 @@ const inactiveControls = {
 	code: false,
 }
 
-function ArticleRichTextEditor({
+function PostRichTextEditor({
 	editor,
 	linkDraft,
 	onOpenLinkPanel,
@@ -45,7 +45,7 @@ function ArticleRichTextEditor({
 	onApplyLink,
 	onRemoveLink,
 	onCancelLink,
-}: ArticleRichTextEditorProps) {
+}: PostRichTextEditorProps) {
 	const activeControls = useEditorState({
 		editor,
 		selector: ({ editor: currentEditor }) => {
@@ -161,7 +161,7 @@ function ArticleRichTextEditor({
 							...linkDraft,
 							url: event.target.value,
 						})}
-						placeholder="https://exemplo.com ou /portfolio/artigos"
+						placeholder="https://exemplo.com ou /portfolio/blog"
 					/>
 					<div className="admin__linkactions">
 						<button className="button button--secondary tooltip tooltip--top" type="button" onClick={() => onApplyLink(false)} data-tooltip="Link interno">
@@ -186,4 +186,4 @@ function ArticleRichTextEditor({
 	)
 }
 
-export default ArticleRichTextEditor
+export default PostRichTextEditor

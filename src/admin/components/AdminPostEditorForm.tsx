@@ -1,13 +1,13 @@
 import type { FormEvent } from 'react'
 import type { Editor } from '@tiptap/react'
-import ArticleRichTextEditor from './ArticleRichTextEditor'
+import PostRichTextEditor from './PostRichTextEditor'
 import type { ArticleFormState, EditingArticle, LinkDraft } from '../types/adminTypes'
-import { formatArticleDateTime } from '../../site/utils/formatArticleDate'
+import { formatPostDateTime } from '../../site/utils/formatPostDate'
 import {
 	Save,
 } from 'lucide-react'
 
-type AdminArticleEditorFormProps = {
+type AdminPostEditorFormProps = {
 	form: ArticleFormState
 	editingArticle: EditingArticle | null
 	hasSavedToken: boolean
@@ -24,7 +24,7 @@ type AdminArticleEditorFormProps = {
 	onInsertImage: () => void
 }
 
-function AdminArticleEditorForm({
+function AdminPostEditorForm({
 	form,
 	editingArticle,
 	hasSavedToken,
@@ -39,13 +39,13 @@ function AdminArticleEditorForm({
 	onRemoveLink,
 	onCancelLink,
 	onInsertImage,
-}: AdminArticleEditorFormProps) {
+}: AdminPostEditorFormProps) {
 	const visibleUpdatedAt = editingArticle ? form.updatedAt : form.date
 
 	return (
 		<section className="admin__publisher" aria-labelledby="admin-create-article-title">
 			<div className="admin__summary">
-				<p>{editingArticle ? 'Edite as informações do artigo e salve as alterações quando concluir.' : 'Preencha os dados do artigo e publique quando estiver pronto.'}</p>
+				<p>{editingArticle ? 'Edite as informações do post e salve as alterações quando concluir.' : 'Preencha os dados do post e publique quando estiver pronto.'}</p>
 			</div>
 			<form className="admin__form" onSubmit={onSubmit}>
 				<div className="admin__grid">
@@ -61,7 +61,7 @@ function AdminArticleEditorForm({
 							type="text"
 							value={form.title}
 							onChange={(event) => onFormChange('title', event.target.value)}
-							placeholder="Título do artigo"
+							placeholder="Título do post"
 						/>
 					</div>
 
@@ -72,7 +72,7 @@ function AdminArticleEditorForm({
 							type="text"
 							value={form.slug}
 							onChange={(event) => onFormChange('slug', event.target.value)}
-							placeholder="slug-do-artigo"
+							placeholder="slug-do-post"
 						/>
 					</div>
 
@@ -97,14 +97,14 @@ function AdminArticleEditorForm({
 					<div className="admin__field">
 						<span className="admin__label">Criação</span>
 						<span className="admin__value">
-							{formatArticleDateTime(form.date)}
+							{formatPostDateTime(form.date)}
 						</span>
 					</div>
 
 					<div className="admin__field">
 						<span className="admin__label">Editado</span>
 						<span className="admin__value">
-							{formatArticleDateTime(visibleUpdatedAt || form.date)}
+							{formatPostDateTime(visibleUpdatedAt || form.date)}
 						</span>
 					</div>
 
@@ -119,7 +119,7 @@ function AdminArticleEditorForm({
 							id="article-summary"
 							value={form.summary}
 							onChange={(event) => onFormChange('summary', event.target.value)}
-							placeholder="Resumo do artigo"
+							placeholder="Resumo do post"
 							rows={2}
 						/>
 					</div>
@@ -127,7 +127,7 @@ function AdminArticleEditorForm({
 
 				<div className="admin__cms">
 					<label>Conteúdo</label>
-					<ArticleRichTextEditor
+					<PostRichTextEditor
 						editor={editor}
 						linkDraft={linkDraft}
 						onOpenLinkPanel={onOpenLinkPanel}
@@ -138,7 +138,7 @@ function AdminArticleEditorForm({
 						onInsertImage={onInsertImage}
 					/>
 					<div className="admin__actions">
-						<button className="button button--primary tooltip tooltip--top" type="submit" disabled={!hasSavedToken || isCreatingArticle} data-tooltip={editingArticle ? 'Salvar artigo' : 'Publicar artigo'}>
+						<button className="button button--primary tooltip tooltip--top" type="submit" disabled={!hasSavedToken || isCreatingArticle} data-tooltip={editingArticle ? 'Salvar post' : 'Publicar post'}>
 							<Save size={24} />
 						</button>
 					</div>
@@ -149,4 +149,4 @@ function AdminArticleEditorForm({
 	)
 }
 
-export default AdminArticleEditorForm
+export default AdminPostEditorForm

@@ -1,17 +1,17 @@
-import ArticleCard from '../components/ArticleCard'
+import PostCard from '../components/PostCard'
 import Overview from '../components/Overview'
-import { articles } from '../data/articles'
+import { articles } from '../data/posts'
 
-function WritingPage() {
+function BlogPage() {
 	return (
 		<main>
-			<h1 className="sr-only">Artigos</h1>
+			<h1 className="sr-only">Blog</h1>
 			<Overview />
 			<section className="writing">
 				<div className="writing__container container">
 					<div className="writing__list">
 						{articles.map((article) => (
-							<ArticleCard article={article} key={article.slug} />
+							<PostCard article={article} key={article.slug} />
 						))}
 					</div>
 				</div>
@@ -20,4 +20,4 @@ function WritingPage() {
 	)
 }
 
-export default WritingPage
+export default BlogPage
