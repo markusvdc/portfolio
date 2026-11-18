@@ -1,16 +1,16 @@
 @use '../base/variables'
 
-.writing
+.blog
 	padding: 50px 0
 
-.writing__container
+.blog__container
 	display: block
 
-.writing__list
+.blog__list
 	display: flex
 	flex-direction: column
 
-.writing__card
+.blog__card
 	padding: 40px 0
 	border-top: 1px solid #DDD
 	display: flex
@@ -34,7 +34,7 @@
 		line-height: variables.$font-height-md
 		text-align: justify
 
-.writing__meta
+.blog__meta
 	display: flex
 	flex-wrap: wrap
 	align-items: center
@@ -50,17 +50,17 @@
 		&::before
 			content: '·'
 
-.writing__link
+.blog__link
 	margin-top: 10px
 	width: max-content
 	padding-right: 30px
 	padding-left: 30px
 
 @media (max-width: variables.$breakpoint-md)
-	.writing
+	.blog
 		padding: 45px 0
 
-	.writing__card
+	.blog__card
 		padding-top: 32px
 		&:first-child
 			padding-top: 0

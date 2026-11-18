@@ -1,4 +1,4 @@
-import type { Article } from '../../shared/posts/parsePostMarkdown'
+import type { Post } from '../../shared/posts/PostParser'
 
 export type GitHubContentItem = {
 	name: string
@@ -25,17 +25,17 @@ export type GitHubWriteFileResponse = {
 	}
 }
 
-export type AdminArticle = Article & {
+export type AdminPost = Post & {
 	sha: string
 	apiUrl: string
 }
 
-export type EditingArticle = {
+export type EditingPost = {
 	filePath: string
 	sha: string
 }
 
-export type ArticleFormState = {
+export type PostFormState = {
 	title: string
 	slug: string
 	date: string

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { marked } from 'marked'
 import Overview from '../components/Overview'
-import { articles } from '../data/posts'
-import { formatPostDate } from '../utils/formatPostDate'
-import { normalizeMarkdownCodeBlocks } from '../../shared/posts/normalizeMarkdownCodeBlocks'
+import { posts } from '../data/posts'
+import { formatPostDate } from '../utils/PostDate'
+import { normalizeMarkdownCodeBlocks } from '../../shared/posts/CodeBlocks'
 
 const codeBlockTheme = 'github-dark'
 const supportedLanguages = [
@@ -20,10 +20,10 @@ const supportedLanguages = [
 	'jsx',
 ] as const
 type SupportedCodeLanguage = typeof supportedLanguages[number]
-type ArticleCodeHighlighter = {
+type PostCodeHighlighter = {
 	codeToHtml: (code: string, options: { lang: SupportedCodeLanguage, theme: typeof codeBlockTheme }) => string
 }
-let highlighterPromise: Promise<ArticleCodeHighlighter> | null = null
+let highlighterPromise: Promise<PostCodeHighlighter> | null = null
 
 function getHighlighter() {
 	highlighterPromise ??= Promise.all([
@@ -69,7 +69,7 @@ function getHighlighter() {
 			jsx.default,
 		],
 		engine: createJavaScriptRegexEngine(),
-	}) as Promise<ArticleCodeHighlighter>)
+	}) as Promise<PostCodeHighlighter>)
 
 	return highlighterPromise
 }
@@ -129,7 +129,7 @@ function resolveCodeLanguage(language = '', code = '') {
 	)
 }
 
-async function renderArticleMarkdown(content: string) {
+async function renderPostMarkdown(content: string) {
 	const normalizedContent = normalizeMarkdownCodeBlocks(content)
 	const highlightedCodeBlocks: string[] = []
 	const markdownWithoutCodeBlocks = normalizedContent.replace(
@@ -147,7 +147,7 @@ async function renderArticleMarkdown(content: string) {
 		const resolvedLanguage = resolveCodeLanguage(language, code)
 
 		if (!resolvedLanguage || !highlighter) {
-			return `<pre class="shiki article__code-block"><code>${escapeHtml(code)}</code></pre>`
+			return `<pre class="shiki post__code-block"><code>${escapeHtml(code)}</code></pre>`
 		}
 
 		return highlighter.codeToHtml(code, {
@@ -166,56 +166,56 @@ async function renderArticleMarkdown(content: string) {
 
 function PostPage() {
 	const { slug } = useParams()
-	const article = articles.find((item) => item.slug === slug)
-	const [articleHtml, setArticleHtml] = useState('')
+	const post = posts.find((item) => item.slug === slug)
+	const [postHtml, setPostHtml] = useState('')
 
 	useEffect(() => {
-		let isCurrentArticle = true
+		let isCurrentPost = true
 
-		if (article) {
-			document.title = `${article.title} - MARKUS DOMENEGHETI`
+		if (post) {
+			document.title = `${post.title} - MARKUS DOMENEGHETI`
 		}
 
-		async function renderArticle() {
-			if (!article) {
+		async function renderPost() {
+			if (!post) {
 				return
 			}
 
-			const renderedHtml = await renderArticleMarkdown(article.content)
+			const renderedHtml = await renderPostMarkdown(post.content)
 
-			if (isCurrentArticle) {
-				setArticleHtml(renderedHtml)
+			if (isCurrentPost) {
+				setPostHtml(renderedHtml)
 			}
 		}
 
-		void renderArticle()
+		void renderPost()
 
 		return () => {
-			isCurrentArticle = false
+			isCurrentPost = false
 		}
-	}, [article])
+	}, [post])
 
-	if (!article) {
+	if (!post) {
 		return <Navigate to="/blog" replace />
 	}
 
 	return (
 		<main>
 			<Overview />
-			<article className="article">
-				<div className="article__container container">
-					<header className="article__header">
-						<h1>{article.title}</h1>
-						<div className="article__meta">
-							<time dateTime={article.date}>{formatPostDate(article.date)}</time>
-							<span>{article.readingTime} min de leitura</span>
+			<article className="post">
+				<div className="post__container container">
+					<header className="post__header">
+						<h1>{post.title}</h1>
+						<div className="post__meta">
+							<time dateTime={post.date}>{formatPostDate(post.date)}</time>
+							<span>{post.readingTime} min de leitura</span>
 						</div>
 					</header>
 					<div
-						className="article__content"
-						dangerouslySetInnerHTML={{ __html: articleHtml }}
+						className="post__content"
+						dangerouslySetInnerHTML={{ __html: postHtml }}
 					/>
-					<Link className="article__back button button--secondary" to="/blog">
+					<Link className="post__back button button--secondary" to="/blog">
 						Voltar Para Blog
 					</Link>
 				</div>

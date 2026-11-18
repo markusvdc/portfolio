@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/ScrollTop'
 import HomePage from './pages/HomePage'
 import PortfolioPage from './pages/PortfolioPage'
 import ResumePage from './pages/ResumePage'
@@ -25,7 +25,7 @@ function SiteApp() {
 			home: 'MARKUS DOMENEGHETI',
 			portfolio: 'PORTFOLIO - MARKUS DOMENEGHETI',
 			resume: 'CURRICULO - MARKUS DOMENEGHETI',
-			writing: 'BLOG - MARKUS DOMENEGHETI',
+			blog: 'BLOG - MARKUS DOMENEGHETI',
 		}
 
 		document.title = pageTitles[page]

@@ -1,9 +1,9 @@
 @use '../base/variables'
 
-.article
+.post
 	padding: 50px 0
 
-.article__header
+.post__header
 	display: flex
 	flex-direction: column
 	row-gap: 6px
@@ -13,7 +13,7 @@
 		line-height: 1.625rem
 		font-weight: variables.$font-weight-bd
 
-.article__meta
+.post__meta
 	display: flex
 	flex-wrap: wrap
 	align-items: center
@@ -29,7 +29,7 @@
 		&::before
 			content: '·'
 
-.article__content
+.post__content
 	max-width: 930px
 	display: flex
 	flex-direction: column
@@ -95,18 +95,18 @@
 		color: variables.$color-primary
 		border-bottom: 1px solid variables.$color-primary
 
-.article__back
+.post__back
 	width: fit-content
 	margin-top: 30px
 	padding-right: 25px
 	padding-left: 25px
 
 @media (max-width: variables.$breakpoint-md)
-	.article
+	.post
 		padding: 45px 0
 
-	.article__header
+	.post__header
 		padding-bottom: 20px
 
-	.article__content
+	.post__content
 		padding: 20px 0 40px

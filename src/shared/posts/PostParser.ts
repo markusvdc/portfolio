@@ -1,4 +1,4 @@
-export type Article = {
+export type Post = {
 	title: string
 	slug: string
 	date: string
@@ -9,7 +9,7 @@ export type Article = {
 	filePath: string
 }
 
-type ArticleFrontmatter = Omit<Article, 'content' | 'filePath'>
+type PostFrontmatter = Omit<Post, 'content' | 'filePath'>
 
 function parseFrontmatterValue(value: string) {
 	const trimmedValue = value.trim()
@@ -21,22 +21,22 @@ function parseFrontmatterValue(value: string) {
 	return trimmedValue
 }
 
-export function parsePostMarkdown(filePath: string, markdown: string): Article {
+export function parsePostMarkdown(filePath: string, markdown: string): Post {
 	const frontmatterMatch = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
 
 	if (!frontmatterMatch) {
-		throw new Error(`Article markdown is missing frontmatter: ${filePath}`)
+		throw new Error(`Post markdown is missing frontmatter: ${filePath}`)
 	}
 
 	const [, frontmatterSource, contentSource] = frontmatterMatch
-	const frontmatter = frontmatterSource.split(/\r?\n/).reduce<Partial<ArticleFrontmatter>>((fields, line) => {
+	const frontmatter = frontmatterSource.split(/\r?\n/).reduce<Partial<PostFrontmatter>>((fields, line) => {
 		const separatorIndex = line.indexOf(':')
 
 		if (separatorIndex === -1) {
 			return fields
 		}
 
-		const key = line.slice(0, separatorIndex).trim() as keyof ArticleFrontmatter
+		const key = line.slice(0, separatorIndex).trim() as keyof PostFrontmatter
 		const value = parseFrontmatterValue(line.slice(separatorIndex + 1))
 
 		return {
@@ -46,7 +46,7 @@ export function parsePostMarkdown(filePath: string, markdown: string): Article {
 	}, {})
 
 	if (!frontmatter.title || !frontmatter.slug || !frontmatter.date || !frontmatter.readingTime || !frontmatter.summary) {
-		throw new Error(`Article markdown has incomplete frontmatter: ${filePath}`)
+		throw new Error(`Post markdown has incomplete frontmatter: ${filePath}`)
 	}
 
 	return {

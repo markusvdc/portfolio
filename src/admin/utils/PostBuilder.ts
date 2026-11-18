@@ -1,10 +1,10 @@
-import type { ArticleFormState } from '../types/adminTypes'
+import type { PostFormState } from '../types/adminTypes'
 
 function escapeFrontmatterValue(value: string) {
 	return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
 }
 
-export function buildArticleMarkdown(form: ArticleFormState, markdownContent: string) {
+export function buildPostMarkdown(form: PostFormState, markdownContent: string) {
 	return [
 		'---',
 		`title: "${escapeFrontmatterValue(form.title.trim())}"`,

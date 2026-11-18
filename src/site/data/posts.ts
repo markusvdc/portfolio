@@ -1,18 +1,18 @@
-import { parsePostMarkdown } from '../../shared/posts/parsePostMarkdown'
-import type { Article } from '../../shared/posts/parsePostMarkdown'
+import { parsePostMarkdown } from '../../shared/posts/PostParser'
+import type { Post } from '../../shared/posts/PostParser'
 
-export type { Article }
+export type { Post }
 
-const articleFiles = import.meta.glob('../../../content/posts/*.md', {
+const postFiles = import.meta.glob('../../../content/posts/*.md', {
 	eager: true,
 	query: '?raw',
 	import: 'default',
 }) as Record<string, string>
 
-export const articles = Object.entries(articleFiles)
+export const posts = Object.entries(postFiles)
 	.map(([filePath, markdown]) => parsePostMarkdown(filePath.replace('../../../', ''), markdown))
 	.sort(
-		(firstArticle, secondArticle) =>
-			new Date(secondArticle.date).getTime() -
-			new Date(firstArticle.date).getTime()
+		(firstPost, secondPost) =>
+			new Date(secondPost.date).getTime() -
+			new Date(firstPost.date).getTime()
 	)

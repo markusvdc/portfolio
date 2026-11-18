@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useEditor } from '@tiptap/react'
 import Image from '@tiptap/extension-image'
 import StarterKit from '@tiptap/starter-kit'
-import { normalizeMarkdownCodeBlocks } from '../../shared/posts/normalizeMarkdownCodeBlocks'
+import { normalizeMarkdownCodeBlocks } from '../../shared/posts/CodeBlocks'
 import type { LinkDraft } from '../types/adminTypes'
 import {
 	ManualLink,

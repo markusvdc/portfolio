@@ -1,25 +1,25 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import toast from 'react-hot-toast'
-import type { AdminArticle, ArticleFormState, EditingArticle } from '../types/adminTypes'
-import { buildArticleMarkdown } from '../utils/postMarkdownBuilder'
-import { createPostSlug } from '../utils/createPostSlug'
-import { githubTokenStorageKey } from '../services/githubAdminConfig'
+import type { AdminPost, PostFormState, EditingPost } from '../types/adminTypes'
+import { buildPostMarkdown } from '../utils/PostBuilder'
+import { createPostSlug } from '../utils/PostSlug'
+import { githubTokenStorageKey } from '../services/AdminConfig'
 import {
 	createAdminTestFile,
-	deleteMarkdownArticle,
-	listMarkdownArticles,
-	loadMarkdownArticle,
-	saveMarkdownArticle,
+	deleteMarkdownPost,
+	listMarkdownPosts,
+	loadMarkdownPost,
+	saveMarkdownPost,
 	testRepositoryConnection,
-} from '../services/githubAdminService'
-import { usePostRichTextEditor } from './usePostRichTextEditor'
+} from '../services/AdminService'
+import { usePostRichTextEditor } from './usePost'
 
 function getCurrentDatetimeLocal() {
 	return new Date().toISOString().slice(0, 16)
 }
 
-const emptyArticleForm = (): ArticleFormState => {
+const emptyPostForm = (): PostFormState => {
 	const currentDatetime = getCurrentDatetimeLocal()
 
 	return {
@@ -30,6 +30,21 @@ const emptyArticleForm = (): ArticleFormState => {
 		readingTime: 1,
 		summary: '',
 	}
+}
+
+function getNewPostPath(slug: string, existingPosts: AdminPost[]) {
+	const [firstWord = 'post', secondWord = 'novo'] = slug.split('-').filter(Boolean)
+	const filePrefix = `content/posts/${firstWord}-${secondWord}`
+	const existingPaths = new Set(existingPosts.map((post) => post.filePath))
+	let filePath = `${filePrefix}.md`
+	let suffix = 2
+
+	while (existingPaths.has(filePath)) {
+		filePath = `${filePrefix}${suffix}.md`
+		suffix += 1
+	}
+
+	return filePath
 }
 
 function getSavedToken() {
@@ -63,17 +78,17 @@ function showAdminToast(type: 'success' | 'error' | 'info', message: string) {
 export function useAdminPageController() {
 	const [token, setToken] = useState(() => getSavedToken() ?? '')
 	const [hasSavedToken, setHasSavedToken] = useState(() => Boolean(getSavedToken()))
-	const [adminArticles, setAdminArticles] = useState<AdminArticle[]>([])
-	const [editingArticle, setEditingArticle] = useState<EditingArticle | null>(null)
+	const [adminPosts, setAdminPosts] = useState<AdminPost[]>([])
+	const [editingPost, setEditingPost] = useState<EditingPost | null>(null)
 	const [isTestingConnection, setIsTestingConnection] = useState(false)
 	const [isCreatingTestFile, setIsCreatingTestFile] = useState(false)
-	const [isListingArticles, setIsListingArticles] = useState(false)
-	const [isCreatingArticle, setIsCreatingArticle] = useState(false)
-	const [isLoadingArticleForEdit, setIsLoadingArticleForEdit] = useState(false)
-	const [deletingArticlePath, setDeletingArticlePath] = useState('')
-	const [articleForm, setArticleForm] = useState<ArticleFormState>(() => emptyArticleForm())
+	const [isListingPosts, setIsListingPosts] = useState(false)
+	const [isCreatingPost, setIsCreatingPost] = useState(false)
+	const [isLoadingPostForEdit, setIsLoadingPostForEdit] = useState(false)
+	const [deletingPostPath, setDeletingPostPath] = useState('')
+	const [postForm, setPostForm] = useState<PostFormState>(() => emptyPostForm())
 	const [isSlugEdited, setIsSlugEdited] = useState(false)
-	const hasLoadedInitialArticles = useRef(false)
+	const hasLoadedInitialPosts = useRef(false)
 	const richTextEditor = usePostRichTextEditor()
 
 	function handleTokenChange(value: string) {
@@ -93,7 +108,7 @@ export function useAdminPageController() {
 		localStorage.setItem(githubTokenStorageKey, trimmedToken)
 		setToken(trimmedToken)
 		setHasSavedToken(true)
-		setEditingArticle(null)
+		setEditingPost(null)
 		showAdminToast('success', 'Token salvo com sucesso.')
 	}
 
@@ -101,8 +116,8 @@ export function useAdminPageController() {
 		localStorage.removeItem(githubTokenStorageKey)
 		setToken('')
 		setHasSavedToken(false)
-		setAdminArticles([])
-		setEditingArticle(null)
+		setAdminPosts([])
+		setEditingPost(null)
 		showAdminToast('info', 'Token removido do navegador.')
 	}
 
@@ -146,36 +161,36 @@ export function useAdminPageController() {
 		}
 	}
 
-	const listSavedArticles = useCallback(async (savedToken: string, shouldNotify = true) => {
-		setIsListingArticles(true)
+	const listSavedPosts = useCallback(async (savedToken: string, shouldNotify = true) => {
+		setIsListingPosts(true)
 
 		try {
-			const articlesFromGithub = await listMarkdownArticles(savedToken)
+			const postsFromGithub = await listMarkdownPosts(savedToken)
 
-			setAdminArticles(articlesFromGithub)
+			setAdminPosts(postsFromGithub)
 
 			if (shouldNotify) {
-				showAdminToast('success', `${articlesFromGithub.length} post(s) encontrado(s).`)
+				showAdminToast('success', `${postsFromGithub.length} post(s) encontrado(s).`)
 			}
 		} catch (error) {
 			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao listar posts.'))
 		} finally {
-			setIsListingArticles(false)
+			setIsListingPosts(false)
 		}
 	}, [])
 
 	useEffect(() => {
 		const savedToken = getSavedToken()
 
-		if (hasLoadedInitialArticles.current || !savedToken) {
+		if (hasLoadedInitialPosts.current || !savedToken) {
 			return
 		}
 
-		hasLoadedInitialArticles.current = true
-		void listSavedArticles(savedToken, false)
-	}, [listSavedArticles])
+		hasLoadedInitialPosts.current = true
+		void listSavedPosts(savedToken, false)
+	}, [listSavedPosts])
 
-	async function handleListArticles() {
+	async function handleListPosts() {
 		const savedToken = getSavedToken()
 
 		if (!savedToken) {
@@ -183,11 +198,11 @@ export function useAdminPageController() {
 			return
 		}
 
-		await listSavedArticles(savedToken)
+		await listSavedPosts(savedToken)
 	}
 
-	function updateArticleForm(field: keyof ArticleFormState, value: ArticleFormState[keyof ArticleFormState]) {
-		setArticleForm((currentForm) => {
+	function updatePostForm(field: keyof PostFormState, value: PostFormState[keyof PostFormState]) {
+		setPostForm((currentForm) => {
 			if (field === 'title' && !isSlugEdited && typeof value === 'string') {
 				return {
 					...currentForm,
@@ -207,14 +222,14 @@ export function useAdminPageController() {
 		})
 	}
 
-	function resetArticleForm() {
-		setArticleForm(emptyArticleForm())
+	function resetPostForm() {
+		setPostForm(emptyPostForm())
 		setIsSlugEdited(false)
-		setEditingArticle(null)
+		setEditingPost(null)
 		richTextEditor.clearContent()
 	}
 
-	async function handleEditArticle(article: AdminArticle) {
+	async function handleEditPost(post: AdminPost) {
 		const savedToken = getSavedToken()
 
 		if (!savedToken) {
@@ -222,33 +237,33 @@ export function useAdminPageController() {
 			return
 		}
 
-		setIsLoadingArticleForEdit(true)
+		setIsLoadingPostForEdit(true)
 
 		try {
-			const loadedArticle = await loadMarkdownArticle(savedToken, article)
+			const loadedPost = await loadMarkdownPost(savedToken, post)
 
-			setArticleForm({
-				title: loadedArticle.article.title,
-				slug: loadedArticle.article.slug,
-				date: loadedArticle.article.date,
-				updatedAt: loadedArticle.article.updatedAt,
-				readingTime: loadedArticle.article.readingTime,
-				summary: loadedArticle.article.summary,
+			setPostForm({
+				title: loadedPost.post.title,
+				slug: loadedPost.post.slug,
+				date: loadedPost.post.date,
+				updatedAt: loadedPost.post.updatedAt,
+				readingTime: loadedPost.post.readingTime,
+				summary: loadedPost.post.summary,
 			})
 			setIsSlugEdited(true)
-			setEditingArticle({
-				filePath: article.filePath,
-				sha: loadedArticle.sha,
+			setEditingPost({
+				filePath: post.filePath,
+				sha: loadedPost.sha,
 			})
-			richTextEditor.setMarkdownContent(loadedArticle.article.content)
+			richTextEditor.setMarkdownContent(loadedPost.post.content)
 		} catch (error) {
 			showAdminToast('error', getErrorMessage(error, 'Erro ao carregar post.'))
 		} finally {
-			setIsLoadingArticleForEdit(false)
+			setIsLoadingPostForEdit(false)
 		}
 	}
 
-	async function handleDeleteArticle(article: AdminArticle) {
+	async function handleDeletePost(post: AdminPost) {
 		const savedToken = getSavedToken()
 
 		if (!savedToken) {
@@ -256,32 +271,32 @@ export function useAdminPageController() {
 			return
 		}
 
-		const confirmed = window.confirm(`Excluir o post "${article.title}"?\n\nArquivo: ${article.filePath}`)
+		const confirmed = window.confirm(`Excluir o post "${post.title}"?\n\nArquivo: ${post.filePath}`)
 
 		if (!confirmed) {
 			return
 		}
 
-		setDeletingArticlePath(article.filePath)
+		setDeletingPostPath(post.filePath)
 
 		try {
-			await deleteMarkdownArticle(savedToken, article)
+			await deleteMarkdownPost(savedToken, post)
 
-			setAdminArticles((currentArticles) => currentArticles.filter((item) => item.filePath !== article.filePath))
+			setAdminPosts((currentPosts) => currentPosts.filter((item) => item.filePath !== post.filePath))
 
-			if (editingArticle?.filePath === article.filePath) {
-				resetArticleForm()
+			if (editingPost?.filePath === post.filePath) {
+				resetPostForm()
 			}
 
 			showAdminToast('success', 'Post removido com sucesso.')
 		} catch (error) {
 			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao excluir post.'))
 		} finally {
-			setDeletingArticlePath('')
+			setDeletingPostPath('')
 		}
 	}
 
-	async function handleSaveArticle(event: FormEvent<HTMLFormElement>) {
+	async function handleSavePost(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 
 		const savedToken = getSavedToken()
@@ -291,7 +306,7 @@ export function useAdminPageController() {
 			return
 		}
 
-		if (!articleForm.title.trim() || !articleForm.slug.trim() || !articleForm.date.trim() || !articleForm.readingTime || !articleForm.summary.trim()) {
+		if (!postForm.title.trim() || !postForm.slug.trim() || !postForm.date.trim() || !postForm.readingTime || !postForm.summary.trim()) {
 			showAdminToast('info', 'Preencha título, slug, data, tempo de leitura e resumo.')
 			return
 		}
@@ -301,43 +316,43 @@ export function useAdminPageController() {
 			return
 		}
 
-		setIsCreatingArticle(true)
+		setIsCreatingPost(true)
 
 		try {
 			const markdownContent = richTextEditor.getMarkdownContent()
-			const articleFormForSave = {
-				...articleForm,
-				updatedAt: editingArticle ? getCurrentDatetimeLocal() : articleForm.date,
+			const postFormForSave = {
+				...postForm,
+				updatedAt: editingPost ? getCurrentDatetimeLocal() : postForm.date,
 			}
-			const markdownFile = buildArticleMarkdown(articleFormForSave, markdownContent)
-			const articlePath = editingArticle?.filePath ?? `content/posts/${articleForm.slug.trim()}.md`
-			const savedResult = await saveMarkdownArticle(savedToken, articlePath, markdownFile, editingArticle?.sha)
+			const markdownFile = buildPostMarkdown(postFormForSave, markdownContent)
+			const postPath = editingPost?.filePath ?? getNewPostPath(postForm.slug.trim(), adminPosts)
+			const savedResult = await saveMarkdownPost(savedToken, postPath, markdownFile, editingPost?.sha)
 
-			setAdminArticles((currentArticles) => [
-				savedResult.savedArticle,
-				...currentArticles.filter((article) => article.filePath !== articlePath),
-			].sort((firstArticle, secondArticle) => secondArticle.date.localeCompare(firstArticle.date)))
-			showAdminToast('success', editingArticle ? 'Post publicado com sucesso.' : 'Post criado com sucesso.')
-			resetArticleForm()
+			setAdminPosts((currentPosts) => [
+				savedResult.savedPost,
+				...currentPosts.filter((post) => post.filePath !== postPath),
+			].sort((firstPost, secondPost) => secondPost.date.localeCompare(firstPost.date)))
+			showAdminToast('success', editingPost ? 'Post publicado com sucesso.' : 'Post criado com sucesso.')
+			resetPostForm()
 		} catch (error) {
 			showAdminToast('error', getErrorMessage(error, 'Erro inesperado ao criar post.'))
 		} finally {
-			setIsCreatingArticle(false)
+			setIsCreatingPost(false)
 		}
 	}
 
 	return {
 		token,
 		hasSavedToken,
-		adminArticles,
-		editingArticle,
+		adminPosts,
+		editingPost,
 		isTestingConnection,
 		isCreatingTestFile,
-		isListingArticles,
-		isCreatingArticle,
-		isLoadingArticleForEdit,
-		deletingArticlePath,
-		articleForm,
+		isListingPosts,
+		isCreatingPost,
+		isLoadingPostForEdit,
+		deletingPostPath,
+		postForm,
 		linkDraft: richTextEditor.linkDraft,
 		editor: richTextEditor.editor,
 		setLinkDraft: richTextEditor.setLinkDraft,
@@ -346,15 +361,15 @@ export function useAdminPageController() {
 		handleRemoveToken,
 		handleTestConnection,
 		handleCreateTestFile,
-		handleListArticles,
-		updateArticleForm,
+		handleListPosts,
+		updatePostForm,
 		handleSetLink: richTextEditor.openLinkPanel,
 		handleApplyLink: richTextEditor.applyLink,
 		handleRemoveLink: richTextEditor.removeLink,
 		handleInsertImage: richTextEditor.insertImage,
-		resetArticleForm,
-		handleEditArticle,
-		handleDeleteArticle,
-		handleSaveArticle,
+		resetPostForm,
+		handleEditPost,
+		handleDeletePost,
+		handleSavePost,
 	}
 }

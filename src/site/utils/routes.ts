@@ -6,7 +6,7 @@ export const routes = {
 	home: basePath,
 	portfolio: `${basePath}portfolio/`,
 	resume: `${basePath}curriculo/`,
-	writing: `${basePath}blog/`,
+	blog: `${basePath}blog/`,
 }
 
 export function getRouteFromPath(pathname: string) {
@@ -17,7 +17,7 @@ export function getRouteFromPath(pathname: string) {
 	const normalizedPath = pathnameWithoutBase.endsWith('/') ? pathnameWithoutBase : `${pathnameWithoutBase}/`
 	const portfolioPath = '/portfolio/'
 	const resumePath = '/curriculo/'
-	const writingPath = '/blog/'
+	const blogPath = '/blog/'
 	const postPath = '/post/'
 
 	if (normalizedPath === '/') {
@@ -32,5 +32,5 @@ export function getRouteFromPath(pathname: string) {
 		return 'resume'
 	}
 
-	return normalizedPath.startsWith(writingPath) || normalizedPath.startsWith(postPath) ? 'writing' : 'home'
+	return normalizedPath.startsWith(blogPath) || normalizedPath.startsWith(postPath) ? 'blog' : 'home'
 }

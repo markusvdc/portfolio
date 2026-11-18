@@ -154,7 +154,7 @@ function PostRichTextEditor({
 			{linkDraft && (
 				<div className="admin__linkpanel">
 					<input
-						id="article-link-url"
+						id="post-link-url"
 						type="text"
 						value={linkDraft.url}
 						onChange={(event) => onChangeLinkDraft({

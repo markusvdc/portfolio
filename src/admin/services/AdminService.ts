@@ -1,5 +1,5 @@
-import { parsePostMarkdown } from '../../shared/posts/parsePostMarkdown'
-import type { AdminArticle, GitHubContentItem, GitHubReadFileResponse, GitHubWriteFileResponse } from '../types/adminTypes'
+import { parsePostMarkdown } from '../../shared/posts/PostParser'
+import type { AdminPost, GitHubContentItem, GitHubReadFileResponse, GitHubWriteFileResponse } from '../types/adminTypes'
 import { decodeBase64Content, encodeBase64Content } from '../utils/base64Content'
 import {
 	createGitHubHeaders,
@@ -7,7 +7,7 @@ import {
 	githubPostsDirectoryUrl,
 	githubRepositoryUrl,
 	githubTestFileUrl,
-} from './githubAdminConfig'
+} from './AdminConfig'
 
 export async function testRepositoryConnection(token: string) {
 	const response = await fetch(githubRepositoryUrl, {
@@ -50,7 +50,7 @@ export async function createAdminTestFile(token: string) {
 	return data.commit?.html_url ?? data.content?.html_url
 }
 
-export async function listMarkdownArticles(token: string): Promise<AdminArticle[]> {
+export async function listMarkdownPosts(token: string): Promise<AdminPost[]> {
 	const headers = createGitHubHeaders(token)
 	const directoryResponse = await fetch(githubPostsDirectoryUrl, { headers })
 	const directoryData: GitHubContentItem[] | { message?: string } = await directoryResponse.json()
@@ -64,7 +64,7 @@ export async function listMarkdownArticles(token: string): Promise<AdminArticle[
 	}
 
 	const markdownFiles = directoryData.filter((item) => item.type === 'file' && item.name.endsWith('.md'))
-	const articlesFromGithub = await Promise.all(markdownFiles.map(async (file) => {
+	const postsFromGithub = await Promise.all(markdownFiles.map(async (file) => {
 		const fileResponse = await fetch(file.url, { headers })
 		const fileData: GitHubReadFileResponse = await fileResponse.json()
 
@@ -79,13 +79,13 @@ export async function listMarkdownArticles(token: string): Promise<AdminArticle[
 		}
 	}))
 
-	return articlesFromGithub.sort((firstArticle, secondArticle) => (
-		secondArticle.date.localeCompare(firstArticle.date)
+	return postsFromGithub.sort((firstPost, secondPost) => (
+		secondPost.date.localeCompare(firstPost.date)
 	))
 }
 
-export async function loadMarkdownArticle(token: string, article: AdminArticle) {
-	const response = await fetch(article.apiUrl, {
+export async function loadMarkdownPost(token: string, post: AdminPost) {
+	const response = await fetch(post.apiUrl, {
 		headers: createGitHubHeaders(token),
 	})
 	const data: GitHubReadFileResponse = await response.json()
@@ -95,18 +95,18 @@ export async function loadMarkdownArticle(token: string, article: AdminArticle) 
 	}
 
 	return {
-		article: parsePostMarkdown(article.filePath, decodeBase64Content(data.content)),
-		sha: data.sha ?? article.sha,
+		post: parsePostMarkdown(post.filePath, decodeBase64Content(data.content)),
+		sha: data.sha ?? post.sha,
 	}
 }
 
-export async function saveMarkdownArticle(token: string, articlePath: string, markdownFile: string, sha?: string) {
-	const parsedArticle = parsePostMarkdown(articlePath, markdownFile)
-	const response = await fetch(`${githubRepositoryUrl}/contents/${articlePath}`, {
+export async function saveMarkdownPost(token: string, postPath: string, markdownFile: string, sha?: string) {
+	const parsedPost = parsePostMarkdown(postPath, markdownFile)
+	const response = await fetch(`${githubRepositoryUrl}/contents/${postPath}`, {
 		method: 'PUT',
 		headers: createGitHubJsonHeaders(token),
 		body: JSON.stringify({
-			message: sha ? `Update article ${parsedArticle.slug}` : `Create article ${parsedArticle.slug}`,
+			message: sha ? `Update post ${parsedPost.slug}` : `Create post ${parsedPost.slug}`,
 			content: encodeBase64Content(markdownFile),
 			...(sha ? { sha } : {}),
 		}),
@@ -118,22 +118,22 @@ export async function saveMarkdownArticle(token: string, articlePath: string, ma
 	}
 
 	return {
-		savedArticle: {
-			...parsedArticle,
+		savedPost: {
+			...parsedPost,
 			sha: data.content?.sha ?? sha ?? '',
-			apiUrl: `${githubRepositoryUrl}/contents/${articlePath}`,
+			apiUrl: `${githubRepositoryUrl}/contents/${postPath}`,
 		},
 		link: data.content?.html_url ?? data.commit?.html_url,
 	}
 }
 
-export async function deleteMarkdownArticle(token: string, article: AdminArticle) {
-	const response = await fetch(`${githubRepositoryUrl}/contents/${article.filePath}`, {
+export async function deleteMarkdownPost(token: string, post: AdminPost) {
+	const response = await fetch(`${githubRepositoryUrl}/contents/${post.filePath}`, {
 		method: 'DELETE',
 		headers: createGitHubJsonHeaders(token),
 		body: JSON.stringify({
-			message: `Delete article ${article.slug}`,
-			sha: article.sha,
+			message: `Delete post ${post.slug}`,
+			sha: post.sha,
 		}),
 	})
 	const data: GitHubWriteFileResponse = await response.json()

@@ -11,13 +11,13 @@ type AdminTokenPanelProps = {
 	hasSavedToken: boolean
 	isTestingConnection: boolean
 	isCreatingTestFile: boolean
-	isListingArticles: boolean
+	isListingPosts: boolean
 	onTokenChange: (value: string) => void
 	onSaveToken: (event: FormEvent<HTMLFormElement>) => void
 	onRemoveToken: () => void
 	onTestConnection: () => void
 	onCreateTestFile: () => void
-	onListArticles: () => void
+	onListPosts: () => void
 }
 
 function AdminTokenPanel({

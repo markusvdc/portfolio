@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom'
-import type { Article } from '../data/posts'
-import { formatPostDate } from '../utils/formatPostDate'
+import type { Post } from '../data/posts'
+import { formatPostDate } from '../utils/PostDate'
 
-function PostCard({ article }: { article: Article }) {
+function PostCard({ post }: { post: Post }) {
 	return (
-		<article className="writing__card">
-			<h2>{article.title}</h2>
-			<div className="writing__meta">
-				<time dateTime={article.date}>{formatPostDate(article.date)}</time>
-				<span>{article.readingTime} min de leitura</span>
+		<article className="blog__card">
+			<h2>{post.title}</h2>
+			<div className="blog__meta">
+				<time dateTime={post.date}>{formatPostDate(post.date)}</time>
+				<span>{post.readingTime} min de leitura</span>
 			</div>
-			<p>{article.summary}</p>
-			<Link className="writing__link button button--secondary" to={`/post/${article.slug}`}>
+			<p>{post.summary}</p>
+			<Link className="blog__link button button--secondary" to={`/post/${post.slug}`}>
 				Ler Post
 			</Link>
 		</article>

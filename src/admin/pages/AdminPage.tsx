@@ -8,27 +8,27 @@ import {
 	Newspaper,
 	Users,
 } from 'lucide-react'
-import AdminPostEditorForm from '../components/AdminPostEditorForm'
-import AdminPostList from '../components/AdminPostList'
-import AdminTokenPanel from '../components/AdminTokenPanel'
-import { useAdminPageController } from '../hooks/useAdminPageController'
+import AdminPostEditorForm from '../components/PostForm'
+import AdminPostList from '../components/PostList'
+import AdminTokenPanel from '../components/TokenPanel'
+import { useAdminPageController } from '../hooks/useAdmin'
 
 type AdminView = 'post-list' | 'post-editor' | 'token'
 
 function AdminPage() {
 	const admin = useAdminPageController()
 	const [activeView, setActiveView] = useState<AdminView>('post-list')
-	const isArticleSection = activeView === 'post-list' || activeView === 'post-editor'
-	const isArticleListView = activeView === 'post-list'
-	const isArticleEditorView = activeView === 'post-editor'
+	const isPostSection = activeView === 'post-list' || activeView === 'post-editor'
+	const isPostListView = activeView === 'post-list'
+	const isPostEditorView = activeView === 'post-editor'
 
-	function handleOpenCreateArticle() {
-		admin.resetArticleForm()
+	function handleOpenCreatePost() {
+		admin.resetPostForm()
 		setActiveView('post-editor')
 	}
 
-	function handleEditArticle(article: Parameters<typeof admin.handleEditArticle>[0]) {
-		admin.handleEditArticle(article)
+	function handleEditPost(post: Parameters<typeof admin.handleEditPost>[0]) {
+		admin.handleEditPost(post)
 		setActiveView('post-editor')
 	}
 
@@ -46,7 +46,7 @@ function AdminPage() {
 						<LayoutDashboard size={24} />
 					</button>
 					<button
-						className={`button button--secondary admin__shortcut tooltip tooltip--right ${isArticleSection ? 'button--active' : ''}`}
+						className={`button button--secondary admin__shortcut tooltip tooltip--right ${isPostSection ? 'button--active' : ''}`}
 						type="button"
 						onClick={() => setActiveView('post-list')}
 						aria-label="Blog"
@@ -79,10 +79,10 @@ function AdminPage() {
 						<span>Painel Administrativo</span>
 					</header>
 
-					{isArticleSection && (
+					{isPostSection && (
 						<div className="admin__group">
 							<button
-								className={`admin__item ${isArticleListView ? 'admin__item--active' : ''}`}
+								className={`admin__item ${isPostListView ? 'admin__item--active' : ''}`}
 								type="button"
 								onClick={() => setActiveView('post-list')}
 							>
@@ -90,9 +90,9 @@ function AdminPage() {
 								Listar Blog
 							</button>
 							<button
-								className={`admin__item ${isArticleEditorView ? 'admin__item--active' : ''}`}
+								className={`admin__item ${isPostEditorView ? 'admin__item--active' : ''}`}
 								type="button"
-								onClick={handleOpenCreateArticle}
+								onClick={handleOpenCreatePost}
 							>
 								<FilePlus size={24} />
 								Criar Post
@@ -115,28 +115,28 @@ function AdminPage() {
 				</aside>
 
 				<section className="admin__workspace" aria-labelledby="admin-title">
-					{isArticleListView && (
+					{isPostListView && (
 						<AdminPostList
-							articles={admin.adminArticles}
-							isListingArticles={admin.isListingArticles}
-							isLoadingArticleForEdit={admin.isLoadingArticleForEdit}
-							deletingArticlePath={admin.deletingArticlePath}
-							onListArticles={admin.handleListArticles}
-							onEditArticle={handleEditArticle}
-							onDeleteArticle={admin.handleDeleteArticle}
+							posts={admin.adminPosts}
+							isListingPosts={admin.isListingPosts}
+							isLoadingPostForEdit={admin.isLoadingPostForEdit}
+							deletingPostPath={admin.deletingPostPath}
+							onListPosts={admin.handleListPosts}
+							onEditPost={handleEditPost}
+							onDeletePost={admin.handleDeletePost}
 						/>
 					)}
 
-					{isArticleEditorView && (
+					{isPostEditorView && (
 						<AdminPostEditorForm
-							form={admin.articleForm}
-							editingArticle={admin.editingArticle}
+							form={admin.postForm}
+							editingPost={admin.editingPost}
 							hasSavedToken={admin.hasSavedToken}
-							isCreatingArticle={admin.isCreatingArticle}
+							isCreatingPost={admin.isCreatingPost}
 							editor={admin.editor}
 							linkDraft={admin.linkDraft}
-							onFormChange={admin.updateArticleForm}
-							onSubmit={admin.handleSaveArticle}
+							onFormChange={admin.updatePostForm}
+							onSubmit={admin.handleSavePost}
 							onOpenLinkPanel={admin.handleSetLink}
 							onChangeLinkDraft={admin.setLinkDraft}
 							onApplyLink={admin.handleApplyLink}
@@ -156,13 +156,13 @@ function AdminPage() {
 								hasSavedToken={admin.hasSavedToken}
 								isTestingConnection={admin.isTestingConnection}
 								isCreatingTestFile={admin.isCreatingTestFile}
-								isListingArticles={admin.isListingArticles}
+								isListingPosts={admin.isListingPosts}
 								onTokenChange={admin.handleTokenChange}
 								onSaveToken={admin.handleSaveToken}
 								onRemoveToken={admin.handleRemoveToken}
 								onTestConnection={admin.handleTestConnection}
 								onCreateTestFile={admin.handleCreateTestFile}
-								onListArticles={admin.handleListArticles}
+								onListPosts={admin.handleListPosts}
 							/>
 						</div>
 					)}

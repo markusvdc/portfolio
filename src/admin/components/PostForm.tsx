@@ -1,20 +1,20 @@
 import type { FormEvent } from 'react'
 import type { Editor } from '@tiptap/react'
-import PostRichTextEditor from './PostRichTextEditor'
-import type { ArticleFormState, EditingArticle, LinkDraft } from '../types/adminTypes'
-import { formatPostDateTime } from '../../site/utils/formatPostDate'
+import PostRichTextEditor from './PostEditor'
+import type { PostFormState, EditingPost, LinkDraft } from '../types/adminTypes'
+import { formatPostDateTime } from '../../site/utils/PostDate'
 import {
 	Save,
 } from 'lucide-react'
 
 type AdminPostEditorFormProps = {
-	form: ArticleFormState
-	editingArticle: EditingArticle | null
+	form: PostFormState
+	editingPost: EditingPost | null
 	hasSavedToken: boolean
-	isCreatingArticle: boolean
+	isCreatingPost: boolean
 	editor: Editor | null
 	linkDraft: LinkDraft | null
-	onFormChange: (field: keyof ArticleFormState, value: ArticleFormState[keyof ArticleFormState]) => void
+	onFormChange: (field: keyof PostFormState, value: PostFormState[keyof PostFormState]) => void
 	onSubmit: (event: FormEvent<HTMLFormElement>) => void
 	onOpenLinkPanel: () => void
 	onChangeLinkDraft: (draft: LinkDraft) => void
@@ -26,9 +26,9 @@ type AdminPostEditorFormProps = {
 
 function AdminPostEditorForm({
 	form,
-	editingArticle,
+	editingPost,
 	hasSavedToken,
-	isCreatingArticle,
+	isCreatingPost,
 	editor,
 	linkDraft,
 	onFormChange,
@@ -40,24 +40,24 @@ function AdminPostEditorForm({
 	onCancelLink,
 	onInsertImage,
 }: AdminPostEditorFormProps) {
-	const visibleUpdatedAt = editingArticle ? form.updatedAt : form.date
+	const visibleUpdatedAt = editingPost ? form.updatedAt : form.date
 
 	return (
-		<section className="admin__publisher" aria-labelledby="admin-create-article-title">
+		<section className="admin__publisher" aria-labelledby="admin-create-post-title">
 			<div className="admin__summary">
-				<p>{editingArticle ? 'Edite as informações do post e salve as alterações quando concluir.' : 'Preencha os dados do post e publique quando estiver pronto.'}</p>
+				<p>{editingPost ? 'Edite as informações do post e salve as alterações quando concluir.' : 'Preencha os dados do post e publique quando estiver pronto.'}</p>
 			</div>
 			<form className="admin__form" onSubmit={onSubmit}>
 				<div className="admin__grid">
 					<div className="admin__field admin__field--wide">
-						<label htmlFor="article-title">
+						<label htmlFor="post-title">
 							Título
 							<span className="admin__character">
 								{form.title.length}/75
 							</span>
 						</label>
 						<input
-							id="article-title"
+							id="post-title"
 							type="text"
 							value={form.title}
 							onChange={(event) => onFormChange('title', event.target.value)}
@@ -66,9 +66,9 @@ function AdminPostEditorForm({
 					</div>
 
 					<div className="admin__field">
-						<label htmlFor="article-slug">Slug</label>
+						<label htmlFor="post-slug">Slug</label>
 						<input
-							id="article-slug"
+							id="post-slug"
 							type="text"
 							value={form.slug}
 							onChange={(event) => onFormChange('slug', event.target.value)}
@@ -77,9 +77,9 @@ function AdminPostEditorForm({
 					</div>
 
 					<div className="admin__field">
-						<label htmlFor="article-reading-time">Tempo de leitura</label>
+						<label htmlFor="post-reading-time">Tempo de leitura</label>
 						<input
-							id="article-reading-time"
+							id="post-reading-time"
 							type="number"
 							min={1}
 							max={99}
@@ -109,14 +109,14 @@ function AdminPostEditorForm({
 					</div>
 
 					<div className="admin__field admin__field--wide">
-						<label htmlFor="article-summary">
+						<label htmlFor="post-summary">
 							Resumo
 							<span className="admin__character">
 								{form.summary.length}/270
 							</span>
 						</label>
 						<textarea
-							id="article-summary"
+							id="post-summary"
 							value={form.summary}
 							onChange={(event) => onFormChange('summary', event.target.value)}
 							placeholder="Resumo do post"
@@ -138,7 +138,7 @@ function AdminPostEditorForm({
 						onInsertImage={onInsertImage}
 					/>
 					<div className="admin__actions">
-						<button className="button button--primary tooltip tooltip--top" type="submit" disabled={!hasSavedToken || isCreatingArticle} data-tooltip={editingArticle ? 'Salvar post' : 'Publicar post'}>
+						<button className="button button--primary tooltip tooltip--top" type="submit" disabled={!hasSavedToken || isCreatingPost} data-tooltip={editingPost ? 'Salvar post' : 'Publicar post'}>
 							<Save size={24} />
 						</button>
 					</div>
