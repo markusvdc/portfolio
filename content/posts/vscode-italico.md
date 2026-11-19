@@ -5,6 +5,7 @@ date: "2026-06-18T22:15"
 updatedAt: "2026-10-06T08:04"
 readingTime: 6
 summary: "O texto em itálico no VSCODE dificulta a leitura do código? Veja como desativar esse estilo nos principais elementos FRONT-END. A configuração pronta foi testada com HTML, CSS, SCSS, SASS, JavaScript, TypeScript, React, PHP e WordPress, para aplicar sem ajustes extras e manter o editor mais confortável para ler."
+tags: [Tecnologia]
 ---
 
 Se você usa um tema estilizado no VSCODE, talvez já tenha percebido comentários, parâmetros, classes ou tipos aparecendo em itálico. Muitos desenvolvedores gostam desse visual, mas, depois de anos programando, percebi que prefiro o código sem esse estilo. Para mim, remover o itálico deixa a leitura do código mais confortável em projetos maiores e extensos.

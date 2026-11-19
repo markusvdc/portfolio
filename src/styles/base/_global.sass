@@ -94,6 +94,23 @@ body
 	display: flex
 	align-items: center
 
+.post-tags
+	display: flex
+	flex-wrap: wrap
+	gap: 6px
+	margin: 8px 0
+	padding: 0
+	list-style: none
+
+.post-tags__item
+	padding: 4px 9px
+	border-radius: 12px
+	background: variables.$color-secondary
+	color: variables.$color-black
+	font-size: .75rem
+	line-height: 1rem
+	font-weight: variables.$font-weight-sm
+
 @media (max-width: variables.$breakpoint-md)
 	.container
 		width: 90%

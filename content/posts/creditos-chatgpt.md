@@ -5,6 +5,7 @@ date: "2026-09-13T16:56"
 updatedAt: "2026-09-13T16:56"
 readingTime: 8
 summary: "O ChatGPT Work inclui uma franquia de uso com limites renovados periodicamente. Algumas contas também podem recorrer a créditos adicionais ou pedir uma redefinição completa. Entenda como cada alternativa funciona e onde consultar os limites e créditos disponíveis na sua conta, além de saber quando cada opção pode ajudar."
+tags: [Tecnologia]
 ---
 
 O ChatGPT Work permite executar tarefas mais longas e complexas, como pesquisar informações, trabalhar com arquivos, executar comandos e navegar por diferentes etapas de um projeto. Esse trabalho, porém, possui limites de uso. Ao utilizar o Work, você pode encontrar um indicador informando, por exemplo, que possui 10% de uso restante.

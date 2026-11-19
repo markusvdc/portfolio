@@ -5,6 +5,7 @@ date: "2026-10-08T15:45"
 updatedAt: "2026-10-08T15:45"
 readingTime: 10
 summary: "A chegada de um segundo filho não transforma a responsabilidade pelo primeiro em metade. O texto questiona a ideia de responsabilidade como quantidade limitada e propõe entendê-la como uma relação integral com cada pessoa."
+tags: [Tecnologia]
 ---
 
 Duas pessoas compartilham uma tarefa e cada uma faz 50%. A tarefa é concluída, mas quem foi beneficiado? A primeira resposta parece óbvia: as duas, porque cada uma fez a sua parte. Mas, se considerarmos que o benefício é executar a tarefa, surge um problema: quando ela é dividida, cada pessoa executa apenas 50% da tarefa. A tarefa foi concluída em conjunto, mas nenhuma das duas executou a tarefa.

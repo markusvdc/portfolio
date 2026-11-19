@@ -5,6 +5,7 @@ date: "2026-07-12T11:54"
 updatedAt: "2026-10-06T00:00"
 readingTime: 15
 summary: "Hierarquias em tecnologia costumam ser associadas a poder e autoridade. Mas também podem traduzir contextos entre níveis de abstração. Assim, as informações atravessam a empresa sem perder significado durante a comunicação entre equipes técnicas e lideranças, aproximando decisões do trabalho que as orienta."
+tags: [Tecnologia]
 ---
 
 Empresas de tecnologia trabalham constantemente com camadas de abstração. Temos componentes, serviços, APIs e interfaces porque sistemas diferentes nem sempre conseguem se comunicar diretamente sem perder contexto. Curiosamente, quando falamos de pessoas, esquecemos essa lógica. A palavra hierarquia costuma ser associada a poder: um nível acima decide e um nível abaixo executa. Mas talvez estejamos confundindo uma característica comum das hierarquias atuais com sua função estrutural.

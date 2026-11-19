@@ -5,6 +5,7 @@ date: "2026-06-23T09:18"
 updatedAt: "2026-10-06T08:04"
 readingTime: 15
 summary: "Estou criando um blog em React com ajuda do Codex e vivendo um paradoxo: domino o projeto, mas ainda não todo o código. Será que ganho produtividade ou perco conhecimento? Talvez sem IA eu nem tivesse começado. Essa experiência me faz rever como aprendo enquanto construo e assumo decisões sobre meu próprio projeto."
+tags: [Tecnologia]
 ---
 
 Nas últimas semanas, venho construindo algo que provavelmente não faria sozinho: um blog em React, com CMS próprio e sem backend, usando GitHub API, Markdown e GitHub Pages. O Codex me acompanha durante o desenvolvimento, e o mais curioso é a sensação que isso provoca: eu domino completamente o projeto.

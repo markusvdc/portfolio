@@ -5,6 +5,7 @@ date: "2026-10-08T12:00"
 updatedAt: "2026-10-08T12:00"
 readingTime: 5
 summary: "Quem merece respeito? Talvez a pergunta comece pelo lugar errado. O respeito pode ser entendido como prática que organiza limites nas relações. Ao rompê-los, o desrespeito altera a relação, cria uma exceção dentro da regra e mostra como ela define sua própria fronteira."
+tags: [Tecnologia]
 ---
 
 Máquinas merecem respeito? A pergunta parece simples, mas talvez comece pelo lugar errado. Talvez seja mais interessante perguntar o que não merece respeito. Essa mudança de perspectiva altera nossa ideia do próprio respeito.

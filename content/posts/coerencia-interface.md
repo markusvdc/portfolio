@@ -5,6 +5,7 @@ date: "2026-06-27T08:51"
 updatedAt: "2026-10-06T07:57"
 readingTime: 8
 summary: "Usuários aprendem regras, não telas. Pequenas quebras de consistência afetam a experiência e mudam a forma como as pessoas entendem uma interface. Por isso, páginas e modais precisam acompanhar o contexto e as expectativas criadas durante a navegação, tornando cada interação mais coerente para quem usa o produto."
+tags: [Tecnologia]
 ---
 
 Esses dias, percebi um detalhe no VS Code que me fez refletir sobre a forma como projetamos interfaces. Quase tudo no editor abre da mesma maneira: como arquivo. Você seleciona um item, ele ocupa o espaço de edição; abre outro, ele aparece em uma nova aba. Esse fluxo consistente cria uma expectativa que se quebra quando as Configurações surgem em uma interface centralizada.

@@ -5,6 +5,7 @@ date: "2026-11-18T00:00"
 updatedAt: "2026-11-18T00:00"
 readingTime: 5
 summary: "O texto diferencia falhas de execução, orientação e supervisão ao trabalhar com agentes de IA. Entenda por que localizar a origem do erro melhora o feedback, apoia a aprendizagem profissional e ajuda equipes a assumir responsabilidades sem atribuir toda falha à tecnologia."
+tags: [Tecnologia]
 ---
 Agentes de inteligência artificial estão mudando o desenvolvimento de software e a responsabilidade profissional. Ferramentas como ChatGPT e Codex alteram arquivos, criam recursos e automatizam tarefas a partir de instruções, mas quem entrega o trabalho ainda precisa avaliar o resultado.
 

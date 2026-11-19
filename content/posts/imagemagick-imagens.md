@@ -5,6 +5,7 @@ date: "2026-05-26T09:15"
 updatedAt: "2026-10-06T08:04"
 readingTime: 6
 summary: "Conheça o ImageMagick, ferramenta gratuita para converter e otimizar imagens pela linha de comando. Aprenda a instalar, converter PNG para WEBP e reduzir arquivos. Também processe várias imagens de uma vez usando comandos simples no terminal, sem abrir um editor gráfico ou repetir cada etapa manualmente."
+tags: [Tecnologia]
 ---
 
 Tenho usado o ImageMagick para converter e otimizar imagens diretamente pela linha de comando, e uma das coisas que mais gosto nele é a simplicidade. A ferramenta gratuita e de código aberto edita, converte e processa imagens em centenas de formatos. Ela existe há muitos anos, é madura e funciona no Windows, Linux e macOS.

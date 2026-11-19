@@ -5,6 +5,7 @@ date: "2026-05-30T20:40"
 updatedAt: "2026-10-06T08:04"
 readingTime: 8
 summary: "Aprender React, Vite e TypeScript tem sido mais produtivo do que eu imaginava. Com o Codex, crio projetos reais e entendo cada etapa do processo. Assim, dedico mais tempo a melhorar o código e menos à busca por bugs, aprendendo enquanto avanço e ganhando confiança para continuar estudando."
+tags: [Tecnologia]
 ---
 
 Estou aprendendo React, Vite e TypeScript enquanto reconstruo meu próprio site. Em vez de estudar a documentação, fazer cursos e só depois tentar criar algo, decidi aprender construindo. Assim, cada conceito aparece ligado a uma necessidade concreta e observo como as peças do site se conectam enquanto avanço.

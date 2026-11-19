@@ -5,6 +5,7 @@ date: "2026-09-13T18:08"
 updatedAt: "2026-09-13T18:08"
 readingTime: 12
 summary: "“Provavelmente” apresenta a conclusão mais plausível sem esconder a incerteza. Veja como a IA pode separar o que sabemos daquilo que inferimos. Essa escolha afeta a confiança e o risco, além de mudar como sistemas inteligentes explicam suas respostas em diferentes situações, sem transformar estimativas em certezas."
+tags: [Tecnologia]
 ---
 
 Uma IA não precisa ter certeza para oferecer uma direção. Se as evidências disponíveis apontam para X, uma resposta pode ser simplesmente: Provavelmente é X. É uma construção pequena, mas muito eficiente. Ela comunica duas informações ao mesmo tempo: X é a conclusão que parece mais plausível e ainda existe alguma incerteza.

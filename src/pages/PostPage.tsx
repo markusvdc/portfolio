@@ -210,6 +210,9 @@ function PostPage() {
 							<time dateTime={post.date}>{formatPostDate(post.date)}</time>
 							<span>{post.readingTime} min de leitura</span>
 						</div>
+						<ul className="post-tags" aria-label="Tags do post">
+							{post.tags.map((tag) => <li className="post-tags__item" key={tag}>{tag}</li>)}
+						</ul>
 					</header>
 					<div
 						className="post__content"

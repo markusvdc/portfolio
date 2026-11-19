@@ -5,11 +5,12 @@ export type Post = {
 	updatedAt: string
 	readingTime: number
 	summary: string
+	tags: string[]
 	content: string
 	filePath: string
 }
 
-type PostFrontmatter = Omit<Post, 'content' | 'filePath'>
+type PostFrontmatter = Omit<Post, 'content' | 'filePath' | 'tags'> & { tags?: string }
 
 function parseFrontmatterValue(value: string) {
 	const trimmedValue = value.trim()
@@ -19,6 +20,19 @@ function parseFrontmatterValue(value: string) {
 	}
 
 	return trimmedValue
+}
+
+function parseTags(value = '') {
+	const trimmedValue = value.trim()
+	const tagsSource = trimmedValue.startsWith('[') && trimmedValue.endsWith(']')
+		? trimmedValue.slice(1, -1)
+		: trimmedValue
+
+	return tagsSource
+		.split(',')
+		.map(parseFrontmatterValue)
+		.map((tag) => tag.trim())
+		.filter(Boolean)
 }
 
 export function parsePostMarkdown(filePath: string, markdown: string): Post {
@@ -56,6 +70,7 @@ export function parsePostMarkdown(filePath: string, markdown: string): Post {
 		updatedAt: frontmatter.updatedAt || frontmatter.date,
 		readingTime: frontmatter.readingTime,
 		summary: frontmatter.summary,
+		tags: parseTags(frontmatter.tags),
 		content: contentSource.trim(),
 		filePath,
 	}
