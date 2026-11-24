@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 // https://vite.dev/config/
@@ -44,6 +44,20 @@ export default defineConfig({
 					}
 				]
 				const indexHtml = await readFile(resolve('dist/index.html'), 'utf-8')
+				const postFiles = await readdir(resolve('content/posts'))
+				const postRoutes = await Promise.all(
+					postFiles
+						.filter((file) => file.endsWith('.md'))
+						.map(async (file) => {
+							const markdown = await readFile(resolve('content/posts', file), 'utf-8')
+							const title = markdown.match(/^title:\s*"([^"]+)"/m)?.[1]
+							const slug = markdown.match(/^slug:\s*"([^"]+)"/m)?.[1]
+
+							return title && slug
+								? { path: `post/${slug}`, title: `${title} - MARKUS DOMENEGHETI` }
+								: null
+						})
+				)
 				const baseRedirectHtml = [
 					'<!doctype html>',
 					'<html lang="pt-BR">',
@@ -58,7 +72,7 @@ export default defineConfig({
 					'</html>',
 				].join('')
 
-				await Promise.all(staticRoutes.map(async (route) => {
+				await Promise.all([...staticRoutes, ...postRoutes.filter((route) => route !== null)].map(async (route) => {
 					const routeDir = resolve('dist', route.path)
 					const routeHtml = indexHtml.replace(
 						/<title>.*<\/title>/,
